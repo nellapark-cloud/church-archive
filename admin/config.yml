@@ -20,68 +20,73 @@ collections:
           - label: "폴더 트리"
             name: "root"
             widget: "object"
+            collapsed: true
             fields:
-              - { label: "ID", name: "id", widget: "hidden", default: "root" }
-              - { label: "제목", name: "title", widget: "hidden", default: "전체" }
               - label: "최상위 항목"
                 name: "children"
                 widget: "list"
+                collapsed: true
                 types:
                   - label: "폴더"
                     name: "folder"
                     widget: "object"
+                    collapsed: true
                     summary: "📁 {{fields.title}}"
                     fields:
-                      - { label: "ID (영문, 하이픈만)", name: "id", widget: "string" }
                       - { label: "폴더 이름", name: "title", widget: "string" }
                       - { label: "설명", name: "desc", widget: "text", required: false }
                       - label: "하위 항목"
                         name: "children"
                         widget: "list"
+                        collapsed: true
                         required: false
                         types:
                           - label: "폴더"
                             name: "folder"
                             widget: "object"
+                            collapsed: true
                             summary: "📁 {{fields.title}}"
                             fields:
-                              - { label: "ID (영문, 하이픈만)", name: "id", widget: "string" }
                               - { label: "폴더 이름", name: "title", widget: "string" }
                               - { label: "설명", name: "desc", widget: "text", required: false }
                               - label: "하위 항목"
                                 name: "children"
                                 widget: "list"
+                                collapsed: true
                                 required: false
                                 types:
                                   - label: "폴더"
                                     name: "folder"
                                     widget: "object"
+                                    collapsed: true
                                     summary: "📁 {{fields.title}}"
                                     fields:
-                                      - { label: "ID (영문, 하이픈만)", name: "id", widget: "string" }
                                       - { label: "폴더 이름", name: "title", widget: "string" }
                                       - { label: "설명", name: "desc", widget: "text", required: false }
                                       - label: "하위 항목"
                                         name: "children"
                                         widget: "list"
+                                        collapsed: true
                                         required: false
                                         types:
                                           - label: "폴더"
                                             name: "folder"
                                             widget: "object"
+                                            collapsed: true
                                             summary: "📁 {{fields.title}}"
                                             fields:
-                                              - { label: "ID (영문, 하이픈만)", name: "id", widget: "string" }
                                               - { label: "폴더 이름", name: "title", widget: "string" }
                                               - { label: "설명", name: "desc", widget: "text", required: false }
                                               - label: "자료"
                                                 name: "children"
                                                 widget: "list"
+                                                collapsed: true
                                                 required: false
                                                 types:
                                                   - label: "자료"
                                                     name: "file"
                                                     widget: "object"
+                                                    collapsed: true
                                                     summary: "📄 {{fields.name}}"
                                                     fields:
                                                       - { label: "자료 이름", name: "name", widget: "string" }
@@ -90,6 +95,7 @@ collections:
                                           - label: "자료"
                                             name: "file"
                                             widget: "object"
+                                            collapsed: true
                                             summary: "📄 {{fields.name}}"
                                             fields:
                                               - { label: "자료 이름", name: "name", widget: "string" }
@@ -98,6 +104,7 @@ collections:
                                   - label: "자료"
                                     name: "file"
                                     widget: "object"
+                                    collapsed: true
                                     summary: "📄 {{fields.name}}"
                                     fields:
                                       - { label: "자료 이름", name: "name", widget: "string" }
@@ -106,6 +113,7 @@ collections:
                           - label: "자료"
                             name: "file"
                             widget: "object"
+                            collapsed: true
                             summary: "📄 {{fields.name}}"
                             fields:
                               - { label: "자료 이름", name: "name", widget: "string" }
@@ -114,6 +122,7 @@ collections:
                   - label: "자료"
                     name: "file"
                     widget: "object"
+                    collapsed: true
                     summary: "📄 {{fields.name}}"
                     fields:
                       - { label: "자료 이름", name: "name", widget: "string" }

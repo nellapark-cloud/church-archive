@@ -49,14 +49,14 @@
 </script>
 
 <script>
-  function findNode(node, pathIds) {
+  function findNode(node, pathIndices) {
     let current = node;
-    const trail = [{ id: current.id, title: current.title }];
-    for (const id of pathIds) {
-      const next = (current.children || []).find(c => c.id === id && c.type === 'folder');
-      if (!next) return null;
+    const trail = [{ title: current.title }];
+    for (const idx of pathIndices) {
+      const next = (current.children || [])[idx];
+      if (!next || next.type !== 'folder') return null;
       current = next;
-      trail.push({ id: current.id, title: current.title });
+      trail.push({ title: current.title });
     }
     return { node: current, trail };
   }
@@ -66,9 +66,9 @@
     .then(data => {
       const params = new URLSearchParams(location.search);
       const pathParam = params.get('path');
-      const pathIds = pathParam ? pathParam.split(',').filter(Boolean) : [];
+      const pathIndices = pathParam ? pathParam.split(',').filter(x => x !== '').map(Number) : [];
 
-      const result = findNode({ id: 'root', title: data.siteTitle, children: data.root.children }, pathIds);
+      const result = findNode({ title: data.siteTitle, children: data.root.children }, pathIndices);
 
       if (!result) {
         document.querySelector('.wrap').innerHTML = `
@@ -80,7 +80,7 @@
       }
 
       const { node, trail } = result;
-      const isRoot = pathIds.length === 0;
+      const isRoot = pathIndices.length === 0;
 
       document.title = `${isRoot ? data.siteTitle : node.title} · 은혜교회 작업 아카이브`;
 
@@ -89,8 +89,8 @@
         crumb.style.display = 'block';
         crumb.innerHTML = trail.map((t, i) => {
           if (i === trail.length - 1) return `<span class="current">${t.title}</span>`;
-          const p = trail.slice(1, i + 1).map(x => x.id).join(',');
-          return `<a href="index.html${p ? '?path=' + encodeURIComponent(p) : ''}">${t.title}</a><span class="sep">/</span>`;
+          const p = pathIndices.slice(0, i).join(',');
+          return `<a href="index.html${i === 0 ? '' : '?path=' + encodeURIComponent(p)}">${t.title}</a><span class="sep">/</span>`;
         }).join('');
       }
 
@@ -118,15 +118,16 @@
       }
 
       const grid = document.getElementById('folder-grid');
-      folders.forEach(folder => {
-        const newPath = [...pathIds, folder.id].join(',');
-        const subCount = (folder.children || []).length;
+      children.forEach((child, idx) => {
+        if (child.type !== 'folder') return;
+        const newPath = [...pathIndices, idx].join(',');
+        const subCount = (child.children || []).length;
         const a = document.createElement('a');
         a.className = 'card';
         a.href = `index.html?path=${encodeURIComponent(newPath)}`;
         a.innerHTML = `
-          <h3 class="card-title">${folder.title}</h3>
-          <p class="card-desc">${folder.desc || ''}</p>
+          <h3 class="card-title">${child.title}</h3>
+          <p class="card-desc">${child.desc || ''}</p>
           <div class="card-meta">항목 ${subCount}개 →</div>
         `;
         grid.appendChild(a);
