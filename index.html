@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>은혜교회 · 작업 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Pretendard:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">GRACE CHURCH · WORK ARCHIVE</div>
+    <h1 id="site-title">은혜교회 작업 아카이브</h1>
+    <p id="site-desc"></p>
+    <div class="hero-count">
+      <div id="count-folders">0<span>폴더</span></div>
+      <div id="count-drawers">0<span>서랍</span></div>
+      <div id="count-files">0<span>자료</span></div>
+    </div>
+  </header>
+
+  <section class="category" style="padding-top:48px;">
+    <div class="grid" id="folder-grid"></div>
+  </section>
+
+  <footer>
+    <strong>안내:</strong> 폴더를 클릭하면 그 안의 서랍이, 서랍을 클릭하면 실제 자료(열람·다운로드)가 나옵니다.<br>
+    새 자료를 추가하려면 <a href="/admin/">관리 페이지</a>에서 로그인 후 추가해주세요.
+  </footer>
+</div>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+<script>
+  fetch('content/data.json')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('site-title').textContent = data.siteTitle;
+      document.getElementById('site-desc').textContent = data.siteDesc;
+
+      let totalDrawers = 0, totalFiles = 0;
+      const grid = document.getElementById('folder-grid');
+
+      data.folders.forEach(folder => {
+        const drawerCount = folder.drawers.length;
+        const fileCount = folder.drawers.reduce((sum, d) => sum + d.files.length, 0);
+        totalDrawers += drawerCount;
+        totalFiles += fileCount;
+
+        const a = document.createElement('a');
+        a.className = 'card';
+        a.href = `folder.html?f=${encodeURIComponent(folder.id)}`;
+        a.innerHTML = `
+          <h3 class="card-title">${folder.num}. ${folder.title}</h3>
+          <p class="card-desc">${folder.desc}</p>
+          <div class="card-meta">서랍 ${drawerCount}개 · 자료 ${fileCount}개 →</div>
+        `;
+        grid.appendChild(a);
+      });
+
+      document.getElementById('count-folders').innerHTML = `${data.folders.length}<span>폴더</span>`;
+      document.getElementById('count-drawers').innerHTML = `${totalDrawers}<span>서랍</span>`;
+      document.getElementById('count-files').innerHTML = `${totalFiles}<span>자료</span>`;
+    });
+</script>
+
+</body>
+</html>

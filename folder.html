@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>폴더 · 은혜교회 작업 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Pretendard:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="index.html">전체 폴더</a>
+    <span class="sep">/</span>
+    <span class="current" id="crumb-folder">-</span>
+  </div>
+
+  <header class="hero" style="padding-top:24px;">
+    <div class="eyebrow" id="folder-num">FOLDER</div>
+    <h1 id="folder-title">-</h1>
+    <p id="folder-desc"></p>
+  </header>
+
+  <section class="category" style="padding-top:48px;">
+    <div class="grid" id="drawer-grid"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      이 폴더 안에는 아직 서랍이 없습니다.<br>
+      <a href="/admin/">관리 페이지</a>에서 서랍을 추가해보세요.
+    </div>
+  </section>
+
+  <footer>
+    <strong>안내:</strong> 서랍을 클릭하면 그 안의 실제 자료를 열람하거나 다운로드할 수 있습니다.<br>
+    새 서랍이나 자료를 추가하려면 <a href="/admin/">관리 페이지</a>를 이용하세요.
+  </footer>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const folderId = params.get('f');
+
+  fetch('content/data.json')
+    .then(res => res.json())
+    .then(SITE_DATA => {
+      const folder = SITE_DATA.folders.find(f => f.id === folderId);
+
+      if (!folder) {
+        document.querySelector('.wrap').innerHTML = `
+          <div style="padding:80px 0;text-align:center;">
+            <p style="font-family:'Noto Serif KR',serif;font-size:20px;margin-bottom:16px;">폴더를 찾을 수 없습니다.</p>
+            <a href="index.html" style="color:#A9814E;font-weight:600;">← 전체 폴더로 돌아가기</a>
+          </div>`;
+        return;
+      }
+
+      document.title = `${folder.title} · 은혜교회 작업 아카이브`;
+      document.getElementById('crumb-folder').textContent = folder.title;
+      document.getElementById('folder-num').textContent = `FOLDER ${folder.num}`;
+      document.getElementById('folder-title').textContent = folder.title;
+      document.getElementById('folder-desc').textContent = folder.desc;
+
+      const grid = document.getElementById('drawer-grid');
+      if (folder.drawers.length === 0) {
+        document.getElementById('empty-state').style.display = 'block';
+      } else {
+        folder.drawers.forEach(drawer => {
+          const a = document.createElement('a');
+          a.className = 'card';
+          a.href = `drawer.html?f=${encodeURIComponent(folder.id)}&d=${encodeURIComponent(drawer.id)}`;
+          a.innerHTML = `
+            <h3 class="card-title">${drawer.title}</h3>
+            <p class="card-desc">${drawer.desc}</p>
+            <div class="card-meta">자료 ${drawer.files.length}개 →</div>
+          `;
+          grid.appendChild(a);
+        });
+      }
+    });
+</script>
+
+</body>
+</html>
