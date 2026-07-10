@@ -4,9 +4,372 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리 페이지 · 은혜교회 작업 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Pretendard:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gate{max-width:420px;margin:120px auto;text-align:center;}
+  .gate button{background:var(--ink);color:var(--paper);border:none;padding:12px 28px;font-size:14px;font-weight:600;border-radius:var(--radius);cursor:pointer;}
+
+  .setup-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin-bottom:32px;}
+  .setup-panel h3{font-family:'Noto Serif KR',serif;font-size:16px;margin:0 0 4px;}
+  .setup-panel p{font-size:12.5px;color:var(--text-soft);margin:0 0 16px;}
+  .setup-row{display:grid;grid-template-columns:2fr 2fr 1fr;gap:10px;margin-bottom:12px;}
+  .setup-panel input{padding:9px 11px;border:1px solid var(--line);border-radius:var(--radius);font-size:13px;background:var(--paper);}
+  .setup-panel button.save{background:var(--ink);color:var(--paper);border:none;padding:9px 18px;font-size:12.5px;font-weight:600;border-radius:var(--radius);cursor:pointer;}
+
+  .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+  .top-bar .whoami{font-size:12.5px;color:var(--text-soft);}
+  .top-bar .whoami a{color:var(--brass);cursor:pointer;font-weight:600;text-decoration:none;}
+
+  .site-meta{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:28px;}
+  .site-meta label{display:block;font-size:11.5px;font-weight:600;color:var(--text-soft);margin-bottom:5px;}
+  .site-meta input, .site-meta textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:var(--radius);font-size:13.5px;font-family:'Pretendard',sans-serif;margin-bottom:12px;background:var(--paper);color:var(--ink);}
+
+  .node{border:1px solid var(--line);border-radius:var(--radius);background:#fff;margin-bottom:10px;}
+  .node-head{display:flex;gap:8px;align-items:flex-start;padding:14px 16px;}
+  .node-head input.title{font-family:'Noto Serif KR',serif;font-size:14.5px;font-weight:600;border:1px solid transparent;background:transparent;padding:4px 6px;border-radius:var(--radius);width:100%;color:var(--ink);}
+  .node-head input.title:hover, .node-head input.title:focus{border-color:var(--line);background:var(--paper);outline:none;}
+  .node-head input.desc{font-size:12px;color:var(--text-soft);border:1px solid transparent;background:transparent;padding:4px 6px;border-radius:var(--radius);width:100%;margin-top:2px;}
+  .node-head input.desc:hover, .node-head input.desc:focus{border-color:var(--line);background:var(--paper);outline:none;}
+  .node-actions{display:flex;gap:6px;flex-shrink:0;padding-top:2px;}
+  .node-actions button, .node-actions label{
+    font-size:11.5px;font-weight:600;padding:6px 10px;border-radius:var(--radius);
+    border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--ink);white-space:nowrap;
+  }
+  .node-actions button.danger{color:#a3392f;border-color:#e8cfc9;}
+  .node-children{padding:0 16px 14px 34px;}
+  .node.file .node-head{background:var(--paper-dim);}
+  .node-filepath{font-size:11px;color:var(--brass);word-break:break-all;padding:0 16px 12px 16px;}
+
+  .add-row{padding:10px 16px 16px 34px;}
+  .add-row button{
+    font-size:12px;font-weight:600;padding:7px 14px;border-radius:var(--radius);
+    border:1px dashed var(--brass-dim);background:transparent;color:var(--brass);cursor:pointer;margin-right:8px;
+  }
+
+  .save-bar{
+    position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+    padding:16px 0;margin-top:24px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .save-bar button.primary{background:var(--ink);color:var(--paper);border:none;padding:11px 26px;font-size:13.5px;font-weight:600;border-radius:var(--radius);cursor:pointer;}
+  .save-bar .status{font-size:12.5px;color:var(--text-soft);}
+</style>
 </head>
 <body>
+
+<div class="wrap" style="max-width:820px;">
+
+  <div id="gate" class="gate">
+    <p style="font-family:'Noto Serif KR',serif;font-size:20px;margin-bottom:16px;">관리 페이지 로그인</p>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:24px;">초대받은 이메일 계정으로 로그인해주세요.</p>
+    <button onclick="netlifyIdentity.open()">로그인</button>
+  </div>
+
+  <div id="app" style="display:none;">
+    <div class="top-bar">
+      <div>
+        <div class="eyebrow" style="font-size:12px;color:var(--brass);font-weight:600;">ADMIN</div>
+        <h1 style="font-family:'Noto Serif KR',serif;font-size:26px;margin:6px 0 0;">자료 관리</h1>
+      </div>
+      <div class="whoami">
+        <span id="user-email"></span> ·
+        <a onclick="netlifyIdentity.logout()">로그아웃</a> ·
+        <a href="../index.html">사이트 보기</a>
+      </div>
+    </div>
+
+    <div class="setup-panel" id="setup-panel">
+      <h3>① 저장소 연결 설정 <span style="font-size:11px;color:var(--text-soft);font-weight:400;">(최초 1회만)</span></h3>
+      <p>이 관리 페이지가 어느 GitHub 저장소에 저장할지 알려주세요.</p>
+      <div class="setup-row">
+        <input id="cfg-owner" placeholder="GitHub 사용자명 (예: nellapark-cloud)">
+        <input id="cfg-repo" placeholder="저장소 이름 (예: church-archive)">
+        <input id="cfg-branch" placeholder="브랜치 (main)" value="main">
+      </div>
+      <button class="save" onclick="saveConfigAndLoad()">저장하고 불러오기</button>
+      <span id="cfg-status" style="font-size:12px;color:var(--text-soft);margin-left:10px;"></span>
+    </div>
+
+    <div id="editor" style="display:none;">
+      <div class="site-meta">
+        <label>사이트 제목</label>
+        <input id="site-title-input">
+        <label>사이트 설명</label>
+        <textarea id="site-desc-input" rows="2"></textarea>
+      </div>
+
+      <div id="tree-root"></div>
+
+      <div class="add-row" style="padding-left:0;">
+        <button onclick="addFolder(treeData.root)">+ 최상위 폴더 추가</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="save-bar wrap" id="save-bar" style="display:none;max-width:820px;">
+  <span class="status" id="save-status"></span>
+  <button class="primary" onclick="saveAll()">변경사항 저장 (사이트에 반영)</button>
+</div>
+
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script>
+  let currentUser = null;
+  let treeData = null;
+  let dataSha = null;
+
+  netlifyIdentity.on('init', user => {
+    if (user) onLogin(user);
+  });
+  netlifyIdentity.on('login', user => {
+    onLogin(user);
+    netlifyIdentity.close();
+  });
+  netlifyIdentity.on('logout', () => {
+    document.getElementById('gate').style.display = 'block';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('save-bar').style.display = 'none';
+  });
+  netlifyIdentity.init();
+
+  function onLogin(user) {
+    currentUser = user;
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('user-email').textContent = user.email;
+
+    const cfg = getConfig();
+    if (cfg.owner && cfg.repo) {
+      document.getElementById('cfg-owner').value = cfg.owner;
+      document.getElementById('cfg-repo').value = cfg.repo;
+      document.getElementById('cfg-branch').value = cfg.branch || 'main';
+      loadTree();
+    }
+  }
+
+  function getConfig() {
+    return {
+      owner: localStorage.getItem('gg_owner') || '',
+      repo: localStorage.getItem('gg_repo') || '',
+      branch: localStorage.getItem('gg_branch') || 'main'
+    };
+  }
+  function setConfig(owner, repo, branch) {
+    localStorage.setItem('gg_owner', owner);
+    localStorage.setItem('gg_repo', repo);
+    localStorage.setItem('gg_branch', branch || 'main');
+  }
+
+  function saveConfigAndLoad() {
+    const owner = document.getElementById('cfg-owner').value.trim();
+    const repo = document.getElementById('cfg-repo').value.trim();
+    const branch = document.getElementById('cfg-branch').value.trim() || 'main';
+    if (!owner || !repo) { alert('사용자명과 저장소 이름을 입력해주세요.'); return; }
+    setConfig(owner, repo, branch);
+    loadTree();
+  }
+
+  async function jwt() {
+    return await currentUser.jwt();
+  }
+
+  function apiBase() {
+    const cfg = getConfig();
+    return `/.netlify/git/github/repos/${cfg.owner}/${cfg.repo}/contents`;
+  }
+
+  function b64ToUtf8(b64) {
+    return decodeURIComponent(escape(atob(b64.replace(/\n/g, ''))));
+  }
+  function utf8ToB64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  async function gitGet(path) {
+    const token = await jwt();
+    const cfg = getConfig();
+    const res = await fetch(`${apiBase()}/${path}?ref=${cfg.branch}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error(`불러오기 실패 (${res.status}): ${path}`);
+    return res.json();
+  }
+
+  async function gitPut(path, base64Content, sha, message) {
+    const token = await jwt();
+    const cfg = getConfig();
+    const body = { message: message || `update ${path}`, content: base64Content, branch: cfg.branch };
+    if (sha) body.sha = sha;
+    const res = await fetch(`${apiBase()}/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`저장 실패 (${res.status}): ${errText}`);
+    }
+    return res.json();
+  }
+
+  async function loadTree() {
+    document.getElementById('cfg-status').textContent = '불러오는 중...';
+    try {
+      const file = await gitGet('content/data.json');
+      dataSha = file.sha;
+      treeData = JSON.parse(b64ToUtf8(file.content));
+      document.getElementById('cfg-status').textContent = '✓ 연결됨';
+      document.getElementById('setup-panel').style.display = 'none';
+      document.getElementById('editor').style.display = 'block';
+      document.getElementById('save-bar').style.display = 'flex';
+      document.getElementById('site-title-input').value = treeData.siteTitle || '';
+      document.getElementById('site-desc-input').value = treeData.siteDesc || '';
+      renderTree();
+    } catch (e) {
+      document.getElementById('cfg-status').textContent = '오류: ' + e.message;
+      document.getElementById('setup-panel').style.display = 'block';
+    }
+  }
+
+  function newId(title) {
+    const base = (title || 'item').toLowerCase().replace(/[^a-z0-9\uac00-\ud7a3]/g, '');
+    return 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+
+  function addFolder(parent) {
+    if (!parent.children) parent.children = [];
+    parent.children.push({ type: 'folder', id: newId('folder'), title: '새 폴더', desc: '', children: [] });
+    renderTree();
+  }
+
+  function addFilePlaceholder(parent) {
+    if (!parent.children) parent.children = [];
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = async () => {
+      const f = input.files[0];
+      if (!f) return;
+      const uploadPath = `files/uploads/${Date.now()}-${f.name}`;
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64 = reader.result.split(',')[1];
+        try {
+          document.getElementById('save-status').textContent = '파일 업로드 중...';
+          await gitPut(uploadPath, base64, null, `upload ${f.name}`);
+          parent.children.push({ type: 'file', id: newId(f.name), name: f.name, desc: '', file: uploadPath });
+          document.getElementById('save-status').textContent = '파일 업로드 완료. 저장을 눌러 반영하세요.';
+          renderTree();
+        } catch (e) {
+          alert('업로드 실패: ' + e.message);
+          document.getElementById('save-status').textContent = '';
+        }
+      };
+      reader.readAsDataURL(f);
+    };
+    input.click();
+  }
+
+  function removeNode(parent, node) {
+    if (!confirm(`"${node.title || node.name}" 항목을 삭제할까요? (하위 항목이 있다면 함께 삭제됩니다)`)) return;
+    parent.children = parent.children.filter(c => c !== node);
+    renderTree();
+  }
+
+  function buildNodeEl(node, parent) {
+    const wrap = document.createElement('div');
+    wrap.className = 'node' + (node.type === 'file' ? ' file' : '');
+
+    const head = document.createElement('div');
+    head.className = 'node-head';
+
+    const textCol = document.createElement('div');
+    textCol.style.flex = '1';
+    textCol.style.minWidth = '0';
+
+    const titleInput = document.createElement('input');
+    titleInput.className = 'title';
+    titleInput.value = node.type === 'file' ? node.name : node.title;
+    titleInput.oninput = () => { if (node.type === 'file') node.name = titleInput.value; else node.title = titleInput.value; };
+    textCol.appendChild(titleInput);
+
+    const descInput = document.createElement('input');
+    descInput.className = 'desc';
+    descInput.placeholder = '설명 (선택)';
+    descInput.value = node.desc || '';
+    descInput.oninput = () => { node.desc = descInput.value; };
+    textCol.appendChild(descInput);
+
+    head.appendChild(textCol);
+
+    const actions = document.createElement('div');
+    actions.className = 'node-actions';
+
+    if (node.type === 'folder') {
+      const addF = document.createElement('button');
+      addF.textContent = '+ 폴더';
+      addF.onclick = () => addFolder(node);
+      actions.appendChild(addF);
+
+      const addFile = document.createElement('button');
+      addFile.textContent = '+ 자료 업로드';
+      addFile.onclick = () => addFilePlaceholder(node);
+      actions.appendChild(addFile);
+    }
+
+    const del = document.createElement('button');
+    del.className = 'danger';
+    del.textContent = '삭제';
+    del.onclick = () => removeNode(parent, node);
+    actions.appendChild(del);
+
+    head.appendChild(actions);
+    wrap.appendChild(head);
+
+    if (node.type === 'file') {
+      const pathEl = document.createElement('div');
+      pathEl.className = 'node-filepath';
+      pathEl.textContent = node.file;
+      wrap.appendChild(pathEl);
+    }
+
+    if (node.type === 'folder') {
+      const childrenEl = document.createElement('div');
+      childrenEl.className = 'node-children';
+      (node.children || []).forEach(child => {
+        childrenEl.appendChild(buildNodeEl(child, node));
+      });
+      wrap.appendChild(childrenEl);
+    }
+
+    return wrap;
+  }
+
+  function renderTree() {
+    const rootEl = document.getElementById('tree-root');
+    rootEl.innerHTML = '';
+    (treeData.root.children || []).forEach(node => {
+      rootEl.appendChild(buildNodeEl(node, treeData.root));
+    });
+  }
+
+  async function saveAll() {
+    treeData.siteTitle = document.getElementById('site-title-input').value;
+    treeData.siteDesc = document.getElementById('site-desc-input').value;
+
+    document.getElementById('save-status').textContent = '저장 중...';
+    try {
+      const latest = await gitGet('content/data.json');
+      const json = JSON.stringify(treeData, null, 2);
+      await gitPut('content/data.json', utf8ToB64(json), latest.sha, 'archive: update via admin page');
+      dataSha = latest.sha;
+      document.getElementById('save-status').textContent = '✓ 저장 완료 (1~2분 내 사이트에 반영됩니다)';
+    } catch (e) {
+      document.getElementById('save-status').textContent = '오류: ' + e.message;
+    }
+  }
+</script>
+
 </body>
 </html>

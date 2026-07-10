@@ -11,24 +11,27 @@
 <body>
 
 <div class="wrap">
+  <div class="breadcrumb" id="breadcrumb" style="display:none;"></div>
+
   <header class="hero">
-    <div class="eyebrow">GRACE CHURCH · WORK ARCHIVE</div>
-    <h1 id="site-title">은혜교회 작업 아카이브</h1>
-    <p id="site-desc"></p>
-    <div class="hero-count">
-      <div id="count-folders">0<span>폴더</span></div>
-      <div id="count-drawers">0<span>서랍</span></div>
-      <div id="count-files">0<span>자료</span></div>
-    </div>
+    <div class="eyebrow" id="eyebrow">GRACE CHURCH · WORK ARCHIVE</div>
+    <h1 id="page-title">은혜교회 작업 아카이브</h1>
+    <p id="page-desc"></p>
+    <div class="hero-count" id="hero-count"></div>
   </header>
 
   <section class="category" style="padding-top:48px;">
     <div class="grid" id="folder-grid"></div>
+    <div class="file-list" id="file-list"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      이 폴더 안에는 아직 내용이 없습니다.<br>
+      <a href="/admin/">관리 페이지</a>에서 폴더나 자료를 추가해보세요.
+    </div>
   </section>
 
   <footer>
-    <strong>안내:</strong> 폴더를 클릭하면 그 안의 서랍이, 서랍을 클릭하면 실제 자료(열람·다운로드)가 나옵니다.<br>
-    새 자료를 추가하려면 <a href="/admin/">관리 페이지</a>에서 로그인 후 추가해주세요.
+    <strong>안내:</strong> 폴더를 클릭하면 그 안으로 계속 들어갈 수 있습니다. 새 폴더나 자료를 추가하려면
+    <a href="/admin/">관리 페이지</a>에서 로그인 후 추가해주세요.
   </footer>
 </div>
 
@@ -44,36 +47,111 @@
     });
   }
 </script>
+
 <script>
+  function findNode(node, pathIds) {
+    let current = node;
+    const trail = [{ id: current.id, title: current.title }];
+    for (const id of pathIds) {
+      const next = (current.children || []).find(c => c.id === id && c.type === 'folder');
+      if (!next) return null;
+      current = next;
+      trail.push({ id: current.id, title: current.title });
+    }
+    return { node: current, trail };
+  }
+
   fetch('content/data.json')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('site-title').textContent = data.siteTitle;
-      document.getElementById('site-desc').textContent = data.siteDesc;
+      const params = new URLSearchParams(location.search);
+      const pathParam = params.get('path');
+      const pathIds = pathParam ? pathParam.split(',').filter(Boolean) : [];
 
-      let totalDrawers = 0, totalFiles = 0;
+      const result = findNode({ id: 'root', title: data.siteTitle, children: data.root.children }, pathIds);
+
+      if (!result) {
+        document.querySelector('.wrap').innerHTML = `
+          <div style="padding:80px 0;text-align:center;">
+            <p style="font-family:'Noto Serif KR',serif;font-size:20px;margin-bottom:16px;">폴더를 찾을 수 없습니다.</p>
+            <a href="index.html" style="color:#A9814E;font-weight:600;">← 처음으로 돌아가기</a>
+          </div>`;
+        return;
+      }
+
+      const { node, trail } = result;
+      const isRoot = pathIds.length === 0;
+
+      document.title = `${isRoot ? data.siteTitle : node.title} · 은혜교회 작업 아카이브`;
+
+      if (!isRoot) {
+        const crumb = document.getElementById('breadcrumb');
+        crumb.style.display = 'block';
+        crumb.innerHTML = trail.map((t, i) => {
+          if (i === trail.length - 1) return `<span class="current">${t.title}</span>`;
+          const p = trail.slice(1, i + 1).map(x => x.id).join(',');
+          return `<a href="index.html${p ? '?path=' + encodeURIComponent(p) : ''}">${t.title}</a><span class="sep">/</span>`;
+        }).join('');
+      }
+
+      document.getElementById('eyebrow').textContent = isRoot ? 'GRACE CHURCH · WORK ARCHIVE' : 'FOLDER';
+      document.getElementById('page-title').textContent = isRoot ? data.siteTitle : node.title;
+      document.getElementById('page-desc').textContent = isRoot ? data.siteDesc : (node.desc || '');
+
+      const children = node.children || [];
+      const folders = children.filter(c => c.type === 'folder');
+      const files = children.filter(c => c.type === 'file');
+
+      if (isRoot) {
+        let totalFolders = 0, totalFiles = 0;
+        const countAll = (n) => {
+          (n.children || []).forEach(c => {
+            if (c.type === 'folder') { totalFolders++; countAll(c); }
+            else { totalFiles++; }
+          });
+        };
+        countAll(data.root);
+        document.getElementById('hero-count').innerHTML = `
+          <div>${totalFolders}<span>폴더</span></div>
+          <div>${totalFiles}<span>자료</span></div>
+        `;
+      }
+
       const grid = document.getElementById('folder-grid');
-
-      data.folders.forEach(folder => {
-        const drawerCount = folder.drawers.length;
-        const fileCount = folder.drawers.reduce((sum, d) => sum + d.files.length, 0);
-        totalDrawers += drawerCount;
-        totalFiles += fileCount;
-
+      folders.forEach(folder => {
+        const newPath = [...pathIds, folder.id].join(',');
+        const subCount = (folder.children || []).length;
         const a = document.createElement('a');
         a.className = 'card';
-        a.href = `folder.html?f=${encodeURIComponent(folder.id)}`;
+        a.href = `index.html?path=${encodeURIComponent(newPath)}`;
         a.innerHTML = `
-          <h3 class="card-title">${folder.num}. ${folder.title}</h3>
-          <p class="card-desc">${folder.desc}</p>
-          <div class="card-meta">서랍 ${drawerCount}개 · 자료 ${fileCount}개 →</div>
+          <h3 class="card-title">${folder.title}</h3>
+          <p class="card-desc">${folder.desc || ''}</p>
+          <div class="card-meta">항목 ${subCount}개 →</div>
         `;
         grid.appendChild(a);
       });
 
-      document.getElementById('count-folders').innerHTML = `${data.folders.length}<span>폴더</span>`;
-      document.getElementById('count-drawers').innerHTML = `${totalDrawers}<span>서랍</span>`;
-      document.getElementById('count-files').innerHTML = `${totalFiles}<span>자료</span>`;
+      const list = document.getElementById('file-list');
+      files.forEach(file => {
+        const row = document.createElement('div');
+        row.className = 'file-row';
+        row.innerHTML = `
+          <div class="file-info">
+            <p class="file-name">${file.name}</p>
+            <p class="file-desc">${file.desc || ''}</p>
+          </div>
+          <div class="file-actions">
+            <a class="btn btn-view" href="${file.file}" target="_blank">열람</a>
+            <a class="btn btn-download" href="${file.file}" download>다운로드</a>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+
+      if (folders.length === 0 && files.length === 0) {
+        document.getElementById('empty-state').style.display = 'block';
+      }
     });
 </script>
 
