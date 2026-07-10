@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>민수기 연구 — 전권 합본</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page {
+  size: A4;
+  margin: 20mm 15mm 18mm 15mm;
+  @bottom-center {
+    content: counter(page);
+    font-family: "Noto Sans CJK KR";
+    font-size: 9pt;
+    color: #9a9184;
+  }
+}
+@page :first {
+  margin: 0;
+  @bottom-center { content: ''; }
+}
+@page toc {
+  @bottom-center { content: ''; }
+}
+
+*{ box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.quick-nav{ display: none; }
+.floating-nav{ display: none; }
+
+:root{
+  --cream:#faf6ef;
+  --cream-deep:#f2ebdd;
+  --navy:#20304d;
+  --navy-soft:#3c5273;
+  --gold:#b8863b;
+  --gold-soft:#d8b073;
+  --ink:#2c2a25;
+  --ink-soft:#6b6459;
+  --line:#e2d9c6;
+  --white:#ffffff;
+}
+
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:"Noto Sans CJK KR","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  font-size: 10.3pt;
+  line-height: 1.75;
+}
+
+b, strong { font-weight: 700; }
+
+/* ===== COVER ===== */
+.cover{
+  break-after: page;
+  height: 297mm;
+  background: var(--navy);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20mm;
+}
+.cover .eyebrow{
+  font-size: 11pt;
+  letter-spacing: 0.28em;
+  color: var(--gold-soft);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.cover .cover-series{
+  font-size: 12pt;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.cover h1{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 42pt;
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+.cover .cover-sub{
+  font-size: 13pt;
+  color: #c9d0e0;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+.cover .cover-line{
+  width: 60px;
+  height: 2px;
+  background: var(--gold-soft);
+  margin: 0 auto 40px;
+}
+.cover .cover-range{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 12pt;
+  color: var(--gold-soft);
+  letter-spacing: 0.05em;
+}
+.cover .cover-note{
+  margin-top: 60px;
+  font-size: 9.5pt;
+  color: #8b96ad;
+}
+.cover .cover-church{
+  margin-top: 10px;
+  font-size: 10.5pt;
+  color: var(--gold-soft);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.doc-footer{
+  text-align: center;
+  padding: 14mm 0 4mm;
+  font-size: 10pt;
+  font-weight: 600;
+  color: var(--navy-soft);
+  letter-spacing: 0.03em;
+  border-top: 1px solid var(--line);
+  margin: 10mm 20mm 0;
+}
+
+/* ===== INTRO ===== */
+.intro-page{
+  break-after: page;
+  padding-top: 4mm;
+}
+.page-label{
+  font-size: 10pt;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.intro-page h1{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 22pt;
+  color: var(--navy);
+  font-weight: 700;
+  margin: 0 0 4mm;
+}
+.intro-page .intro-lead{
+  font-size: 11pt;
+  color: var(--ink-soft);
+  margin-bottom: 8mm;
+  line-height: 1.7;
+}
+.intro-block{
+  margin-bottom: 7mm;
+  break-inside: avoid;
+}
+.intro-block h3{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 13pt;
+  color: var(--navy-soft);
+  font-weight: 700;
+  margin: 0 0 3mm;
+  padding-left: 10px;
+  border-left: 3px solid var(--gold-soft);
+}
+.intro-block p{
+  margin: 0 0 2.5mm;
+  text-align: justify;
+  word-break: keep-all;
+}
+.intro-block b{ color: var(--navy-soft); }
+
+.intro-outline{
+  display: flex;
+  gap: 4mm;
+  margin-top: 3mm;
+}
+.intro-outline .oi{
+  flex: 1;
+  background: var(--cream-deep);
+  border-radius: 5px;
+  padding: 4mm 4.5mm;
+  border-top: 3px solid var(--gold-soft);
+}
+.intro-outline .oi .oi-tag{
+  font-size: 8.5pt;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 2mm;
+}
+.intro-outline .oi .oi-title{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 10.5pt;
+  margin-bottom: 1.5mm;
+}
+.intro-outline .oi .oi-body{
+  font-size: 9pt;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ===== TOC ===== */
+.toc-page{
+  page: toc;
+  break-after: page;
+}
+.toc-page h1{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 22pt;
+  color: var(--navy);
+  font-weight: 700;
+  margin: 0 0 10mm;
+}
+.toc-list{
+  display: block;
+}
+.toc-item{
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 3.2mm 0;
+  border-bottom: 1px solid var(--line);
+  break-inside: avoid;
+}
+.toc-num{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: var(--gold);
+  width: 16mm;
+  flex-shrink: 0;
+}
+.toc-title{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 11.5pt;
+  font-weight: 600;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.toc-sub{
+  font-size: 9pt;
+  color: var(--ink-soft);
+  margin-left: 6px;
+  flex-shrink: 1;
+}
+.toc-fill{
+  flex: 1;
+  border-bottom: 1px dotted var(--ink-soft);
+  margin: 0 3mm 1.5mm;
+  opacity: 0.5;
+}
+.toc-page-num{
+  font-size: 10pt;
+  color: var(--navy-soft);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.toc-page-num::after{
+  content: target-counter(attr(href), page);
+}
+
+/* ===== CHAPTER ===== */
+.chapter{
+  break-before: page;
+}
+.chapter-head{
+  margin-bottom: 6mm;
+  padding-bottom: 4mm;
+  border-bottom: 2px solid var(--navy);
+  display: flex;
+  align-items: flex-start;
+  gap: 4mm;
+}
+.chapter-icon-badge{
+  flex-shrink: 0;
+  width: 13mm; height: 13mm;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold-soft);
+  display: flex; align-items: center; justify-content: center;
+}
+.chapter-icon-badge .chapter-icon{ width: 60%; height: 60%; }
+.chapter-head-text{ flex: 1; min-width: 0; }
+.chapter-eyebrow{
+  font-size: 9pt;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+.chapter-head h1{
+  font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif;
+  font-size: 19pt;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 2mm;
+}
+.chapter-head .chapter-sub{
+  font-size: 9.5pt;
+  color: var(--ink-soft);
+}
+.chapter-head .ref-strip{
+  display:flex; gap: 6px; flex-wrap: wrap; margin-top: 3mm;
+}
+.chapter-head .ref-item{
+  font-size: 8pt;
+  color: var(--navy-soft);
+  padding: 2px 8px;
+  background: var(--cream-deep);
+  border-radius: 10px;
+}
+
+section.sub{ margin-bottom: 6mm; }
+.sec-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:2mm; }
+.sec-num{ font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif; font-size:9.5pt; color:var(--gold); font-weight:700; }
+h2{ font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif; font-size:14pt; color:var(--navy); font-weight:700; margin:0; }
+.sec-desc{ color:var(--ink-soft); font-size:9pt; margin:0 0 3.5mm; }
+
+.flow{ display:flex; flex-direction:column; }
+.flow-item{
+  display:grid; grid-template-columns: 22mm 1fr; gap: 4mm;
+  padding: 3mm 0; border-top:1px solid var(--line);
+  break-inside: avoid;
+}
+.flow-item:last-child{ border-bottom:1px solid var(--line); }
+.flow-range{ font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif; font-size:9pt; color:var(--gold); font-weight:700; }
+.flow-title{ font-weight:700; color:var(--navy); font-size:10.3pt; margin-bottom:1.5mm; }
+.flow-body{ color:var(--ink); font-size: 9.6pt; line-height:1.7; text-align:justify; word-break: keep-all; }
+.flow-body b{ color:var(--navy-soft); font-weight:600; }
+
+.teach-grid{ display:flex; flex-direction:column; gap: 3mm; }
+.teach-card{
+  background: var(--cream); border:1px solid var(--line); border-left:3px solid var(--gold-soft);
+  border-radius:4px; padding: 3.5mm 4mm; break-inside: avoid;
+}
+.teach-title{ font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif; font-size:10.6pt; font-weight:700; color:var(--navy); margin-bottom:1.5mm; }
+.teach-body{ font-size:9.6pt; color:var(--ink); text-align:justify; word-break: keep-all; }
+
+.deep-wrap{
+  background: var(--navy); border-radius:6px; padding: 5mm 5.5mm; margin-top: 2mm;
+}
+.deep-wrap .sec-num{ color: var(--gold-soft); }
+.deep-wrap h2{ color: var(--white); }
+.deep-wrap .sec-desc{ color:#b9c2d4; }
+.deep-item{ padding: 3.5mm 0; border-top:1px solid rgba(255,255,255,0.14); break-inside: avoid; }
+.deep-item:first-of-type{ margin-top: 2mm; }
+.deep-num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:5.5mm; height:5.5mm; border:1px solid var(--gold-soft); color:var(--gold-soft);
+  border-radius:50%; font-size:8.5pt; font-weight:700; margin-right: 2mm;
+}
+.deep-title{
+  display:flex; align-items:center; font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif; font-size:10.6pt;
+  font-weight:700; color:var(--white); margin-bottom: 2.5mm;
+}
+.deep-body{ font-size:9.6pt; color:#d8ddea; padding-left: 7.5mm; text-align:justify; word-break: keep-all; }
+.deep-body b{ color: var(--gold-soft); font-weight:600; }
+.view-list{ padding-left:7.5mm; margin-top: 2.5mm; display:flex; flex-direction:column; gap: 2mm; }
+.view{ background: rgba(255,255,255,0.07); border-radius:4px; padding: 2mm 3mm; font-size:8.8pt; color:#c9d0e0; }
+.view b{ color: var(--gold-soft); }
+
+.verse-box{
+  margin: 3mm 0 3mm 7.5mm; background: rgba(216,176,115,0.1); border:1px solid rgba(216,176,115,0.35);
+  border-radius:5px; padding: 3mm 3.5mm; break-inside: avoid;
+}
+.verse-ref{ font-size:8pt; color:var(--gold-soft); font-weight:700; margin-bottom:1.5mm; }
+.verse-text{ font-family:"Noto Serif CJK KR","Noto Serif KR","Batang",serif; font-size:10pt; color:var(--white); line-height:1.7; }
+.verse-text .hinge{ color:var(--gold-soft); font-weight:700; background:rgba(216,176,115,0.2); padding:0 4px; border-radius:3px; }
+.greek-tag{
+  display:inline-block; font-size:7.5pt; color:var(--navy); background:var(--gold-soft);
+  padding:1px 6px; border-radius:8px; font-weight:700; margin-left:4px;
+}
+
+.hinge-note{
+  margin: 3mm 0 1mm 7.5mm; font-size:9pt; color:#c9d0e0; background:rgba(255,255,255,0.06);
+  border-left:2px solid var(--gold-soft); padding: 2.5mm 3.5mm; border-radius:0 4px 4px 0; break-inside: avoid;
+}
+.hinge-note b{ color: var(--gold-soft); }
+
+/* ===== SPEECH BUBBLE ===== */
+.speech-bubble{
+  display: flex;
+  gap: 3mm;
+  align-items: flex-start;
+  background: var(--cream-deep);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4mm 5mm;
+  margin: 5mm 0 2mm;
+  break-inside: avoid;
+}
+.speech-bubble .sb-avatar{
+  width: 8mm; height: 8mm; min-width: 8mm;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10pt;
+}
+.speech-bubble .sb-text{
+  font-size: 9.3pt;
+  color: var(--navy-soft);
+  line-height: 1.7;
+}
+.speech-bubble .sb-text b{ color: var(--navy); }
+
+/* ===== HIGHLIGHTER EMPHASIS ===== */
+.flow-body b.hl-term, .teach-body b.hl-term, .intro-block p b.hl-term, .sb-text b.hl-term{
+  background: #f1dfba; color: #7a5220; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+.flow-body b.hl-quote, .teach-body b.hl-quote, .intro-block p b.hl-quote, .sb-text b.hl-quote{
+  background: #f2dcd3; color: #9a4632; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+.flow-body b.hl-greek, .teach-body b.hl-greek, .intro-block p b.hl-greek, .sb-text b.hl-greek{
+  background: #d7ebe6; color: #235f56; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+
+.deep-body b.hl-term, .verse-text b.hl-term, .hinge-note b.hl-term, .view b.hl-term{
+  background: rgba(216,176,115,0.28); color: #f3dfb8; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+.deep-body b.hl-quote, .verse-text b.hl-quote, .hinge-note b.hl-quote, .view b.hl-quote{
+  background: rgba(224,122,105,0.26); color: #f0b8a8; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+.deep-body b.hl-greek, .verse-text b.hl-greek, .hinge-note b.hl-greek, .view b.hl-greek{
+  background: rgba(110,196,188,0.26); color: #a9e6dd; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+
+/* hl-insight = 더 깊은 설명이 필요한 구절 (하늘색), 클릭 시 팝업 */
+.flow-body b.hl-insight, .teach-body b.hl-insight, .intro-block p b.hl-insight, .sb-text b.hl-insight{
+  background: #d7ebf7; color: #1c5f85; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+.deep-body b.hl-insight, .verse-text b.hl-insight, .hinge-note b.hl-insight, .view b.hl-insight{
+  background: rgba(120,190,230,0.28); color: #bfe3f8; padding: 1px 4px; border-radius: 3px; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1.5px;
+}
+b.has-insight{ cursor: pointer; }
+b.has-insight:after{
+  content: "\25C6"; font-size: 0.55em; margin-left: 2px; vertical-align: super; opacity: 0.85;
+}
+
+/* ===== INSIGHT POPUP (memo-style modal) — screen only ===== */
+#insightOverlay{
+  display: none;
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(20,28,42,0.55);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+#insightOverlay.open{ display: flex; }
+#insightCard{
+  background: var(--white);
+  max-width: 480px; width: 100%;
+  max-height: 80vh; overflow-y: auto;
+  border-radius: 14px;
+  padding: 26px 26px 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  position: relative;
+  border-top: 5px solid #4fa3d1;
+}
+#insightCard .insight-eyebrow{
+  font-size: 11px; letter-spacing: 0.14em; color: #4fa3d1; font-weight: 700;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+#insightCard h3{
+  font-family:"Noto Serif CJK KR","Noto Serif KR",serif;
+  font-size: 18px; color: var(--navy); font-weight: 700; margin: 0 0 12px; line-height: 1.4;
+}
+#insightCard .insight-body{
+  font-size: 14.5px; line-height: 1.85; color: var(--ink); white-space: pre-line;
+}
+#insightCard .insight-close{
+  position: absolute; top: 14px; right: 16px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--cream-deep); color: var(--navy-soft);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 15px;
+}
+#insightCard .insight-close:hover{ background: var(--line); }
+
+.print-only-static b.has-tip{ cursor: default; }
+@media screen{
+  b.has-tip{ cursor: pointer; }
+  b.has-tip:after{
+    content: "ⓘ"; font-size: 0.65em; margin-left: 2px; vertical-align: super;
+    opacity: 0.75;
+  }
+}
+
+#termTip{
+  display: none;
+  position: absolute;
+  z-index: 500;
+  max-width: 280px;
+  background: var(--navy);
+  color: #e8ecf4;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 10px 13px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+#termTip::before{
+  content: "";
+  position: absolute;
+  top: -6px; left: 16px;
+  width: 12px; height: 12px;
+  background: var(--navy);
+  transform: rotate(45deg);
+}
+#termTip .tip-close{
+  position: absolute; top: 4px; right: 8px;
+  color: var(--gold-soft); font-size: 14px; cursor: pointer; opacity: 0.8;
+}
+
+@media screen {
+  html{ background:#ddd; scroll-behavior: smooth; }
+  body{
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 0 24px rgba(0,0,0,0.12);
+    font-size: 16px;
+    line-height: 1.85;
+  }
+  .cover{ height: auto; min-height: 60vh; padding: 60px 24px; }
+  .cover h1{ font-size: 34pt; }
+  .intro-page, .toc-page, .chapter{ padding: 0 4vw; }
+
+  .intro-page h1, .toc-page h1{ font-size: 24px; }
+  .intro-lead{ font-size: 15px; }
+  .intro-block h3{ font-size: 16px; }
+  .intro-block p{ font-size: 15.5px; line-height: 1.85; }
+  .intro-outline{ flex-wrap: wrap; }
+  .intro-outline .oi{ flex: 1 1 220px; }
+  .intro-outline .oi-title{ font-size: 13px; }
+  .intro-outline .oi-body{ font-size: 12.5px; }
+
+  .toc-item{ flex-wrap: wrap; padding: 4mm 0; }
+  .toc-title{ white-space: normal; font-size: 15px; }
+  .toc-sub{ flex-basis: 100%; margin-left: 16mm; font-size: 12.5px; }
+  .toc-fill{ display: none; }
+  .toc-num{ font-size: 13px; }
+  .toc-page-num{ font-size: 13px; }
+
+  .chapter-eyebrow{ font-size: 11px; }
+  .chapter-head h1{ font-size: 25px; }
+  .chapter-head .chapter-sub{ font-size: 13.5px; }
+  .chapter-head .ref-item{ font-size: 11px; }
+
+  h2{ font-size: 19px; }
+  .sec-num{ font-size: 13px; }
+  .sec-desc{ font-size: 13.5px; }
+
+  .flow-item{ grid-template-columns: 1fr; gap: 1.5mm; }
+  .flow-range{ font-size: 12.5px; }
+  .flow-title{ font-size: 16px; }
+  .flow-body{ font-size: 15px; line-height: 1.8; }
+
+  .teach-title{ font-size: 16px; }
+  .teach-body{ font-size: 15px; line-height: 1.8; }
+  .teach-card{ padding: 4mm 5mm; }
+
+  .deep-title{ font-size: 16px; }
+  .deep-body{ font-size: 15px; line-height: 1.8; }
+  .view{ font-size: 13px; }
+
+  .verse-text{ font-size: 16px; }
+  .verse-ref{ font-size: 11.5px; }
+
+  .hinge-note{ font-size: 13.5px; }
+
+  .sb-text{ font-size: 14.5px; }
+
+  .verse-box, .hinge-note{ margin-left: 0; }
+  .deep-body, .view-list{ padding-left: 0; }
+  * { min-width: 0; }
+
+  .quick-nav{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,246,239,0.96);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 4vw;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    font-size: 13px;
+  }
+  .quick-nav .qn-title{
+    font-weight: 700; color: var(--navy); white-space: nowrap;
+    text-decoration: none;
+  }
+  .quick-nav .qn-toc-link{
+    color: var(--navy-soft); text-decoration: none; font-size: 13px;
+    padding: 5px 12px; border: 1px solid var(--line); border-radius: 14px;
+    white-space: nowrap;
+  }
+  .quick-nav .qn-toc-link:hover{ background: var(--cream-deep); }
+
+  .floating-nav{
+    position: fixed; right: 18px; bottom: 18px; z-index: 100;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .floating-nav a{
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--navy); color: var(--gold-soft); font-size: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.28); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .floating-nav a:hover{ background: var(--navy-soft); transform: scale(1.06); }
+  .floating-nav a:active{ transform: scale(0.96); }
+}
+@media screen and (max-width: 640px){
+  body{ box-shadow:none; }
+  .cover h1{ font-size: 26pt; }
+  .intro-page h1, .toc-page h1{ font-size: 20px; }
+  .chapter-head h1{ font-size: 21px; }
+  .quick-nav{ padding: 8px 3.5vw; }
+}
+</style>
+</head><body>
+<div id="top"></div>
+<div id="termTip"></div>
+<div id="insightOverlay"><div id="insightCard"><div class="insight-close">✕</div><div class="insight-eyebrow">💬 더 알아보기</div><h3 id="insightTitle"></h3><div class="insight-body" id="insightBody"></div></div></div>
+
+<div class="quick-nav">
+  <a class="qn-title" role="button" tabindex="0" onclick="goTo(event,'top')" onkeydown="if(event.key==='Enter')goTo(event,'top')">📖 민수기 연구</a>
+  <a class="qn-toc-link" role="button" tabindex="0" onclick="goTo(event,'toc')" onkeydown="if(event.key==='Enter')goTo(event,'toc')">목차 ▾</a>
+</div>
+
+<div class="cover">
+  <div class="cover-series">은혜교회 성경공부 시리즈</div>
+  <div class="eyebrow">BIBLE STUDY &middot; BOOK OF NUMBERS</div>
+  <h1>민수기 연구</h1>
+  <div class="cover-sub">광야에서 배우는 순종과 인도하심 &mdash; 전체 36장 성경 연구</div>
+  <div class="cover-line"></div>
+  <div><span class="cover-range">민 1:1 &ndash; 36:13</span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<span class="cover-range">구조 &middot; 교훈 &middot; 심화 질문</span></div>
+  <div class="cover-note">전 36장 &middot; 구조 &middot; 신학적&middot;목회적 교훈 &middot; 심화 질문</div>
+</div>
+
+<div class="intro-page">
+  <div class="page-label">Introduction</div>
+  <h1>민수기 전체 서론</h1>
+  <p class="intro-lead">약속의 땅을 향해 걷는 순례자들, 그 광야 걸음을 세밀히 세시는 하나님.</p>
+
+  <div class="intro-block">
+    <h3>제목과 기록 시기</h3>
+    <p>히브리어 성경에서 민수기는 첫 어구를 따라 <b class="hl-term">'베미드바르'(בְּמִדְבָּר, '광야에서')</b>라 불린다. 반면 헬라어 칠십인역과 이를 따른 우리말 성경의 제목 '민수기(民數記)'는 1장과 26장에 등장하는 두 차례의 인구조사(census)에서 유래했다. 두 제목 모두 이 책의 본질을 담고 있다 &mdash; 광야라는 공간에서, 숫자로 헤아려지는 한 세대의 흥망이 펼쳐지는 책이다. 레위기와 마찬가지로 모세 저작 전통 위에 서 있으며, 시내산을 떠나는 시점(1:1, 출애굽 2년째)에서 모압 평지에 이르는 약 38년의 여정을 기록한다.</p>
+  </div>
+
+  <div class="intro-block">
+    <h3>수신자와 정황</h3>
+    <p>레위기가 시내산에 머물러 있는 백성에게 '어떻게 예배할 것인가'를 가르쳤다면, 민수기는 그 백성이 <b class="hl-term">약속의 땅을 향해 실제로 이동</b>하며 겪는 순종과 불순종, 인도하심과 심판의 이야기다. 책 전체는 지리적으로 세 구간 &mdash; 시내 광야(1-10장), 가데스 바네아까지의 여정과 그곳에서의 반역(11-20장), 모압 평지까지의 여정(21-36장) &mdash; 으로 나뉘며, 이 지리적 이동이 곧 신학적 이동이기도 하다.</p>
+  </div>
+
+  <div class="intro-block">
+    <h3>문체적 특징</h3>
+    <p>민수기는 레위기보다 훨씬 다채로운 장르가 뒤섞여 있다. 인구조사 명단과 제사 규례 같은 <b class="hl-term">목록과 법전</b>이 원망과 반역, 회개의 <b class="hl-term">서사</b>와 나란히 놓이고, 발람의 신탁 같은 <b class="hl-term">시가</b>도 등장한다. 이 혼합된 장르 자체가 신앙의 여정이 규례와 이야기, 실패와 은혜가 뒤섞인 현실임을 반영한다고 볼 수 있다.</p>
+  </div>
+
+  <div class="intro-block">
+    <h3>핵심 신학 주제</h3>
+    <p>민수기를 관통하는 가장 뚜렷한 주제는 <b class="hl-term">불신앙의 대가와 하나님의 신실하심의 병행</b>이다. 출애굽 1세대는 가데스 바네아에서 열두 정탐꾼의 보고 앞에 하나님을 신뢰하지 못함으로 광야에서 스러져 갔다(14장). 그러나 그 심판의 한복판에서도 하나님은 구름 기둥과 불 기둥으로 인도하시고(9장), 반석에서 물을 내시며(20장), 놋뱀을 통해 생명을 주신다(21장). 인구조사와 진영 배치는 이 백성이 무질서한 유랑민이 아니라 <b class="hl-term">하나님의 군대이자 회중</b>으로 조직되어 있음을 보여주며, 실패한 첫 세대 이후 새로운 세대가 약속의 땅 문턱에 서는 것으로 책이 마무리된다.</p>
+  </div>
+
+  <div class="intro-block">
+    <h3>전체 구조 개관</h3>
+    <div class="intro-outline">
+      <div class="oi">
+        <div class="oi-tag">1 &ndash; 10장</div>
+        <div class="oi-title">시내산에서의 준비</div>
+        <div class="oi-body">인구조사와 진영 배치, 레위인의 임무, 정결법과 나실인 서원을 거쳐 성막 봉헌과 출발 준비까지 이어진다.</div>
+      </div>
+      <div class="oi">
+        <div class="oi-tag">11 &ndash; 25장</div>
+        <div class="oi-title">광야에서의 반역과 심판</div>
+        <div class="oi-body">원망과 정탐꾼 사건, 고라의 반역을 거쳐 첫 세대가 광야에서 스러지고, 발람 사건과 바알브올의 죄로 마무리된다.</div>
+      </div>
+      <div class="oi">
+        <div class="oi-tag">26 &ndash; 36장</div>
+        <div class="oi-title">새로운 세대와 약속의 땅 준비</div>
+        <div class="oi-body">두 번째 인구조사로 새 세대가 등장하고, 미디안 전쟁과 땅 분배 규례를 거쳐 모압 평지에서 가나안 입성을 준비한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-block">
+    <h3>이 책의 사용법</h3>
+    <p>각 장은 레위기 연구와 동일한 세 부분으로 구성된다. <b class="hl-term">①본문 구조와 핵심 내용</b>은 해당 장을 몇 개의 단락으로 나누어 흐름을 요약하고, <b class="hl-term">②신학적&middot;목회적 교훈</b>은 본문에서 오늘의 신앙과 삶으로 이어지는 다섯 가지 통찰을 제시하며, <b class="hl-term">③깊이 생각해볼 문제</b>는 히브리어 원어 배경, 해석사적 논쟁, 신약과의 관계 등 확정적 답보다 함께 씨름할 가치가 있는 지점들을 다룬다. 개인 묵상은 물론 소그룹&middot;설교 준비 자료로도 사용할 수 있도록 구성하였다.</p>
+  </div>
+</div>
+
+<div class="toc-page" id="toc">
+  <div class="page-label">Contents</div>
+  <h1>목차</h1>
+  <div class="toc-list">
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch1')" onkeydown="if(event.key==='Enter')goTo(event,'ch1')">
+      <span class="toc-num">01</span><span class="toc-title">숫자로 헤아려지는 사랑</span><span class="toc-sub">첫 번째 인구조사</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch1"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch2')" onkeydown="if(event.key==='Enter')goTo(event,'ch2')">
+      <span class="toc-num">02</span><span class="toc-title">중심을 향해 정렬된 진</span><span class="toc-sub">진영 배치의 질서</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch2"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch3')" onkeydown="if(event.key==='Enter')goTo(event,'ch3')">
+      <span class="toc-num">03</span><span class="toc-title">대신 구별된 자들</span><span class="toc-sub">레위인의 수와 대속</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch3"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch4')" onkeydown="if(event.key==='Enter')goTo(event,'ch4')">
+      <span class="toc-num">04</span><span class="toc-title">맡겨진 것을 짊어지는 사람들</span><span class="toc-sub">레위인의 구체적 직무</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch4"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch5')" onkeydown="if(event.key==='Enter')goTo(event,'ch5')">
+      <span class="toc-num">05</span><span class="toc-title">진 밖으로, 그리고 다시 안으로</span><span class="toc-sub">공동체의 순결</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch5"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch6')" onkeydown="if(event.key==='Enter')goTo(event,'ch6')">
+      <span class="toc-num">06</span><span class="toc-title">특별히 구별된 헌신</span><span class="toc-sub">나실인 서원과 제사장의 축복</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch6"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch7')" onkeydown="if(event.key==='Enter')goTo(event,'ch7')">
+      <span class="toc-num">07</span><span class="toc-title">같은 마음, 각자의 예물</span><span class="toc-sub">지파장들의 봉헌</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch7"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch8')" onkeydown="if(event.key==='Enter')goTo(event,'ch8')">
+      <span class="toc-num">08</span><span class="toc-title">빛을 비추는 자로 세우심</span><span class="toc-sub">등잔대와 레위인의 봉헌</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch8"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch9')" onkeydown="if(event.key==='Enter')goTo(event,'ch9')">
+      <span class="toc-num">09</span><span class="toc-title">구름이 머무는 동안</span><span class="toc-sub">유월절과 인도하시는 구름</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch9"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch10')" onkeydown="if(event.key==='Enter')goTo(event,'ch10')">
+      <span class="toc-num">10</span><span class="toc-title">나팔 소리와 함께 떠나다</span><span class="toc-sub">시내산을 떠나는 행렬</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch10"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch11')" onkeydown="if(event.key==='Enter')goTo(event,'ch11')">
+      <span class="toc-num">11</span><span class="toc-title">만나로는 부족했던 마음</span><span class="toc-sub">원망과 메추라기</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch11"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch12')" onkeydown="if(event.key==='Enter')goTo(event,'ch12')">
+      <span class="toc-num">12</span><span class="toc-title">가장 가까운 사람의 시기</span><span class="toc-sub">미리암과 아론의 반역</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch12"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch13')" onkeydown="if(event.key==='Enter')goTo(event,'ch13')">
+      <span class="toc-num">13</span><span class="toc-title">같은 땅, 다른 보고</span><span class="toc-sub">열두 정탐꾼</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch13"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch14')" onkeydown="if(event.key==='Enter')goTo(event,'ch14')">
+      <span class="toc-num">14</span><span class="toc-title">믿음의 눈과 두려움의 눈</span><span class="toc-sub">반역과 광야 심판</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch14"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch15')" onkeydown="if(event.key==='Enter')goTo(event,'ch15')">
+      <span class="toc-num">15</span><span class="toc-title">심판 중에도 이어지는 약속</span><span class="toc-sub">추가 규례와 옷단의 술</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch15"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch16')" onkeydown="if(event.key==='Enter')goTo(event,'ch16')">
+      <span class="toc-num">16</span><span class="toc-title">스스로 높아지려 한 자들</span><span class="toc-sub">고라의 반역</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch16"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch17')" onkeydown="if(event.key==='Enter')goTo(event,'ch17')">
+      <span class="toc-num">17</span><span class="toc-title">마른 지팡이에서 핀 꽃</span><span class="toc-sub">아론의 싹 난 지팡이</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch17"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch18')" onkeydown="if(event.key==='Enter')goTo(event,'ch18')">
+      <span class="toc-num">18</span><span class="toc-title">몫으로 주어진 부르심</span><span class="toc-sub">제사장과 레위인의 직무와 분깃</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch18"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch19')" onkeydown="if(event.key==='Enter')goTo(event,'ch19')">
+      <span class="toc-num">19</span><span class="toc-title">죽음 앞에서 필요한 정결</span><span class="toc-sub">붉은 암송아지</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch19"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch20')" onkeydown="if(event.key==='Enter')goTo(event,'ch20')">
+      <span class="toc-num">20</span><span class="toc-title">반석을 명하지 않고 친 순간</span><span class="toc-sub">모세의 실수와 두 지도자의 죽음</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch20"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch21')" onkeydown="if(event.key==='Enter')goTo(event,'ch21')">
+      <span class="toc-num">21</span><span class="toc-title">쳐다보아야 사는 은혜</span><span class="toc-sub">놋뱀과 광야 승전</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch21"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch22')" onkeydown="if(event.key==='Enter')goTo(event,'ch22')">
+      <span class="toc-num">22</span><span class="toc-title">나귀보다 못 보았던 선지자</span><span class="toc-sub">발람과 나귀</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch22"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch23')" onkeydown="if(event.key==='Enter')goTo(event,'ch23')">
+      <span class="toc-num">23</span><span class="toc-title">저주하려 해도 막히는 입</span><span class="toc-sub">발람의 첫 두 신탁</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch23"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch24')" onkeydown="if(event.key==='Enter')goTo(event,'ch24')">
+      <span class="toc-num">24</span><span class="toc-title">멀리서 떠오르는 별 하나</span><span class="toc-sub">발람의 마지막 신탁</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch24"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch25')" onkeydown="if(event.key==='Enter')goTo(event,'ch25')">
+      <span class="toc-num">25</span><span class="toc-title">칼보다 앞선 열심</span><span class="toc-sub">바알브올과 비느하스</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch25"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch26')" onkeydown="if(event.key==='Enter')goTo(event,'ch26')">
+      <span class="toc-num">26</span><span class="toc-title">새로운 세대의 명단</span><span class="toc-sub">두 번째 인구조사</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch26"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch27')" onkeydown="if(event.key==='Enter')goTo(event,'ch27')">
+      <span class="toc-num">27</span><span class="toc-title">딸들이 낸 용기 있는 질문</span><span class="toc-sub">슬로브핫의 딸들과 여호수아의 위임</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch27"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch28')" onkeydown="if(event.key==='Enter')goTo(event,'ch28')">
+      <span class="toc-num">28</span><span class="toc-title">매일과 매주로 이어지는 예배</span><span class="toc-sub">정규 제사의 시간표</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch28"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch29')" onkeydown="if(event.key==='Enter')goTo(event,'ch29')">
+      <span class="toc-num">29</span><span class="toc-title">한 해를 마무리하는 절기들</span><span class="toc-sub">칠월의 절기 제사</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch29"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch30')" onkeydown="if(event.key==='Enter')goTo(event,'ch30')">
+      <span class="toc-num">30</span><span class="toc-title">말의 무게, 관계의 책임</span><span class="toc-sub">여성의 서원 규례</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch30"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch31')" onkeydown="if(event.key==='Enter')goTo(event,'ch31')">
+      <span class="toc-num">31</span><span class="toc-title">정의를 이루는 슬픈 전쟁</span><span class="toc-sub">미디안과의 전쟁</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch31"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch32')" onkeydown="if(event.key==='Enter')goTo(event,'ch32')">
+      <span class="toc-num">32</span><span class="toc-title">먼저 자리 잡고 싶은 마음</span><span class="toc-sub">요단 동편 지파들의 요청</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch32"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch33')" onkeydown="if(event.key==='Enter')goTo(event,'ch33')">
+      <span class="toc-num">33</span><span class="toc-title">걸어온 길을 되짚어보다</span><span class="toc-sub">광야 여정의 노정表</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch33"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch34')" onkeydown="if(event.key==='Enter')goTo(event,'ch34')">
+      <span class="toc-num">34</span><span class="toc-title">경계가 그려주는 안정감</span><span class="toc-sub">가나안 땅의 경계</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch34"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch35')" onkeydown="if(event.key==='Enter')goTo(event,'ch35')">
+      <span class="toc-num">35</span><span class="toc-title">도망칠 수 있는 자리를 마련하다</span><span class="toc-sub">레위인의 성읍과 도피성</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch35"></span>
+    </a>
+    <a class="toc-item" role="button" tabindex="0" onclick="goTo(event,'ch36')" onkeydown="if(event.key==='Enter')goTo(event,'ch36')">
+      <span class="toc-num">36</span><span class="toc-title">기업과 공동체 사이의 균형</span><span class="toc-sub">슬로브핫 딸들의 결혼 규정</span><span class="toc-fill"></span><span class="toc-page-num" href="#ch36"></span>
+    </a>
+  </div>
+</div>
+
+<section class="chapter" id="ch1">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V22a12 12 0 0 1 24 0v18" /><path d="M12 40h24" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 1</div>
+      <h1>1장 &middot; 숫자로 헤아려지는 사랑</h1>
+      <div class="chapter-sub">민수기 1장 &mdash; 첫 번째 인구조사</div>
+      <div class="ref-strip"><span class="ref-item">민 1:1-54</span><span class="ref-item">체바</span><span class="ref-item">파쿠드</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-19절</div><div><div class="flow-title">회막에서 시작된 조사</div><div class="flow-body">출애굽 후 둘째 해 둘째 달, 시내 광야 회막에서 스무 살 이상 <b class="hl-greek has-tip" data-tip="'군대, 싸울 수 있는 무리'를 뜻하는 히브리어. 인구조사의 대상이 된 남자들을 가리키는 표현이다.">체바</b>(싸울 수 있는 남자)를 지파별로 세는 일이 시작된다. 인구조사조차 성막이라는 예배의 자리에서 출발한다는 점이 인상적이다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">20-46절</div><div><div class="flow-title">지파별 명단, 육십만이 넘는 수</div><div class="flow-body">열두 지파의 수가 차례로 기록되며 총 <b class="hl-insight has-insight" data-insight="1">603,550명</b>에 이른다. 이름 없이 지나칠 수 있었던 개개인이 하나님 앞에서 낱낱이 헤아려진 것이다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">47-54절</div><div><div class="flow-title">계수에서 제외된 레위 지파</div><div class="flow-body">레위 지파는 전쟁 인원에 포함되지 않고 대신 <b class="hl-term">성막을 맡은 자</b>로 구별된다. 모든 지파가 동일한 역할을 맡는 것이 아니라 각자에게 정해진 몫이 있었다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 이름으로 기억되는 존재</div><div class="teach-body">거대한 무리 속에서도 하나님은 익명이 아니라 이름과 가문으로 각 사람을 기억하신다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 헤아려짐은 소속의 확인</div><div class="teach-body">숫자로 세어진다는 것은 억압이 아니라 공동체에 속해 있다는 증표였다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 질서 있는 공동체의 기초</div><div class="teach-body">체계적으로 조직된 회중은 무질서한 유랑민과 다른, 하나님의 백성다운 정체성을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 서로 다른 부르심의 인정</div><div class="teach-body">레위 지파를 따로 구별하신 것은 모든 부르심이 동일한 형태일 필요가 없음을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 전쟁을 앞둔 준비</div><div class="teach-body">약속의 땅을 향한 여정은 목가적 산책이 아니라 실제적 전투를 준비하는 행군이었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">민수기 1장의 끝없는 명단을 그냥 넘기기 쉽지만, 그 목록 하나하나가 사실 하나님이 기억하신 한 사람 한 사람의 이름이라는 걸 생각하면 다르게 읽힙니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>육십만이라는 숫자의 역사성 논쟁</div><div class="deep-body">603,550명이라는 성인 남자 수는 전체 인구를 200만 명 이상으로 추산하게 하는데, 이는 당시 광야의 생태적 부양 능력을 훨씬 초과한다는 지적이 오래전부터 있었다. 히브리어 <b class="hl-greek has-tip" data-tip="'천' 또는 '가문/씨족 단위'를 모두 의미할 수 있는 히브리어 단어. 인구조사 숫자 해석 논쟁의 핵심이다.">엘레프</b>(אֶלֶף)가 '천'이 아니라 '가문 단위'를 가리킬 수 있다는 재해석 등 여러 학설이 제기되지만, 어느 것도 결정적이지 않다는 것이 현재 학계의 신중한 입장이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>인구조사와 사무엘하 24장의 긴장</div><div class="deep-body">민수기의 인구조사는 하나님의 명령으로 이루어져 축복으로 다뤄지지만, 사무엘하 24장에서 다윗의 인구조사는 심판의 대상이 된다. 이 차이는 조사 행위 자체가 아니라 그 동기(하나님의 명령에 대한 순종인가, 인간적 자랑과 신뢰의 결여인가)에 달려 있다는 해석이 널리 받아들여진다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch2">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16" /><path d="M24 10v4M24 34v4M10 24h4M34 24h4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 2</div>
+      <h1>2장 &middot; 중심을 향해 정렬된 진</h1>
+      <div class="chapter-sub">민수기 2장 &mdash; 진영 배치의 질서</div>
+      <div class="ref-strip"><span class="ref-item">민 2:1-34</span><span class="ref-item">데겔</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-2절</div><div><div class="flow-title">각 사람은 자기 진영의 <b class="hl-term">깃발</b>(데겔) 곁에</div><div class="flow-body">각 지파는 자기 조상의 가문의 기호와 <b class="hl-greek has-tip" data-tip="'깃발, 군기'를 뜻하는 히브리어로, 각 진영을 구분하던 단위다.">데겔</b>(깃발) 곁에 진을 쳐야 했다. 소속이 분명한 삶은 방향을 잃지 않는다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">3-31절</div><div><div class="flow-title">동서남북, 회막을 둘러싼 배치</div><div class="flow-body">유다·르우벤·에브라임·단 진영이 동서남북에 자리하며, <b class="hl-insight has-insight" data-insight="2">회막이 언제나 진영의 정중앙</b>에 위치했다. 백성의 삶 전체가 하나님의 임재를 중심으로 배열된 것이다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">32-34절</div><div><div class="flow-title">명하신 대로 행하는 순종</div><div class="flow-body">모세에게 명령하신 대로 이스라엘 자손이 다 준행하였다는 반복된 표현이 본문을 마무리한다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 삶의 중심을 어디에 두는가</div><div class="teach-body">우리 삶의 배치도 결국 무엇을 중심에 두고 있는지를 드러낸다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 질서가 주는 안정감</div><div class="teach-body">각자 정해진 자리가 있다는 것은 혼란이 아니라 평안의 근거였다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 소속과 정체성</div><div class="teach-body">자기 깃발 곁에 있다는 것은 소속을 통해 정체성을 확인하는 일이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 이동하는 성전 도시</div><div class="teach-body">이 배치는 진이 이동할 때도 그대로 유지되어, 어디를 가든 하나님 중심의 질서가 지켜졌다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 순종의 반복된 확인</div><div class="teach-body">"다 준행하였더라"는 반복은 순종이 예외가 아니라 습관이 되어야 함을 보여준다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">회막이 진영의 정중앙에 있었다는 사실, 지도를 그려보면 더 실감 나요. 이스라엘의 모든 움직임이 문자 그대로 하나님을 중심으로 돌아가고 있었던 거죠.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>진영 배치와 요한계시록의 새 예루살렘</div><div class="deep-body">일부 학자들은 열두 지파가 사방으로 회막을 둘러싼 이 구조가 요한계시록 21장의 열두 문을 가진 새 예루살렘 환상과 상징적으로 공명한다고 본다. 두 본문 모두 하나님의 임재를 중심에 둔 공동체적 질서를 그린다는 점에서 흥미로운 병행이지만, 직접적 문학적 의존 관계로 보기는 어렵다는 것이 신중한 해석이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>유다 지파가 동쪽 선두에 서는 배치의 함의</div><div class="deep-body">행군의 선두를 맡은 유다 지파의 위치는 후대 다윗 왕가와 메시아 계보가 유다 지파에서 나온다는 점(창 49:10)과 연결지어 신학적으로 해석되곤 한다. 다만 이는 사후적 독법일 가능성이 있어, 본문 자체가 이를 의도했는지는 신중히 판단해야 한다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch3">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="14" width="28" height="20" rx="2" /><path d="M10 14l14 10 14-10" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 3</div>
+      <h1>3장 &middot; 대신 구별된 자들</h1>
+      <div class="chapter-sub">민수기 3장 &mdash; 레위인의 수와 대속</div>
+      <div class="ref-strip"><span class="ref-item">민 3:1-51</span><span class="ref-item">베코르</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">5-13절</div><div><div class="flow-title">장자 대신 세워진 레위인</div><div class="flow-body">본래 애굽에서 <b class="hl-greek has-tip" data-tip="'장자, 맏아들'을 뜻하는 히브리어. 유월절 밤 심판에서 건짐받은 이스라엘 장자를 가리킨다.">베코르</b>(장자)를 살리신 그 밤 이후, 모든 장자는 하나님의 것이었다. 이제 레위인이 그 장자들을 대신하는 존재로 구별된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">14-39절</div><div><div class="flow-title">게르손·고핫·므라리, 세 가문의 배치</div><div class="flow-body">레위인의 세 가문이 각각 성막의 서·남·북쪽에 진을 치고, <b class="hl-insight has-insight" data-insight="3">서로 다른 성막 기구</b>를 맡아 관리했다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">40-51절</div><div><div class="flow-title">숫자가 맞지 않을 때의 대속 값</div><div class="flow-body">이스라엘 장자의 수가 레위인 수보다 273명 많아, 그 차액만큼 은으로 대속 값을 치르게 하는 세밀한 계산이 이루어진다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 대속의 원리가 스며든 조직</div><div class="teach-body">한 사람이나 집단이 다른 사람을 대신할 수 있다는 대속의 신학이 이미 이 조직 구조 안에 스며 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 세밀하게 맞아떨어지는 계산</div><div class="teach-body">273명이라는 숫자까지 정확히 셈하시는 것은 하나님의 정의가 대략적이지 않음을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 생명을 구원받은 자의 헌신</div><div class="teach-body">장자가 하나님의 것이 된 근원은 유월절 밤 생명을 건짐받은 은혜에 있었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 분업으로 완성되는 섬김</div><div class="teach-body">세 가문이 각기 다른 기구를 맡은 것은 한 사람이 모든 것을 할 필요가 없다는 원리를 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 특권이 아닌 책임으로서의 구별</div><div class="teach-body">레위인의 구별됨은 특권이기 이전에 성막을 향한 무거운 책임이었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">273명이라는 숫자 하나까지 놓치지 않고 대속 값을 계산하시는 장면, 하나님의 정의는 대충 뭉뚱그리는 법이 없다는 걸 새삼 느끼게 됩니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>장자 대속과 그리스도론적 독법의 한계</div><div class="deep-body">레위인이 장자를 '대신'한다는 대속 구조는 흔히 그리스도의 대속 사역의 예표로 설교되지만, 본문 자체는 이를 미래의 메시아와 명시적으로 연결하지 않는다. 대속의 원리 자체를 성경 전체가 공유하는 신학적 문법으로 이해하되, 이 본문을 곧바로 그리스도 예표로 단정하는 것은 신중해야 한다는 지적이 있다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>레위인 수(22,000명)와 장자 수(22,273명)의 근접성</div><div class="deep-body">두 숫자가 거의 정확히 일치한다는 점은 우연으로 보기 어렵다는 논의가 있다. 일부 학자는 이것이 인구조사 숫자 전체가 문자적 통계라기보다 상징적·신학적으로 구성된 수치 체계일 가능성을 시사한다고 본다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch4">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 20h20M14 28h20M10 14h28v20H10z" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 4</div>
+      <h1>4장 &middot; 맡겨진 것을 짊어지는 사람들</h1>
+      <div class="chapter-sub">민수기 4장 &mdash; 레위인의 구체적 직무</div>
+      <div class="ref-strip"><span class="ref-item">민 4:1-49</span><span class="ref-item">아보다</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-20절</div><div><div class="flow-title">덮은 후에야 만질 수 있는 지성물</div><div class="flow-body">고핫 자손은 언약궤 등 지성물을 옮기지만, <b class="hl-insight has-insight" data-insight="4">제사장이 먼저 덮개로 덮은 후</b>에야 만질 수 있었다. 거룩한 것에는 임의로 접근할 수 없었다. 이처럼 성막을 향한 모든 <b class="hl-greek has-tip" data-tip="'섬김, 노동, 예배'를 뜻하는 히브리어로, 성막을 향한 레위인의 직무 전체를 가리키는 핵심 단어다.">아보다</b>(섬김)에는 정해진 절차가 있었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">21-33절</div><div><div class="flow-title">서른부터 쉰까지, 정해진 복무 연령</div><div class="flow-body">게르손과 므라리 자손의 직무가 구체적으로 규정되며, <b class="hl-term">30세에서 50세</b>라는 복무 연령이 세 가문 모두에 동일하게 적용된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">34-49절</div><div><div class="flow-title">한 사람 한 사람 이름으로 계수됨</div><div class="flow-body">봉사할 수 있는 레위인의 수가 가문별로 다시 정밀하게 세어지며, 총 8,580명이 성막 봉사의 일꾼으로 확인된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 거룩한 것을 대하는 절차의 중요성</div><div class="teach-body">아무리 헌신된 자라도 순서와 절차를 건너뛰고 거룩한 것에 접근할 수 없었다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 인생의 계절에 맞는 부르심</div><div class="teach-body">30세에서 50세라는 복무 연령은 모든 부르심에 적절한 때와 준비 기간이 있음을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 보이지 않는 수고의 가치</div><div class="teach-body">천막을 걷고 나르는 일은 화려하지 않지만 성막 유지에 필수적인 헌신이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 각자에게 맞는 짐의 무게</div><div class="teach-body">고핫·게르손·므라리 각 가문에게 각자의 힘과 역할에 맞는 짐이 배정되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 정밀한 조직이 보여주는 존중</div><div class="teach-body">한 사람 한 사람의 이름과 역할을 세밀히 기록한 것은 그들을 향한 하나님의 존중을 보여준다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">고핫 자손이 지성물을 나르지만 정작 그것을 볼 수도, 먼저 만질 수도 없었다는 것, 헌신에도 정해진 경계가 있다는 걸 보여주는 대목이에요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>고핫 자손이 지성물을 보지 못하게 한 이유(20절)</div><div class="deep-body">"그들이 잠시라도 들어가서 성물을 보지 말라 그리하면 죽으리라"는 경고는 지극히 거룩한 것 앞에서 인간의 접근이 철저히 제한되어야 함을 보여준다. 이는 훗날 웃사의 죽음(삼하 6장)이 언약궤를 부적절하게 다룬 데서 비롯되었다는 사건과 신학적으로 연결지어 읽힌다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>30-50세 복무 연령과 8장 레위인 봉헌 연령(25세)의 차이</div><div class="deep-body">민수기 4장은 30세를, 8장은 25세를 봉사 시작 연령으로 제시하여 표면적 불일치가 있다. 학자들은 25세부터 수습 훈련이 시작되고 30세에 정식 직무를 수행했다는 단계적 해석, 혹은 서로 다른 시기의 규정이라는 해석 등을 제시하지만 확정된 답은 없다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch5">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="12" /><path d="M24 16v8l6 4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 5</div>
+      <h1>5장 &middot; 진 밖으로, 그리고 다시 안으로</h1>
+      <div class="chapter-sub">민수기 5장 &mdash; 공동체의 순결</div>
+      <div class="ref-strip"><span class="ref-item">민 5:1-31</span><span class="ref-item">소타</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-4절</div><div><div class="flow-title">진 가운데 거하시는 하나님을 위한 자리</div><div class="flow-body">부정한 자를 진 밖으로 내보내는 이유는 <b class="hl-quote">"내가 그 진 가운데에 거함이니라"</b>는 한 문장으로 요약된다. 공동체의 순결은 하나님의 임재와 직결된 문제였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">5-10절</div><div><div class="flow-title">배상과 회복의 절차</div><div class="flow-body">이웃에게 잘못한 것은 <b class="hl-insight has-insight" data-insight="5">원금에 오분의 일을 더하여</b> 갚도록 하여, 죄의 인정이 구체적 배상으로 이어져야 함을 보여준다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">11-31절</div><div><div class="flow-title">의심의 소제 &mdash; 하나님께 맡기는 판결</div><div class="flow-body">간음이 의심되나 증거가 없는 경우, 인간의 판단이 아니라 <b class="hl-term">쓴 물</b>을 통한 하나님의 판결에 맡기도록 하여, 억울한 의심이 사적 보복으로 번지지 않게 했다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 임재가 요구하는 거룩함</div><div class="teach-body">하나님이 함께 계신다는 사실이 공동체의 순결을 지켜야 할 근본 이유였다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 회개는 구체적 행동으로</div><div class="teach-body">배상 규정은 회개가 감정을 넘어 실제적 회복으로 이어져야 함을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 의심을 판단에 맡기는 지혜</div><div class="teach-body">증거 없는 의심을 인간의 감정에 맡기지 않고 하나님께 맡기는 절차가 공동체의 파괴를 막았다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 관계의 신뢰 회복</div><div class="teach-body">본문 전체가 궁극적으로 지향하는 것은 처벌이 아니라 관계와 공동체의 회복이다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 사적 감정보다 앞선 공적 절차</div><div class="teach-body">의심스러운 관계의 문제조차 개인의 격정이 아니라 정해진 절차를 따라야 했다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">의심의 소제 규례는 오늘날의 시선으로 낯설게 느껴질 수 있어요. 하지만 그 의도는 억울한 의심이 사적 보복으로 번지지 않도록 막는 데 있었다는 걸 기억하면 좋겠습니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span><b class="hl-greek has-tip" data-tip="'벗어난 여인'이라는 뜻의 히브리어로, 간음 의심 시 치르는 의심의 소제 규례를 가리킨다.">소타</b>(סוֹטָה) 의식의 고대 근동 배경과 성별 비대칭성</div><div class="deep-body">이 규례가 오직 여성에게만 적용되고 남성에게 상응하는 절차가 없다는 점은 고대 가부장적 사회 구조를 반영한다는 비판적 독법이 있다. 동시에 이 절차가 남편의 일방적 처벌권을 제한하고 공적·신적 판결에 맡기게 했다는 점에서, 당대 다른 고대 근동 법전보다 오히려 여성을 보호하는 측면이 있었다는 평가도 함께 논의된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>쓴 물 의식의 실제 작동 방식에 대한 논쟁</div><div class="deep-body">이 의식이 실제 초자연적 심판으로 작동했는지, 혹은 심리적 자백을 유도하는 고대의 재판 절차였는지에 대해 주석가들의 해석이 갈린다. 본문이 결과를 하나님께 명시적으로 돌린다는 점에서(21절), 적어도 본문 자체는 이를 인간의 조작이 아니라 신적 판결로 제시하고 있다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch6">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8v10M18 16l6 6 6-6" /><path d="M10 34q14-8 28 0" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 6</div>
+      <h1>6장 &middot; 특별히 구별된 헌신</h1>
+      <div class="chapter-sub">민수기 6장 &mdash; 나실인 서원과 제사장의 축복</div>
+      <div class="ref-strip"><span class="ref-item">민 6:1-27</span><span class="ref-item">나지르</span><span class="ref-item">제사장의 축복</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-8절</div><div><div class="flow-title">포도주와 삭도와 시체, 세 가지 금지</div><div class="flow-body"><b class="hl-greek has-tip" data-tip="'구별된 자, 헌신한 자'를 뜻하는 히브리어. 스스로 서원하여 특별한 구별의 삶을 사는 자를 가리킨다.">나실인</b>(나지르)은 포도주를 멀리하고 머리를 깎지 않으며 시체를 가까이하지 않는 특별한 구별의 삶을 자원하여 선택할 수 있었다. <b class="hl-insight has-insight" data-insight="6">자발적 헌신</b>의 길이 누구에게나 열려 있었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">13-21절</div><div><div class="flow-title">서원이 끝난 후의 예식</div><div class="flow-body">기간이 끝나면 제물을 드리고 길렀던 머리털을 화목제 불 위에 사르는 것으로 서원이 완성되며, 특별한 구별도 결국 공동체의 예배 안에서 마무리된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">22-27절</div><div><div class="flow-title">여호와는 네게 복을 주시고</div><div class="flow-body">아론과 그 아들들이 선포할 <b class="hl-quote">제사장의 축복</b>이 주어지며, 하나님이 자기 이름을 이스라엘 위에 두어 복을 주겠다 약속하신다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 자원하는 헌신의 자리</div><div class="teach-body">모든 헌신이 명령으로만 이루어지는 것이 아니라, 자원하는 마음으로 나아갈 수 있는 길도 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 구별은 목적이 아닌 과정</div><div class="teach-body">나실인의 구별도 결국 공동체 예배 안에서 완성되는 여정의 한 부분이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 이름으로 임하는 복</div><div class="teach-body">제사장의 축복은 사람의 덕담이 아니라 하나님의 이름을 백성 위에 두는 실제적 선언이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 얼굴을 향하신 복</div><div class="teach-body">"그 얼굴을 네게 비추사"라는 표현은 하나님의 관심과 은총이 등을 돌리지 않으심을 상징한다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 평강으로 완성되는 복</div><div class="teach-body">축복의 절정은 물질이 아니라 하나님이 주시는 <b>샬롬</b>(평강)이었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">제사장의 축복문은 오늘날에도 예배 끝에 자주 낭독되는 본문이죠. 삼천 년 넘게 이어져 온 이 한 문단이 얼마나 많은 사람을 위로했을지 생각해봅니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>삼손과 사무엘 같은 '평생 나실인'과 본문의 '기한부 서원'의 차이</div><div class="deep-body">민수기 6장의 나실인은 스스로 기간을 정해 서원하는 자발적·기한부 헌신이지만, 삼손(삿 13장)이나 사무엘(삼상 1장)은 태어나기 전부터 부모의 서원으로 평생 나실인이 된 경우다. 이 두 유형이 같은 제도의 다른 적용인지, 별개의 관습이 후대에 결합된 것인지에 대해 논쟁이 있다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>쿰란 은제 두루마리에 새겨진 제사장의 축복</div><div class="deep-body">예루살렘에서 발견된 기원전 7세기경의 은제 부적(케테프 힌놈 두루마리)에 민수기 6:24-26의 축복문과 거의 동일한 문구가 새겨져 있어, 이 축복이 구약 본문 중 고고학적으로 확인된 가장 오래된 성경 인용문 중 하나로 꼽힌다. 이는 이 축복문이 이스라엘 신앙 생활 속에서 얼마나 이른 시기부터 널리 사용되었는지를 보여주는 귀중한 증거다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch7">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="10" width="20" height="28" rx="2" /><path d="M14 20h20M14 28h20" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 7</div>
+      <h1>7장 &middot; 같은 마음, 각자의 예물</h1>
+      <div class="chapter-sub">민수기 7장 &mdash; 지파장들의 봉헌</div>
+      <div class="ref-strip"><span class="ref-item">민 7:1-89</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-9절</div><div><div class="flow-title">수레와 소, 실질적으로 필요한 것을 드리다</div><div class="flow-body">지파장들이 수레 여섯과 소 열둘을 드려 게르손과 므라리 자손의 <b class="hl-term">운반 사역</b>을 실질적으로 도왔다. 이러한 예물을 <b class="hl-greek has-tip" data-tip="'봉헌, 낙성식'을 뜻하는 히브리어. 지파장들이 성막을 위해 드린 봉헌 예물 전체를 가리킨다.">하누카</b>(봉헌)라 불렀으니, 헌신은 거창한 상징만이 아니라 실제 필요를 채우는 것이기도 했다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">12-83절</div><div><div class="flow-title">열두 날, 동일하게 반복되는 예물</div><div class="flow-body">열두 지파장이 각각 하루씩, <b class="hl-insight has-insight" data-insight="7">완전히 동일한 예물</b>을 열두 번 반복해서 드린다. 지루하게 느껴질 수 있는 이 반복이 오히려 각 지파를 향한 하나님의 동등한 관심을 보여준다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">84-89절</div><div><div class="flow-title">모세가 듣는 하나님의 음성</div><div class="flow-body">봉헌이 끝난 후 모세가 회막에 들어가면 속죄소 위에서 하나님의 음성을 들었다는 기록으로 마무리된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 실용적 필요를 채우는 헌신</div><div class="teach-body">헌신은 때로 화려한 상징이 아니라 구체적으로 필요한 것을 채우는 형태로 나타난다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 반복 속의 동등한 존중</div><div class="teach-body">열두 번 반복된 동일한 예물은 각 지파가 서로 비교되거나 등급 매겨지지 않았음을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 순서를 따르는 겸손</div><div class="teach-body">모든 지파장이 정해진 순서대로 하루씩 나아가며 자기 차례를 기다렸다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 예배 후 임하는 계시</div><div class="teach-body">봉헌이라는 예배의 자리 이후에 하나님의 음성이 이어졌다는 순서가 의미심장하다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 공동체의 헌신이 완성하는 성막</div><div class="teach-body">한 사람이 아니라 열두 지파 전체의 헌신이 모여 성막의 실제적 운영이 가능해졌다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">89절 전체가 열두 번 똑같은 예물 목록을 반복하는 걸 보면 지루하게 느껴질 수 있어요. 그런데 성경이 굳이 이걸 다 기록한 건, 어느 지파도 소홀히 여기지 않으셨다는 뜻 아닐까요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>왜 성경은 굳이 열두 번 동일한 목록을 반복해 기록했을까</div><div class="deep-body">문학적으로 압축하면 훨씬 짧게 서술할 수 있었음에도 본문은 각 지파장의 이름과 예물을 하나하나 완전히 반복해 기록한다. 이러한 반복 문체는 고대 근동의 봉헌 명문(dedicatory inscription) 전통과 유사하며, 각 지파의 기여를 개별적으로 영구히 기념하려는 의도적 문학 기법으로 이해된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>고핫 자손에게는 수레가 주어지지 않은 이유(9절)</div><div class="deep-body">게르손과 므라리 자손에게는 수레와 소가 배정되었지만, 고핫 자손은 "성물은 어깨로 메어야 하기 때문에" 수레를 받지 못했다. 이는 4장의 규례(지성물은 반드시 사람이 직접 어깨에 메어 운반해야 한다는 원칙)와 정확히 일치하며, 거룩한 것에 대한 취급 방식이 일관되게 유지되고 있음을 보여준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch8">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v6M24 36v6M8 24h6M34 24h6" /><circle cx="24" cy="24" r="8" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 8</div>
+      <h1>8장 &middot; 빛을 비추는 자로 세우심</h1>
+      <div class="chapter-sub">민수기 8장 &mdash; 등잔대와 레위인의 봉헌</div>
+      <div class="ref-strip"><span class="ref-item">민 8:1-26</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-4절</div><div><div class="flow-title">앞을 비추는 등불</div><div class="flow-body">일곱 등잔이 놓인 <b class="hl-greek has-tip" data-tip="'등잔대'를 뜻하는 히브리어. 성막 안에서 순금으로 만들어진 일곱 갈래 등잔대를 가리킨다.">메노라</b>(등잔대) 앞으로 빛을 비추도록 배치되어, 성막 안의 삶이 어둠 없이 밝게 지속되도록 했다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">5-19절</div><div><div class="flow-title">물 뿌림과 삭도, 정결하게 구별되는 레위인</div><div class="flow-body">레위인은 정결케 하는 물을 뿌리고 온 몸의 털을 밀고 옷을 빤 후에야 봉사할 수 있었으며, <b class="hl-insight has-insight" data-insight="8">이스라엘 자손 전체가 그들 위에 안수</b>함으로 공동체 전체를 대표해 드려지는 예물이 되었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">23-26절</div><div><div class="flow-title">쉰이 지나면 물러나는 은퇴</div><div class="flow-body">50세가 지난 레위인은 무거운 직무에서 물러나되, 완전히 배제되지 않고 형제를 돕는 역할로 계속 섬길 수 있었다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 꾸준히 비추는 빛의 사명</div><div class="teach-body">등불처럼, 우리의 섬김도 화려함보다 꾸준히 밝히는 데 그 본질이 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 공동체 전체가 함께 세우는 사역자</div><div class="teach-body">레위인의 봉헌은 개인의 결단이 아니라 온 회중의 안수로 이루어진 공동체적 사건이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 준비 없이 나아갈 수 없는 자리</div><div class="teach-body">정결 예식은 섬김의 자리에 아무렇게나 나아갈 수 없다는 것을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 은퇴 이후에도 남는 자리</div><div class="teach-body">직무의 은퇴가 공동체로부터의 단절을 의미하지 않는다는 배려가 담겨 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 대속받은 자의 헌신</div><div class="teach-body">레위인의 봉헌은 3장에서 이미 확립된 장자 대속의 신학을 실제 예식으로 완성한다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">50세 이후에도 완전히 물러나지 않고 형제를 돕는 역할로 남을 수 있었다는 것, 은퇴 이후의 삶을 생각하게 하는 따뜻한 배려예요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>온 회중이 레위인에게 안수한다는 것의 독특성</div><div class="deep-body">보통 안수는 제사장이나 지도자가 개인에게 행하는 예식이지만, 8:10에서는 이스라엘 온 회중이 레위인 전체에게 안수한다. 이는 레위인이 단지 제사장의 보조 인력이 아니라 온 이스라엘을 대표하여 하나님께 드려지는 살아있는 예물임을 상징적으로 보여준다는 해석이 지배적이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>25세(24절) vs 30세(4:3) 복무 연령의 재조명</div><div class="deep-body">4장에서 다룬 이 불일치는 여러 해석 가능성이 있지만, 일부 주석가는 8장이 시내산에서의 최초 봉헌 상황(경험이 부족하므로 더 이른 나이부터 훈련 개념으로 참여)을, 4장이 이후 정착된 정규 직무 연령을 반영한다고 본다. 후대 문헌(대상 23:24-27)에서는 20세로 더 낮아지는데, 이는 시대에 따라 레위인 인력 수요에 맞춰 조정되었을 가능성을 시사한다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch9">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 30q14-14 28 0" /><circle cx="24" cy="14" r="4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 9</div>
+      <h1>9장 &middot; 구름이 머무는 동안</h1>
+      <div class="chapter-sub">민수기 9장 &mdash; 유월절과 인도하시는 구름</div>
+      <div class="ref-strip"><span class="ref-item">민 9:1-23</span><span class="ref-item">아난</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">6-14절</div><div><div class="flow-title">부정하여 지킬 수 없던 자들을 위한 두 번째 기회</div><div class="flow-body">시체로 인해 부정해진 자들이 유월절을 지키지 못함을 안타까워하자, 하나님은 <b class="hl-insight has-insight" data-insight="9">한 달 후에 다시 지킬 수 있는 길</b>을 열어주신다. 규례는 지키되, 형편을 헤아리는 은혜가 함께 있었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">15-19절</div><div><div class="flow-title">구름이 머무는 동안은 진영도 머문다</div><div class="flow-body">성막 위의 <b class="hl-greek has-tip" data-tip="'구름'을 뜻하는 히브리어. 낮에 성막 위에 머물며 이스라엘을 인도한 임재의 표징이다.">아난</b>(구름)이 머무르면 이스라엘도 머물고, 떠오르면 곧바로 행진했다. 여정의 리듬을 인간이 아니라 하나님이 정하셨다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">20-23절</div><div><div class="flow-title">짧든 길든 동일한 순종</div><div class="flow-body">구름이 이틀이든 한 달이든 한 해든 머무는 기간과 관계없이, 이스라엘은 그 기간에 맞춰 머물고 떠나기를 반복했다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 형편을 헤아리시는 하나님</div><div class="teach-body">규례를 지키고 싶어도 지킬 수 없는 형편에 있는 이들을 위한 길을 하나님이 친히 마련하셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 알 수 없는 기다림을 견디는 신뢰</div><div class="teach-body">머무는 기간이 얼마나 될지 알 수 없는 채로 기다려야 했던 순종은 결과를 알지 못해도 신뢰하는 믿음을 요구한다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 인도하심의 리듬을 따르는 삶</div><div class="teach-body">우리의 계획이 아니라 하나님의 인도하심의 속도에 맞추는 것이 신앙의 리듬이다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 눈에 보이는 임재의 확증</div><div class="teach-body">구름과 불이라는 가시적 표징은 하나님이 결코 멀리 계시지 않음을 매일 확인시켜 주었다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 규례의 목적은 배제가 아닌 포함</div><div class="teach-body">두 번째 유월절 규정은 하나님의 법이 사람을 소외시키기 위함이 아니라 포함시키기 위함임을 보여준다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">구름이 어떤 날은 이틀, 어떤 날은 한 해나 머물렀다는 것, 정해진 스케줄 없이 그날그날 하나님의 인도를 기다려야 했던 이스라엘의 삶이 상상이 됩니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>'둘째 유월절'(페사흐 셰니) 제도가 후대 유대교에 미친 영향</div><div class="deep-body">9장의 이 규정은 후대 랍비 유대교에서 '페사흐 셰니'라는 독립된 절기로 발전하여, 정한 때에 첫 유월절을 지키지 못한 모든 이들에게 두 번째 기회를 부여하는 원칙으로 확립되었다. 이는 성경의 한 규정이 공동체의 지속적 실천 속에서 어떻게 발전해 가는지를 보여주는 사례다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>구름과 불 기둥 표징의 신학적 연속성</div><div class="deep-body">출애굽기 13장에서 처음 등장한 구름과 불 기둥이 민수기 9장에서도 동일하게 이어지는 것은, 광야 여정 전체가 단절 없이 동일하신 한 분 하나님의 인도 아래 있음을 강조한다. 이 표징은 이후 열왕기상 8:10-11의 성전 봉헌 시 임재하는 구름과도 신학적으로 연결되며, 하나님의 임재가 이동식 성막에서 고정된 성전으로 옮겨가는 연속성을 보여준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch10">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 34V14l16 10-16 10Z" /><path d="M28 14v20" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 10</div>
+      <h1>10장 &middot; 나팔 소리와 함께 떠나다</h1>
+      <div class="chapter-sub">민수기 10장 &mdash; 시내산을 떠나는 행렬</div>
+      <div class="ref-strip"><span class="ref-item">민 10:1-36</span><span class="ref-item">하초체롯</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-10절</div><div><div class="flow-title">은 나팔 두 개, 소집과 출발의 신호</div><div class="flow-body">은 <b class="hl-greek has-tip" data-tip="'나팔들'을 뜻하는 히브리어. 은으로 만든 두 개의 나팔로, 소집과 출발의 신호로 사용되었다.">하초체롯</b>(나팔) 두 개는 회중을 모으거나 진영을 출발시키는 신호였을 뿐 아니라, <b class="hl-insight has-insight" data-insight="10">전쟁과 절기의 순간</b>에도 하나님 앞에서 기억되는 소리였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">11-28절</div><div><div class="flow-title">드디어 시내산을 떠나는 행렬</div><div class="flow-body">시내 광야를 떠난 지 정확히 정해진 순서 &mdash; 유다 진영, 레위인의 성막 운반, 나머지 진영 순 &mdash; 로 첫 행진이 시작된다. 거의 일 년을 머문 시내산을 떠나는 역사적 순간이었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">29-36절</div><div><div class="flow-title">일어나소서, 여호와여</div><div class="flow-body">궤가 떠날 때와 쉴 때마다 모세가 드린 짧은 기도(<b class="hl-quote">"여호와여 일어나사"</b>, <b class="hl-quote">"여호와여 돌아오소서"</b>)가 행진 전체에 반복되는 예배의 리듬을 만들었다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 소리로 부르시는 하나님</div><div class="teach-body">나팔 소리는 공동체가 흩어지지 않고 하나 되어 움직이게 하는 실제적 도구였다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 정해진 순서의 유익</div><div class="teach-body">2장에서 세워진 진영의 질서가 실제 이동에서 그대로 적용되어 혼란을 막았다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 오래 머문 자리를 떠나는 용기</div><div class="teach-body">거의 일 년을 지낸 익숙한 자리를 떠나는 것도 순종의 한 형태였다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 이동 중에도 이어지는 기도</div><div class="teach-body">여정 자체가 기도 없는 공백이 아니라 계속되는 예배의 연장이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 낯선 자를 향한 초청(29-32절)</div><div class="teach-body">모세가 미디안 사람 호밥에게 동행을 청하는 장면은 공동체가 이방인에게도 열려 있었음을 보여준다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">"우리와 동행하사이다 우리에게 선대하시리이다"라는 모세의 초청(29-32절), 광야 한복판에서도 낯선 이를 향해 열려 있던 마음이 느껴집니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>궤 이동시의 기도문(35-36절)이 히브리어 성경에서 특별 표시된 이유</div><div class="deep-body">전통 히브리어 사본에서 이 두 구절은 앞뒤로 거꾸로 된 히브리어 글자 눈(נ) 표시로 둘러싸여 있어, 마치 본문 속의 '독립된 작은 책'처럼 구별되어 있다. 랍비 전통은 이를 실수로 잘못된 위치에 삽입된 것을 표시한 것이라 보기도 하고, 혹은 의도적으로 별도의 단위로 구별한 것이라 보기도 하는 등 해석이 분분하다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>호밥은 이드로와 동일 인물인가</div><div class="deep-body">29절의 '호밥'이 출애굽기의 '이드로'(모세의 장인)와 동일 인물인지, 아니면 그의 아들인지에 대해 히브리어 구문 해석이 갈린다. 이는 사소해 보이지만 미디안 족속과 이스라엘의 관계, 그리고 겐 족속의 기원(삿 1:16, 4:11)을 이해하는 데 중요한 실마리가 되는 논쟁이다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch11">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c-8 6-8 16 0 22 8-6 8-16 0-22Z" /><path d="M14 40h20" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 11</div>
+      <h1>11장 &middot; 만나로는 부족했던 마음</h1>
+      <div class="chapter-sub">민수기 11장 &mdash; 원망과 메추라기</div>
+      <div class="ref-strip"><span class="ref-item">민 11:1-35</span><span class="ref-item">타아바</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-9절</div><div><div class="flow-title">애굽의 생선을 그리워하는 마음</div><div class="flow-body">섞여 사는 무리로부터 시작된 탐욕이 온 회중에게 번져, 애굽에서 <b class="hl-term">거저 먹던 생선</b>과 채소를 그리워하며 만나를 하찮게 여기게 되었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">10-17절</div><div><div class="flow-title">홀로 짊어지기 버거운 모세</div><div class="flow-body">모세조차 <b class="hl-insight has-insight" data-insight="11">이 모든 백성을 내가 낳았나이까</b>라며 탈진을 토로하고, 하나님은 칠십 장로를 세워 그 짐을 나누게 하신다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">18-34절</div><div><div class="flow-title">한 달 내내 고기가 넘치도록</div><div class="flow-body">고기를 구하는 백성의 요구에 하나님은 메추라기를 한 달 치나 보내시지만, 그 탐욕은 결국 심판(<b class="hl-term">기브롯 핫다아와</b>, '탐욕의 무덤')으로 이어진다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 은혜에 대한 익숙함의 위험</div><div class="teach-body">매일 내리는 만나가 당연해지자 백성은 그것을 하찮게 여기기 시작했다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 지도자의 탈진도 정직하게 인정될 수 있다</div><div class="teach-body">모세의 탈진 고백은 지도자의 연약함을 숨길 필요가 없음을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 짐을 나누는 지혜</div><div class="teach-body">칠십 장로의 세움은 사역이 한 사람에게만 집중될 필요가 없다는 원리를 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 채워주심이 곧 동의는 아니다</div><div class="teach-body">하나님이 요구를 들어주신다고 해서 그 욕망 자체가 옳았다는 뜻은 아니다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 탐욕이 남기는 이름</div><div class="teach-body">'탐욕의 무덤'이라는 지명 자체가 후대에 두고두고 기억될 경고가 되었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">모세가 "차라리 나를 죽여주소서"까지 토로하는 장면(15절), 위대한 지도자도 이렇게 솔직하게 탈진을 고백할 수 있다는 게 오히려 위로가 됩니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>칠십 장로에게 임한 영과 오순절 성령 강림의 병행과 차이</div><div class="deep-body">모세 위에 있던 영을 칠십 장로에게 나누어 주신 사건(25절)은 훗날 사도행전 2장의 성령 강림과 구조적으로 비교되곤 한다. 다만 민수기의 영 임함은 일시적 예언 현상으로 그치는 반면, 오순절 성령은 지속적으로 임한다는 점에서 신학적 차이가 있다는 것이 균형 잡힌 해석이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>엘닷과 메닷이 진영 안에서 예언한 사건(26-29절)의 의미</div><div class="deep-body">칠십 명의 명단에 포함되지 않았던 두 사람이 진영 안에서 예언하자, 여호수아는 이를 막으려 하지만 모세는 오히려 "여호와의 온 백성이 다 선지자 되게 하시기를 원하노라"며 막지 않는다. 이는 하나님의 영의 역사가 정해진 제도나 인원 밖에서도 자유롭게 나타날 수 있음을 인정하는 모세의 열린 태도를 보여주는 대목으로 자주 인용된다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch12">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="20" r="6" /><circle cx="31" cy="20" r="6" /><path d="M8 38c0-7 4-11 9-11s9 4 9 11M22 38c0-7 4-11 9-11s9 4 9 11" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 12</div>
+      <h1>12장 &middot; 가장 가까운 사람의 시기</h1>
+      <div class="chapter-sub">민수기 12장 &mdash; 미리암과 아론의 반역</div>
+      <div class="ref-strip"><span class="ref-item">민 12:1-16</span><span class="ref-item">아나브</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-2절</div><div><div class="flow-title">겉으로 내세운 이유, 숨은 시기심</div><div class="flow-body">모세의 아내를 문제 삼는 듯하지만, 곧이어 <b class="hl-quote">"여호와께서 모세와만 말씀하셨느냐 우리와도 말씀하지 아니하셨느냐"</b>는 말이 진짜 동기를 드러낸다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">3, 6-8절</div><div><div class="flow-title">온유함과 얼굴을 마주한 계시</div><div class="flow-body">모세는 지면의 그 어떤 사람보다 <b class="hl-insight has-insight" data-insight="12">온유한 자</b>(<b class="hl-greek has-tip" data-tip="'온유한, 겸손한'을 뜻하는 히브리어. 자기를 내세우지 않고 낮추는 성품을 가리킨다.">아나브</b>)였고, 하나님은 다른 선지자와 달리 모세와는 대면하여 명백히 말씀하셨다고 친히 증언하신다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">9-15절</div><div><div class="flow-title">나병에 걸린 미리암, 중보하는 모세</div><div class="flow-body">미리암이 나병에 걸리자 모세는 즉시 그녀를 위해 <b class="hl-quote">"하나님이여 원하건대 그를 고쳐 주옵소서"</b>라고 기도했고, 온 백성은 그녀가 회복될 때까지 이레를 기다렸다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 겉포장 속의 진짜 동기</div><div class="teach-body">비판의 표면적 이유와 실제 동기가 다를 때가 많다는 것을 이 사건이 정직하게 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 가장 가까운 관계에서 오는 시기심</div><div class="teach-body">낯선 이보다 가장 가까운 가족과 동료 사이에서 시기심이 더 쉽게 자란다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 온유함이라는 리더십의 자질</div><div class="teach-body">모세는 스스로를 변호하지 않았고, 하나님이 그를 위해 응답하셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 원수 갚음을 하나님께 맡기는 태도</div><div class="teach-body">부당한 비난 앞에서도 모세는 즉각 반격하지 않고 침묵하며 하나님께 맡겼다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 미워하는 자를 위해서도 드리는 중보</div><div class="teach-body">자신을 시기한 누이를 위해 즉시 기도한 모세의 모습은 원수 사랑의 실천적 본이다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">자신을 험담한 누이를 위해 곧바로 "하나님이여 원하건대 그를 고쳐 주옵소서"라고 기도한 모세, 이 짧은 문장 하나가 그의 온유함을 어떤 설명보다 잘 보여줍니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>왜 미리암만 벌을 받고 아론은 벌을 면했을까</div><div class="deep-body">1절의 히브리어 동사 형태(여성 단수가 먼저 오는 구조)로 볼 때 미리암이 이 반역을 주도했을 가능성이 제기된다. 또한 대제사장인 아론이 나병에 걸리면 성막 직무 전체가 마비된다는 실제적 이유도 함께 고려되었을 것이라는 해석이 있다. 본문 자체는 명시적 이유를 제시하지 않아 이는 추정의 영역이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>구스 여인 결혼 문제(1절)의 정체에 대한 논쟁</div><div class="deep-body">모세가 결혼한 '구스 여인'이 미디안 여인 십보라를 가리키는지, 아니면 별도의 에티오피아(구스) 출신 여성을 가리키는지 확실치 않다. 요세푸스 등 고대 전승은 별도의 에티오피아 정복 설화와 연결짓기도 하지만, 본문 자체의 정보는 제한적이어서 확정하기 어렵다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch13">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l4 10 10 1-8 7 3 10-9-6-9 6 3-10-8-7 10-1Z" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 13</div>
+      <h1>13장 &middot; 같은 땅, 다른 보고</h1>
+      <div class="chapter-sub">민수기 13장 &mdash; 열두 정탐꾼</div>
+      <div class="ref-strip"><span class="ref-item">민 13:1-33</span><span class="ref-item">메라글림</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-25절</div><div><div class="flow-title">각 지파에서 한 사람씩, 사십 일의 정탐</div><div class="flow-body">열두 지파의 <b class="hl-greek has-tip" data-tip="'정탐꾼들'을 뜻하는 히브리어. 가나안 땅을 살피러 파송된 열두 명의 지도자를 가리킨다.">메라글림</b>(정탐꾼)이 가나안 땅을 사십 일간 정탐하고 <b class="hl-term">에스골 골짜기</b>에서 거대한 포도송이를 가져온다. 땅은 실제로 젖과 꿀이 흐르는 곳이었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">26-29절</div><div><div class="flow-title">같은 사실, 다르게 강조된 보고</div><div class="flow-body">열 명은 좋은 땅이라는 사실보다 <b class="hl-insight has-insight" data-insight="13">강한 백성과 견고한 성읍</b>을 먼저 강조하며 두려움을 퍼뜨린다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">30-33절</div><div><div class="flow-title">갈렙의 다른 시선</div><div class="flow-body">갈렙은 홀로 백성을 조용하게 하고 <b class="hl-quote">"올라가서 그 땅을 취하자 능히 이기리라"</b>고 외치지만, 나머지 열 명은 자신들을 메뚜기 같다고 낮추며 부정적 소문을 퍼뜨렸다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 사실은 하나, 해석은 여럿</div><div class="teach-body">같은 정보 앞에서도 믿음의 눈과 두려움의 눈은 전혀 다른 결론에 이른다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 스스로를 낮추는 왜곡된 자기 인식</div><div class="teach-body">"우리는 메뚜기 같다"는 그들의 말은 사실이 아니라 두려움이 만들어낸 자기 왜곡이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 다수가 항상 옳은 것은 아니다</div><div class="teach-body">열 명 대 두 명이라는 압도적 다수도 하나님의 시각에서는 틀릴 수 있었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 소수의 목소리가 지닌 힘</div><div class="teach-body">갈렙과 여호수아의 다른 목소리는 결국 다음 세대의 희망이 된다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 약속과 도전은 함께 온다</div><div class="teach-body">좋은 땅이라는 약속과 강한 거민이라는 도전은 언제나 함께 주어진다는 현실을 보여준다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">같은 땅을 보고 온 열두 명인데 보고가 이렇게 갈릴 수 있다는 게 놀랍죠. 결국 문제는 땅이 아니라 그 땅을 바라보는 시선이었던 거예요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>모세가 호세아의 이름을 여호수아로 바꾼 시점(16절)의 의미</div><div class="deep-body">'구원'이라는 뜻의 호세아(הוֹשֵׁעַ)에서 '여호와는 구원이시다'라는 뜻의 여호수아(יְהוֹשֻׁעַ)로의 개명이 정탐꾼 파송 직전에 기록된 것은, 앞으로 그가 감당할 정복 전쟁의 사명이 인간의 능력이 아니라 하나님께 속한 것임을 미리 선언하는 문학적 배치로 읽힌다는 해석이 있다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>아낙 자손과 네피림(33절)의 정체</div><div class="deep-body">정탐꾼들이 언급한 '네피림'은 창세기 6:4에도 등장하는 신비로운 존재로, 그 정확한 정체(거인족, 타락한 천사의 후손 등)에 대한 논쟁이 고대부터 이어져 왔다. 본문의 맥락에서는 이들의 실체보다, 두려움에 사로잡힌 정탐꾼들이 실제보다 과장된 위협으로 이 존재를 활용했다는 점이 더 중요한 해석 포인트로 다뤄진다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch14">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16" /><path d="M24 10v4M24 34v4M10 24h4M34 24h4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 14</div>
+      <h1>14장 &middot; 믿음의 눈과 두려움의 눈</h1>
+      <div class="chapter-sub">민수기 14장 &mdash; 반역과 광야 심판</div>
+      <div class="ref-strip"><span class="ref-item">민 14:1-45</span><span class="ref-item">사라흐티</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-10절</div><div><div class="flow-title">애굽으로 돌아가자는 외침</div><div class="flow-body">온 회중이 밤새 통곡하며 <b class="hl-quote">"애굽 땅에서 죽었더라면"</b>이라 부르짖고, 여호수아와 갈렙을 돌로 치려 한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">11-20절</div><div><div class="flow-title">모세의 중보, 용서하시는 하나님</div><div class="flow-body">모세는 하나님의 이름과 성품을 근거로 간구하고, 하나님은 <b class="hl-insight has-insight" data-insight="14">"내가 네 말대로 사하노라"</b>고 응답하신다. 그러나 용서와 결과는 별개였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">26-38절</div><div><div class="flow-title">사십 년, 광야에서 스러지는 한 세대</div><div class="flow-body">정탐한 사십 일에 하루를 일 년으로 계산해 사십 년을 광야에서 방황하게 하시고, 갈렙과 여호수아 외에는 스무 살 이상 그 세대 전체가 광야에서 죽게 될 것이라 선언하신다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 용서와 결과는 별개일 수 있다</div><div class="teach-body">하나님이 죄를 용서하신다고 해서 그 죄의 결과까지 늘 즉시 사라지는 것은 아니다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 중보자의 담대함</div><div class="teach-body">모세는 하나님의 명예를 근거로 담대히 간구했고, 그 기도는 심판의 완전한 소멸을 막았다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 불신앙이 스스로에게 임한 예언</div><div class="teach-body">"애굽에서 죽었더라면"이라는 그들의 말이 결국 광야에서의 죽음으로 이루어졌다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 늦은 순종도 온전한 순종은 아니다</div><div class="teach-body">뒤늦게 산지로 올라가려 한 백성의 시도(40-45절)는 회개가 아니라 또 다른 불순종이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 다른 마음을 품은 자의 다른 운명</div><div class="teach-body">갈렙과 여호수아만은 다른 마음을 품었다는 이유로 심판에서 제외되었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">"내가 네 말대로 사하노라"는 말씀 뒤에 이어지는 사십 년의 심판, 용서와 결과가 늘 같은 속도로 오는 게 아니라는 걸 이 본문이 조용히 가르쳐줍니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>모세의 중보 논증 구조(13-19절)의 신학적 정교함</div><div class="deep-body">모세는 하나님의 자비를 감정에 호소하지 않고, 오히려 하나님의 명성이 열방 가운데 어떻게 보일지(13-16절)와 출애굽기 34:6-7의 하나님 자신의 성품 선언을 근거로 논증한다. 이는 기도가 막연한 애원이 아니라 하나님의 언약적 성품에 근거한 신학적 논증일 수 있음을 보여주는 성경 내 대표적 중보기도 사례로 꼽힌다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>히브리서 3-4장의 '안식에 들어가지 못함' 재해석</div><div class="deep-body">히브리서 저자는 이 광야 세대의 불신앙 사건을 신약 공동체를 향한 경고로 재해석하며, 육체적 가나안 입성의 실패를 영적 '안식'에 들어가지 못하는 실패의 예표로 확장한다. 이는 구약 사건이 신약에서 어떻게 목회적 경고로 재적용되는지를 보여주는 중요한 사례이나, 원문맥과 신약 저자의 적용을 구분해서 읽는 해석학적 균형이 필요하다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch15">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="14" width="28" height="20" rx="2" /><path d="M10 14l14 10 14-10" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 15</div>
+      <h1>15장 &middot; 심판 중에도 이어지는 약속</h1>
+      <div class="chapter-sub">민수기 15장 &mdash; 추가 규례와 옷단의 술</div>
+      <div class="ref-strip"><span class="ref-item">민 15:1-41</span><span class="ref-item">치치트</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-2절</div><div><div class="flow-title">"너희가 그 땅에 들어가서"</div><div class="flow-body">14장의 심판 선언 직후, 하나님은 곧바로 <b class="hl-insight has-insight" data-insight="15">"너희가 그 땅에 들어가서"</b>라는 말씀으로 새 규례를 시작하신다. 심판이 약속 자체를 폐하지는 않았다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">22-31절</div><div><div class="flow-title">고의적인 죄와 부지중의 죄</div><div class="flow-body">회중이 부지중에 범한 죄에는 속죄의 길이 열려 있었지만, <b class="hl-term">고의로 범하는 죄</b>는 그 백성 중에서 끊어지는 무거운 결과를 가져왔다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">37-41절</div><div><div class="flow-title">옷단에 술을 만들어 기억하라</div><div class="flow-body">옷단 귀에 청색 끈을 단 술을 만들어 그것을 볼 때마다 계명을 기억하고 마음과 눈의 욕심을 따라 방종하지 않도록 하는 실제적 장치가 주어진다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 심판 중에도 살아있는 약속</div><div class="teach-body">한 세대의 실패가 하나님의 궁극적 계획 자체를 무효화하지 않았다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 고의성이 만드는 차이</div><div class="teach-body">모든 죄가 동일한 무게로 다뤄지지 않으며, 고의적 반역은 더 엄중히 취급되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 눈에 보이는 기억 장치의 필요</div><div class="teach-body">옷단의 술처럼, 우리에게도 계명을 기억하게 하는 구체적 도구가 필요하다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 마음과 눈의 욕심 경계</div><div class="teach-body">방종은 대개 마음과 눈이 이끄는 욕심을 따라가는 데서 시작된다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 거류민에게도 동일한 법</div><div class="teach-body">본토인과 거류하는 타국인에게 동일한 법을 적용하는 원칙(15-16절)이 재확인된다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">14장의 무거운 심판 선언 바로 다음 장이 "너희가 그 땅에 들어가서"로 시작한다는 게 놀라워요. 한 세대의 실패가 하나님의 약속 자체를 지우지는 못했던 거죠.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>안식일에 나무한 사람 처형 사건(32-36절)의 신학적 무게</div><div class="deep-body">이 사건이 바로 앞 단락의 '고의적인 죄'에 대한 실제 사례로 배치된 것은 문학적으로 의도적이라는 해석이 있다. 안식일 규정이 단순한 의식법이 아니라 이스라엘 공동체 정체성의 핵심이었기에, 공개적이고 고의적인 위반이 이렇게 무겁게 다뤄졌다는 것이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>옷단의 <b class="hl-greek has-tip" data-tip="'술, 옷단 장식'을 뜻하는 히브리어로, 계명을 기억하게 하는 시각적 장치로 사용되었다.">치치트</b>(צִיצִת)와 예수의 옷자락(마 9:20)</div><div class="deep-body">혈루증 앓던 여인이 만졌던 예수의 '옷 가에 술'(마 9:20, 개역개정)이 바로 이 민수기 15장의 치치트를 가리킨다는 해석이 유력하다. 예수께서 유대 율법의 이 규정을 그대로 지키고 계셨다는 것을 보여주는 흥미로운 세부 연결이다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch16">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v14M14 34l10-14 10 14z" /><path d="M12 40h24" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 16</div>
+      <h1>16장 &middot; 스스로 높아지려 한 자들</h1>
+      <div class="chapter-sub">민수기 16장 &mdash; 고라의 반역</div>
+      <div class="ref-strip"><span class="ref-item">민 16:1-50</span><span class="ref-item">코라흐</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-11절</div><div><div class="flow-title">이미 거룩한데 어찌 더 구하느냐는 반문</div><div class="flow-body"><b class="hl-greek has-tip" data-tip="반역을 주도한 레위인의 이름. '대머리, 얼음'이라는 뜻의 히브리어 어근에서 나왔다는 설이 있다.">고라</b>(코라흐)와 다단, 아비람이 "회중이 다 각각 거룩하거늘 너희가 어찌 스스로 높이느냐"며 모세와 아론에게 도전하지만, 모세는 이것이 결국 <b class="hl-insight has-insight" data-insight="16">하나님을 향한 반역</b>임을 지적한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">28-35절</div><div><div class="flow-title">땅이 갈라지고 불이 삼키다</div><div class="flow-body">고라와 그 무리는 땅이 갈라져 산 채로 삼켜지고, 향을 드리던 이백오십 명은 불에 사라진다. 이 초자연적 심판은 모세의 부르심이 스스로 취한 것이 아님을 명백히 증명했다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">41-50절</div><div><div class="flow-title">염병 중에 선 아론의 중재</div><div class="flow-body">이 심판을 보고도 온 회중이 다시 모세와 아론을 원망하자 염병이 시작되고, 아론이 향로를 들고 산 자와 죽은 자 사이에 서서 백성을 위해 속죄함으로 재앙이 그친다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 옳은 말로 포장된 반역</div><div class="teach-body">"우리도 거룩하다"는 고라의 말은 신학적으로 틀리지 않았지만, 그 의도는 자기 지위를 향한 것이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 부르심은 스스로 취하는 것이 아니다</div><div class="teach-body">직분과 사명은 인간이 스스로 취할 수 있는 것이 아니라 하나님이 세우시는 것이다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 반역의 여파는 넓게 퍼진다</div><div class="teach-body">지도자 몇 사람의 반역이 결국 온 공동체를 재앙으로 몰아넣었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 죽음과 삶 사이에 서는 중보자</div><div class="teach-body">아론이 산 자와 죽은 자 사이에 섰다는 장면은 중보자의 역할이 얼마나 절박한 자리인지 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 심판을 보고도 반복되는 완악함</div><div class="teach-body">눈앞에서 초자연적 심판을 목격하고도 백성은 곧바로 다시 원망했다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">아론이 향로를 들고 "산 자와 죽은 자 사이에" 섰다는 장면(48절), 중보자의 자리가 얼마나 위태롭고도 절박한 자리인지 이보다 더 생생하게 보여주는 장면이 있을까요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>고라의 반역이 담고 있는 세 가지 다른 불만의 결합</div><div class="deep-body">본문을 자세히 보면 고라(레위인, 제사장직에 대한 불만), 다단과 아비람(르우벤 지파, 정치적 지도력에 대한 불만), 이백오십 지휘관(일반적 특권 요구)이라는 서로 다른 동기의 반역이 하나로 결합되어 있다. 이는 본래 별개였던 여러 전승이 하나의 이야기로 편집되었을 가능성을 시사한다는 비평적 논의가 있다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>유다서 11절의 "고라의 패역을 따라 멸망"이라는 신약의 언급</div><div class="deep-body">신약 유다서는 거짓 교사들을 고라와 나란히 언급하며 그의 죄를 권위에 대한 반역의 대표적 사례로 인용한다. 이는 초대교회가 이 사건을 단순한 고대 역사가 아니라 지속적으로 되풀이될 수 있는 영적 위험의 원형으로 이해했음을 보여준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch17">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40V10" /><path d="M24 14c-4-4-10-2-10 2s6 4 10 0c4 4 10 2 10-2s-6-4-10 0Z" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 17</div>
+      <h1>17장 &middot; 마른 지팡이에서 핀 꽃</h1>
+      <div class="chapter-sub">민수기 17장 &mdash; 아론의 싹 난 지팡이</div>
+      <div class="ref-strip"><span class="ref-item">민 17:1-13</span><span class="ref-item">마테</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-5절</div><div><div class="flow-title">열두 지팡이를 증거궤 앞에</div><div class="flow-body">각 지파의 <b class="hl-greek has-tip" data-tip="'지팡이, 막대기' 또는 '지파'를 동시에 뜻하는 히브리어. 지파 지도력을 상징하는 물건이었다.">마테</b>(지팡이)에 이름을 써서 하룻밤 증거궤 앞에 두게 하니, 인간의 논쟁이 아니라 하나님의 표징으로 다툼을 끝내려 하신다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">8절</div><div><div class="flow-title">마른 나무에서 움트고 꽃 피고 열매까지</div><div class="flow-body">이튿날 아론의 지팡이에서 <b class="hl-insight has-insight" data-insight="17">싹이 나고 순이 자라 꽃이 피어 살구 열매</b>까지 맺혔다. 생명 없는 마른 막대기가 하나님의 손길로 완전히 살아난 것이다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">10-13절</div><div><div class="flow-title">보관되어 계속 증언하는 지팡이</div><div class="flow-body">이 지팡이는 증거궤 앞에 간직되어 반역하는 자들에게 계속된 경고와 증거로 남게 된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 논쟁을 끝내는 하나님의 표징</div><div class="teach-body">사람의 언쟁으로는 끝나지 않던 다툼이 하나님의 한 번의 표징으로 종결되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 죽은 것에서 생명을 내시는 하나님</div><div class="teach-body">마른 막대기에서 꽃과 열매가 나는 것은 부르심이 인간의 능력이 아니라 하나님의 생명력에서 나옴을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 지속적으로 증언하는 표징</div><div class="teach-body">한 번의 사건이 계속 보관되어 미래 세대에게도 증언이 되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 다툼 뒤에 오는 두려움(12-13절)</div><div class="teach-body">백성은 심판 앞에서 "우리는 다 망하게 되었나이다"라며 비로소 두려워한다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 은혜로 세워지는 직분</div><div class="teach-body">아론의 제사장직은 그의 능력이 아니라 전적으로 하나님의 선택으로 확증되었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">마른 막대기에서 꽃이 피고 열매까지 맺혔다는 것, 부르심이란 결국 우리 능력이 아니라 하나님의 생명력에서 나온다는 걸 이보다 더 선명하게 보여줄 수 있을까요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>싹, 꽃, 열매가 동시에 나타난 것의 의미</div><div class="deep-body">자연의 순리로는 순차적으로 나타나야 할 발아·개화·결실이 하룻밤 사이 동시에 나타났다는 것은 이 사건이 자연 현상이 아니라 명백한 초자연적 개입임을 강조하려는 의도적 서술로 이해된다. 살구나무(솨케드, שָׁקֵד)는 히브리어로 '지켜본다'는 뜻의 동사와 발음이 유사해, 예레미야 1:11-12에서도 하나님이 자기 말씀을 '지켜 이루신다'는 언어유희로 사용된다는 점이 흥미롭게 연결된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>히브리서 9:4에서 언급되는 '증거궤 안의 세 물건'과의 관계</div><div class="deep-body">히브리서는 만나 항아리, 아론의 싹 난 지팡이, 십계명 돌판이 언약궤 안에 함께 보관되었다고 언급하는데, 열왕기상 8:9는 솔로몬 시대에 궤 안에 돌판 외에는 아무것도 없었다고 기록해 표면적 불일치가 있다. 학자들은 이것이 시대에 따른 보관 위치의 변화(궤 안 vs 궤 앞)를 반영한다고 본다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch18">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V22a12 12 0 0 1 24 0v18" /><path d="M12 40h24" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 18</div>
+      <h1>18장 &middot; 몫으로 주어진 부르심</h1>
+      <div class="chapter-sub">민수기 18장 &mdash; 제사장과 레위인의 직무와 분깃</div>
+      <div class="ref-strip"><span class="ref-item">민 18:1-32</span><span class="ref-item">나할라</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-7절</div><div><div class="flow-title">죄를 담당하는 자리로서의 직분</div><div class="flow-body">제사장과 레위인은 <b class="hl-term">성소와 제단에 대한 죄</b>를 짊어져야 했다. 거룩한 것을 섬기는 자리는 특권만이 아니라 무거운 책임의 자리였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">8-24절</div><div><div class="flow-title">땅이 아니라 하나님이 그들의 기업</div><div class="flow-body">레위인에게는 다른 지파처럼 땅의 <b class="hl-greek has-tip" data-tip="'기업, 상속 재산'을 뜻하는 히브리어. 각 지파가 제비 뽑아 받은 땅의 몫을 가리킨다.">나할라</b>(기업)가 없는 대신, <b class="hl-insight has-insight" data-insight="18">"내가 네 기업이요 네 분깃"</b>이라는 하나님의 말씀과 십일조가 그들의 생계가 되었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">25-32절</div><div><div class="flow-title">레위인도 드리는 십일조의 십일조</div><div class="flow-body">레위인은 받은 십일조 중에서 다시 십분의 일을 하나님께 드려야 했으니, 받는 자도 동시에 드리는 자였다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 특권과 책임은 함께 온다</div><div class="teach-body">거룩한 것을 섬기는 자리는 늘 무거운 책임을 동반한다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 하나님 자신이 기업이 되신다는 것</div><div class="teach-body">땅이 없어도 하나님을 자기 몫으로 삼는다는 것이 얼마나 큰 부요함인지 이 본문이 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 받는 자도 드리는 삶</div><div class="teach-body">레위인이 십일조를 받으면서도 다시 십일조를 드렸다는 것은, 섬기는 자도 예외 없이 헌신자여야 함을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 공동체가 함께 감당하는 사역자의 생계</div><div class="teach-body">사역자의 생계는 공동체 전체의 나눔으로 책임지도록 설계되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 목회자를 향한 존중의 원리</div><div class="teach-body">이 규례는 신약에서 복음을 전하는 자가 복음으로 살리라는 원리(고전 9:13-14)의 배경이 된다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">"내가 네 기업이요 네 분깃이라"는 말씀, 땅 한 평 갖지 못한 레위인에게 이보다 더 크고 실제적인 위로가 있었을까요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>"내가 네 기업이라"는 신학이 시편에 미친 영향</div><div class="deep-body">이 표현은 시편 16:5("여호와는 나의 산업과 나의 잔의 소득이시니")와 시편 73:26 등 여러 시편에서 반복되며, 레위인만이 아니라 신실한 이스라엘 백성 전체가 자신의 정체성을 물질적 소유가 아니라 하나님과의 관계에서 찾는 신학으로 확장되었다는 점이 주목된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>"죄를 담당한다"(1절)는 표현의 정확한 의미</div><div class="deep-body">제사장과 레위인이 '성소에 대한 죄악'과 '제사장 직분에 대한 죄악'을 담당한다는 표현이, 그들이 백성의 죄를 대신 짊어진다는 뜻인지, 혹은 그들 자신이 거룩한 것을 잘못 다룰 경우의 책임을 스스로 진다는 뜻인지에 대해 주석가들의 해석이 갈린다. 문맥상 후자(직무상의 과실에 대한 책임)에 가깝다는 것이 다수 견해다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch19">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="12" /><path d="M24 16v8l6 4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 19</div>
+      <h1>19장 &middot; 죽음 앞에서 필요한 정결</h1>
+      <div class="chapter-sub">민수기 19장 &mdash; 붉은 암송아지</div>
+      <div class="ref-strip"><span class="ref-item">민 19:1-22</span><span class="ref-item">파라 아두마</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-10절</div><div><div class="flow-title">진영 밖에서 태워지는 흠 없는 암송아지</div><div class="flow-body"><b class="hl-greek has-tip" data-tip="'붉은 암송아지'를 뜻하는 히브리어. 유대 전통에서 이성적으로 설명할 수 없는 신비로운 규례의 대표적 사례로 꼽힌다.">파라 아두마</b>(붉은 암송아지)를 진영 밖에서 온전히 불사르고 그 재를 보관하여, 훗날 정결례에 사용할 물을 만들 준비를 갖춘다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">11-16절</div><div><div class="flow-title">시체를 만진 자는 이레 동안 부정</div><div class="flow-body">사람의 시체를 만진 자는 <b class="hl-insight has-insight" data-insight="19">이레 동안 부정</b>하며, 셋째 날과 일곱째 날에 정결하게 하는 물로 스스로를 정결하게 해야 했다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">17-22절</div><div><div class="flow-title">정결하게 하지 않으면 끊어짐</div><div class="flow-body">부정한 채로 정결례를 행하지 않으면 성막을 더럽힌 것으로 여겨져 그 백성 중에서 끊어졌으니, 죽음의 부정함은 결코 가볍게 다뤄지지 않았다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 죽음이라는 근본적 부정함</div><div class="teach-body">죽음은 이스라엘의 정결법 체계 안에서 가장 근원적인 부정함의 원천으로 다뤄졌다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 미리 준비된 은혜의 수단</div><div class="teach-body">부정해질 것을 미리 아시고 정결례의 재를 준비해 두신 것은 앞선 은혜의 모습이다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 슬픔 중에도 필요한 절차</div><div class="teach-body">사랑하는 이를 잃은 슬픔 중에도 공동체로 복귀하기 위한 절차는 생략될 수 없었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 만지는 자까지 정결하게 하는 이 만든 자</div><div class="teach-body">정결한 자가 재를 다루는 일로 인해 도리어 부정해진다는 역설(7-8절)은 정결법의 신비로운 논리를 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 죽음 앞에서도 이어지는 공동체 소속</div><div class="teach-body">규례를 지키는 것은 결국 죽음 앞에서도 공동체에 속해 있기를 원하시는 하나님의 뜻이었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">정결한 사람이 재를 다루다가 도리어 부정해진다는 역설(7-8절), 랍비들도 오랫동안 풀리지 않는 신비로 여겼다고 해요. 모든 것을 다 설명할 수 없는 하나님의 규례도 있다는 걸 겸손히 받아들이게 됩니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>붉은 암송아지 규례의 '초이성적' 성격</div><div class="deep-body">유대 전통에서 이 규례는 흔히 '후카'(חֻקָּה, 이성적 설명이 불가능한 신비로운 법령)의 대표적 사례로 꼽힌다. 솔로몬조차 이 규례의 논리를 완전히 이해하지 못했다는 랍비 전승이 있을 정도로, 정결한 것을 만든 자가 부정해지고 부정한 자가 정결해진다는 역설적 구조는 인간의 논리로 완전히 풀리지 않는다는 것이 유대 해석 전통의 오랜 인식이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>히브리서 9:13-14의 그리스도론적 재해석</div><div class="deep-body">히브리서는 "암송아지의 재를 부정한 자에게 뿌려 그 육체를 정결하게 하거든 하물며 그리스도의 피가...양심을 깨끗하게 하지 못하겠느냐"며 이 규례를 그리스도의 희생과 대조한다. 이는 신약 저자의 신학적 적용이며, 본문 자체가 미래를 예고하는 것은 아니라는 해석학적 구분을 유념할 필요가 있다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch20">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 30q14-14 28 0" /><circle cx="24" cy="12" r="2.5" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 20</div>
+      <h1>20장 &middot; 반석을 명하지 않고 친 순간</h1>
+      <div class="chapter-sub">민수기 20장 &mdash; 모세의 실수와 두 지도자의 죽음</div>
+      <div class="ref-strip"><span class="ref-item">민 20:1-29</span><span class="ref-item">메리바</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-6절</div><div><div class="flow-title">미리암의 죽음, 다시 시작된 원망</div><div class="flow-body">미리암이 죽은 직후 물이 없어 회중이 다시 원망하니, 그 곳은 <b class="hl-greek has-tip" data-tip="'다툼, 시비'를 뜻하는 히브리어. 백성이 물이 없어 모세와 다툰 곳의 이름이 되었다.">므리바</b>(다툼)라 불리게 되었고 모세와 아론은 다시 회막 앞에 엎드린다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">7-13절</div><div><div class="flow-title">명하라 하셨으나 두 번 친 지팡이</div><div class="flow-body">하나님은 반석에게 <b class="hl-term">명령하라</b> 하셨으나 모세는 분노하여 지팡이로 반석을 <b class="hl-insight has-insight" data-insight="20">두 번</b> 쳤고, 물은 나왔지만 그로 인해 모세와 아론은 가나안 입성을 금지당한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">22-29절</div><div><div class="flow-title">호르 산에서 옷이 벗겨지는 아론</div><div class="flow-body">아론은 호르 산에서 제사장 옷을 아들 엘르아살에게 벗어 입히고 그곳에서 죽으니, 한 세대의 지도력이 조용히 다음 세대로 넘어가는 상징적 장면이다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 사소해 보이는 불순종의 무게</div><div class="teach-body">모세의 실수는 물리적으로는 작아 보이지만, 그 불순종의 대가는 결코 작지 않았다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 분노가 순종을 흐리게 할 때</div><div class="teach-body">누적된 지침과 분노는 하나님의 구체적 명령을 왜곡시킬 수 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 지도자에게 더 엄격한 기준</div><div class="teach-body">모세 같은 위대한 지도자에게도 하나님은 결코 기준을 낮추지 않으셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 조용히 넘겨지는 세대교체</div><div class="teach-body">아론의 옷이 아들에게 옮겨지는 장면은 리더십의 이양이 화려함이 아니라 순리로 이루어짐을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 실수 속에서도 여전히 응답하시는 하나님</div><div class="teach-body">모세의 불순종에도 불구하고 물은 실제로 백성에게 공급되었다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">평생을 신실하게 이끌어온 모세가 단 한 번의 분노로 약속의 땅에 들어가지 못하게 되었다는 것, 읽을 때마다 마음이 무거워지는 본문이에요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>모세의 정확한 죄가 무엇이었는가에 대한 오랜 논쟁</div><div class="deep-body">반석을 친 행위 자체가 문제였는지, "우리가 너희를 위하여 이 반석에서 물을 내랴"(10절)라는 말로 자신과 아론이 물을 낸 것처럼 하나님의 영광을 가로챈 것이 문제였는지, 혹은 분노라는 태도 자체가 문제였는지에 대해 주석가들의 견해가 갈린다. 12절 본문은 "나를 믿지 아니하고 ...내 거룩함을 나타내지 아니한 고로"라 하여, 명령 불이행보다 신뢰와 거룩함의 문제로 규정한다는 점이 주목된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>출애굽기 17장 르비딤 사건과의 병행과 차이</div><div class="deep-body">출애굽기 17장에서는 하나님이 명시적으로 반석을 '치라'고 명하셨고 모세는 순종했다. 민수기 20장에서는 '명령하라'는 다른 지시가 주어졌음에도 모세가 옛 방식(치는 것)을 따른 것이 문제가 되었다는 해석이 유력하다. 이는 같은 상황이라도 하나님이 주신 구체적 지시를 정확히 따르는 것이 얼마나 중요한지를 보여주는 대조로 읽힌다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch21">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40V10" /><path d="M16 18c4 4 12 4 16 0" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 21</div>
+      <h1>21장 &middot; 쳐다보아야 사는 은혜</h1>
+      <div class="chapter-sub">민수기 21장 &mdash; 놋뱀과 광야 승전</div>
+      <div class="ref-strip"><span class="ref-item">민 21:1-35</span><span class="ref-item">네하쉬 네호셋</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">4-9절</div><div><div class="flow-title">불뱀과 놋뱀 &mdash; 죽음의 도구가 생명의 표징으로</div><div class="flow-body">길이 힘들어 다시 원망하는 백성에게 불뱀이 보내지지만, 회개한 백성을 위해 하나님은 <b class="hl-greek has-tip" data-tip="'놋뱀'을 뜻하는 히브리어. 네하쉬(뱀)와 네호셋(놋)이 결합된 표현으로, 훗날 느후스단이라는 이름으로 불리게 된다.">네하쉬 네호셋</b>(놋뱀)을 만들어 장대에 달게 하시니, <b class="hl-insight has-insight" data-insight="21">놋뱀을 만들어 장대에 달고 그것을 쳐다보는 자는 살게</b> 하신다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">21-30절</div><div><div class="flow-title">시혼 왕과의 첫 승전</div><div class="flow-body">평화의 요청을 거절하고 대적한 아모리 왕 시혼을 물리치니, 이스라엘이 처음으로 실제 땅을 정복하고 거주하는 사건이 기록된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">33-35절</div><div><div class="flow-title">두려워하지 말라, 바산 왕 옥과의 전쟁</div><div class="flow-body">거인으로 알려진 바산 왕 옥과의 전쟁에서도 하나님은 "그를 두려워하지 말라 내가 그와 그의 모든 백성을 네 손에 붙였느니라"며 승리를 약속하신다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 심판의 도구가 구원의 표징으로</div><div class="teach-body">뱀이라는 심판의 상징이 하나님의 손에서 오히려 생명을 주는 표징이 되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 단순한 신뢰의 요구</div><div class="teach-body">치료의 방법은 복잡한 의식이 아니라 그저 바라보는 단순한 순종이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 회개 후에 열리는 새로운 은혜</div><div class="teach-body">백성의 회개는 즉시 하나님의 구체적 응답으로 이어졌다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 마침내 시작되는 정복</div><div class="teach-body">40년 방황 끝에 처음으로 실제 땅을 얻는 승리가 시작된다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 두려움 앞에 반복되는 약속</div><div class="teach-body">거인 옥 앞에서도 "두려워하지 말라"는 하나님의 반복된 확신이 백성을 붙든다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">뱀에 물린 사람이 다른 무엇도 아니라 그저 놋뱀을 '바라보기만' 하면 살았다는 것, 예수님이 요한복음 3장에서 이 장면을 직접 인용하신 이유가 이해됩니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>요한복음 3:14-15의 명시적 예표론적 인용</div><div class="deep-body">예수님 스스로 "모세가 광야에서 뱀을 든 것 같이 인자도 들려야 하리니"라며 이 사건을 자신의 십자가 사건과 직접 연결하신다. 이는 레위기의 여러 예표론적 해석과 달리, 본문 자체(신약 저자가 아니라 예수님의 육성)가 명시적으로 이 연결을 만든 드문 사례라는 점에서 신학적 무게가 다르다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>이 놋뱀이 훗날 우상이 되어 파괴된 사건(왕하 18:4)</div><div class="deep-body">히스기야 왕은 이스라엘 백성이 이 놋뱀에게 분향하기 시작하자 그것을 '느후스단'(놋조각)이라 부르며 파괴했다. 이는 하나님이 주신 은혜의 표징조차 우상화될 수 있다는 경고이며, 수단 자체가 아니라 그 수단을 주신 하나님을 예배해야 한다는 근본적 원리를 보여주는 사례로 자주 인용된다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch22">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="24" r="8" /><path d="M26 24h12M34 20v8" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 22</div>
+      <h1>22장 &middot; 나귀보다 못 보았던 선지자</h1>
+      <div class="chapter-sub">민수기 22장 &mdash; 발람과 나귀</div>
+      <div class="ref-strip"><span class="ref-item">민 22:1-41</span><span class="ref-item">발라크</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-20절</div><div><div class="flow-title">발락의 청함과 발람의 흔들리는 마음</div><div class="flow-body">모압 왕 <b class="hl-greek has-tip" data-tip="'파괴자, 황폐하게 하는 자'라는 뜻을 지닌 것으로 추정되는 모압 왕의 이름.">발락</b>이 이스라엘을 저주해 달라 청하자, 하나님은 처음엔 가지 말라 하셨으나 발람이 거듭 청하니 <b class="hl-insight has-insight" data-insight="22">가도 좋다 허락</b>하시되 조건을 두신다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">21-30절</div><div><div class="flow-title">선지자보다 먼저 본 나귀</div><div class="flow-body">여호와의 사자가 칼을 들고 길을 막는 것을 나귀는 세 번이나 보고 피했지만, 정작 <b class="hl-term">선지자</b> 발람은 보지 못하고 나귀를 세 번 때렸다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">31-41절</div><div><div class="flow-title">눈이 열려서야 보게 된 것</div><div class="flow-body">여호와께서 발람의 눈을 밝히신 후에야 그는 자신을 막아선 천사를 보고 엎드리며, "내 입에 주시는 말씀"만 전하겠다고 다짐한다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 영적 시야는 지위와 비례하지 않는다</div><div class="teach-body">나귀가 선지자보다 먼저 하나님의 사자를 보았다는 것은 겸손한 경고다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 허락과 뜻은 다를 수 있다</div><div class="teach-body">하나님이 가도록 허락하신 것이 반드시 그 일을 기뻐하신다는 뜻은 아니었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 반복되는 청함 앞의 분별</div><div class="teach-body">원하는 답을 들을 때까지 거듭 청하는 태도 자체가 위험할 수 있음을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 짐승을 통해서도 말씀하시는 하나님</div><div class="teach-body">가장 낮은 짐승을 통해서도 하나님은 자신의 뜻을 나타내실 수 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 말씀에 제한받는 선지자의 사명</div><div class="teach-body">참된 선지자의 표지는 자기 뜻이 아니라 오직 받은 말씀만을 전하는 것이다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">나귀가 선지자보다 먼저 하나님의 사자를 보았다는 것, 우리가 얼마나 자주 익숙함과 조급함에 눈이 가려지는지를 되돌아보게 하는 이야기예요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>하나님이 "가라" 하셨는데 왜 다시 진노하셨을까(20-22절)</div><div class="deep-body">20절에서 하나님은 발람에게 가도 좋다 허락하시지만 22절에서는 그가 감으로 인해 진노하신다는 표면적 모순이 있다. 다수 주석가는 이를 발람의 마음의 동기(하나님의 뜻에 대한 순전한 순종이 아니라 발락의 보상에 대한 탐심)에 대한 심판으로 이해하며, 허락과 그 허락에 응하는 마음의 동기는 별개로 평가될 수 있음을 보여주는 사례로 다룬다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>베드로후서 2:15-16과 유다서 11절이 그리는 '발람의 길'</div><div class="deep-body">신약은 발람을 '불의의 삯을 사랑한' 인물의 전형으로 반복해 언급하며, 그의 이야기를 물질적 유혹 앞에서 타협하는 거짓 교사의 경고로 사용한다. 민수기 본문 자체는 발람을 다소 복합적인 인물(참된 신탁을 전하지만 동시에 탐욕에 흔들리는)로 그리는 반면, 신약의 재해석은 그의 부정적 측면을 훨씬 더 강하게 부각시킨다는 점에서 흥미로운 해석사적 발전을 보여준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch23">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34l10-20 10 20" /><path d="M18 26h12" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 23</div>
+      <h1>23장 &middot; 저주하려 해도 막히는 입</h1>
+      <div class="chapter-sub">민수기 23장 &mdash; 발람의 첫 두 신탁</div>
+      <div class="ref-strip"><span class="ref-item">민 23:1-30</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">7-10절</div><div><div class="flow-title">첫 신탁 &mdash; 저주할 수 없는 백성</div><div class="flow-body">발락이 저주를 청했으나 발람의 입에서는 신탁, 곧 <b class="hl-greek has-tip" data-tip="'신탁, 예언의 말씀'을 뜻하는 히브리어. 선지자가 하나님께 받아 전하는 공식적 선포를 가리킨다.">네움</b>(신탁)의 형태로 <b class="hl-quote">"하나님이 저주하지 않으신 자를 내가 어찌 저주하며"</b>라는 말이 나온다. 인간의 의도와 하나님의 뜻이 정면으로 충돌한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">18-24절</div><div><div class="flow-title">둘째 신탁 &mdash; 후회하지 않으시는 하나님</div><div class="flow-body"><b class="hl-insight has-insight" data-insight="23">"하나님은 사람이 아니시니 거짓말을 하지 않으시고 인생이 아니시니 후회가 없으시도다"</b>라는 유명한 선언이 두 번째 신탁의 핵심을 이룬다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">25-30절</div><div><div class="flow-title">장소를 바꿔도 달라지지 않는 말씀</div><div class="flow-body">발락이 자리를 옮겨 다시 시도하지만, 하나님이 주시는 말씀은 장소를 바꾼다고 바뀌지 않았다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 사람의 저주보다 큰 하나님의 축복</div><div class="teach-body">하나님이 이미 복 주신 것을 그 어떤 인간의 저주도 뒤집을 수 없다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 변하지 않으시는 하나님의 성품</div><div class="teach-body">하나님의 약속은 사람처럼 후회하거나 번복되지 않는다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 환경을 바꿔도 흔들리지 않는 말씀</div><div class="teach-body">자리를 옮기고 조건을 바꾸려는 인간의 시도로도 하나님의 뜻을 바꿀 수 없다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 원수의 입을 통해서도 이루어지는 계획</div><div class="teach-body">발람이라는 낯선 이방 선지자의 입을 통해서도 하나님은 자신의 뜻을 이루셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 물질적 보상과 신실함 사이의 긴장</div><div class="teach-body">발락의 재물 제안 앞에서도 발람은 적어도 이 시점에는 하나님의 말씀을 벗어나지 않았다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">발락이 장소를 세 번이나 바꿔가며 저주를 시도하지만, 하나님의 말씀은 자리를 옮긴다고 바뀌지 않았어요. 우리가 아무리 환경을 바꿔도 하나님의 뜻은 그대로라는 걸 보여주는 것 같습니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>고대 근동의 저주 의식과 발람 신탁의 관계</div><div class="deep-body">고대 근동에는 전문 주술사가 특정한 의식(제단, 제물, 정해진 위치)을 통해 저주나 축복을 선포하는 관습이 널리 퍼져 있었으며, 발람 역시 이러한 전통적 절차(7개의 제단, 각 제단마다 수소와 숫양)를 따른다. 흥미로운 것은 본문이 이 이교적 절차를 사용하면서도, 정작 그 결과는 전적으로 이스라엘의 하나님이 결정하신다는 점을 강조한다는 것이다 &mdash; 절차가 아니라 하나님의 주권이 최종적임을 보여준다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>드베라 문서(Deir Alla 비문)와 역사적 발람</div><div class="deep-body">요르단에서 발견된 기원전 8세기경의 아람어 비문에 '브올의 아들 발람'이라는 이름의 신탁자가 실제로 언급되어 있어, 발람이 이스라엘 밖에서도 알려진 실존 인물이었을 가능성을 시사하는 중요한 고고학적 증거로 평가된다. 이는 민수기의 발람 이야기가 순전한 창작이 아니라 널리 알려진 인물에 대한 전승에 기반했을 가능성을 보여준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch24">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8l2.5 6.5L33 17l-6.5 2.5L24 26l-2.5-6.5L15 17l6.5-2.5Z" /><path d="M14 40h20" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 24</div>
+      <h1>24장 &middot; 멀리서 떠오르는 별 하나</h1>
+      <div class="chapter-sub">민수기 24장 &mdash; 발람의 마지막 신탁</div>
+      <div class="ref-strip"><span class="ref-item">민 24:1-25</span><span class="ref-item">코카브</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-9절</div><div><div class="flow-title">더 이상 주술을 구하지 않는 발람</div><div class="flow-body">이번에는 <b class="hl-term">점술을 구하러 가지 않고</b> 광야를 향해 눈을 든 채 하나님의 영에 사로잡혀 신탁을 전한다. 이스라엘의 장막이 아름답다는 축복이 흘러나온다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">15-19절</div><div><div class="flow-title">먼 훗날을 내다보는 별의 신탁</div><div class="flow-body"><b class="hl-insight has-insight" data-insight="24">"한 별이 야곱에게서 나오며 한 규가 이스라엘에게서 일어나서"</b>라는 신탁은 당장의 상황을 넘어 먼 미래의 왕적 통치를 예고한다. 여기서 별은 <b class="hl-greek has-tip" data-tip="'별'을 뜻하는 히브리어. 고대 근동에서 왕권과 통치자를 상징하는 이미지로 흔히 사용되었다.">코카브</b>(별)로, 왕권의 상징이었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">10-14, 25절</div><div><div class="flow-title">분노한 발락, 빈손으로 돌아가는 발람</div><div class="flow-body">발락은 손뼉을 치며 분노하지만 발람은 재물조차 받지 않고 <b class="hl-quote">"내 입에 있는 말"</b>만 전할 수밖에 없었음을 다시 확인시킨다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 미래를 내다보시는 하나님</div><div class="teach-body">당장의 위기를 넘어 먼 훗날의 구원 역사까지 하나님은 미리 선언하셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 방법을 내려놓을 때 임하는 계시</div><div class="teach-body">주술적 절차를 내려놓았을 때 오히려 더 온전한 하나님의 영이 임했다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 돈으로 살 수 없는 말씀</div><div class="teach-body">발락의 재물도 하나님의 말씀을 흥정의 대상으로 만들 수 없었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 분노해도 바꿀 수 없는 결정</div><div class="teach-body">권력자의 분노조차 이미 선포된 하나님의 뜻을 되돌리지 못했다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 원수의 입을 통해 전해지는 메시아 소망</div><div class="teach-body">이방 선지자의 입에서 메시아를 예고하는 가장 이른 신탁 중 하나가 흘러나왔다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">이스라엘을 저주하러 온 이방 선지자의 입에서 메시아를 가리키는 별의 예언이 나왔다는 것, 하나님은 정말 어떤 통로로도 자신의 뜻을 이루신다는 걸 보여줍니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>"별"과 "규"(17절)가 가리키는 대상에 대한 해석사</div><div class="deep-body">유대 전통은 이 예언을 다윗 왕(혹은 기원후 2세기 반란 지도자 바르 코크바, '별의 아들'이라는 이름 자체가 이 구절에서 유래)에게 적용해 왔고, 기독교 전통은 초기부터 이를 그리스도에 대한 예언으로 읽어왔다(마태복음의 동방박사 별 이야기와도 연결지어짐). 본문 자체는 근접한 역사적 맥락에서 다윗 왕조의 발흥을 가리켰을 가능성이 높지만, 그 성취가 궁극적으로 예수 그리스도에게서 완성된다고 보는 것이 기독교 해석 전통의 입장이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>발람이 결국 미디안 전쟁에서 죽는다는 사실(민 31:8)과의 긴장</div><div class="deep-body">이토록 아름다운 신탁을 전한 발람이 훗날 이스라엘을 실족시킨 배후 인물로 지목되어(31:16) 결국 죽임을 당한다는 사실은 큰 신학적 긴장을 남긴다. 이는 참된 말씀을 전하는 은사와 그 사람의 인격적 신실함이 반드시 일치하지 않을 수 있다는 냉정한 경고로 여러 주석가들이 지적하는 지점이다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch25">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16" /><path d="M24 10v4M24 34v4M10 24h4M34 24h4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 25</div>
+      <h1>25장 &middot; 칼보다 앞선 열심</h1>
+      <div class="chapter-sub">민수기 25장 &mdash; 바알브올과 비느하스</div>
+      <div class="ref-strip"><span class="ref-item">민 25:1-18</span><span class="ref-item">키나</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-3절</div><div><div class="flow-title">모압 여인들과의 음행, 브올의 우상숭배</div><div class="flow-body">이스라엘 백성이 모압 여인들과 음행하고 <b class="hl-term">바알브올</b>을 섬기기 시작하니, 여호와의 진노가 이스라엘에게 타올랐다. 저주로 막지 못한 것이 유혹으로 무너뜨려졌다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">6-9절</div><div><div class="flow-title">회막 문 앞에서 우는 회중 앞의 뻔뻔함</div><div class="flow-body">온 회중이 회막 문에서 울고 있는 그 순간에도 한 이스라엘 남자가 미디안 여인을 <b class="hl-insight has-insight" data-insight="25">공공연히</b> 데려오는 뻔뻔함을 보였고, 염병이 시작되어 24,000명이 죽었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">7-13절</div><div><div class="flow-title">비느하스의 즉각적 행동</div><div class="flow-body">제사장 비느하스가 창을 들고 즉시 두 사람을 찔러 죽이니 염병이 그쳤고, 하나님은 그의 <b class="hl-greek has-tip" data-tip="'열심, 질투'를 뜻하는 히브리어. 하나님의 거룩함을 향한 강렬한 헌신을 가리킨다.">키나</b>(열심)를 인정해 그와 후손에게 <b class="hl-quote">"평화의 언약"</b>을 약속하신다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 저주로 안 되면 유혹으로</div><div class="teach-body">발람의 저주가 실패한 후 오히려 유혹이라는 다른 통로로 이스라엘이 무너졌다는 점이 경고가 된다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 공동체적 죄의 전염성</div><div class="teach-body">한 사람의 죄가 온 진영에 재앙으로 번질 수 있다는 무거운 현실을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 눈물만으로는 부족할 때</div><div class="teach-body">회중이 울고 있는 것만으로는 재앙이 그치지 않았고, 실제적 결단이 필요했다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 거룩함을 향한 열심의 대가</div><div class="teach-body">비느하스의 즉각적 행동은 하나님의 거룩함을 향한 열심으로 인정받았다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 열심이 가져오는 평화의 언약</div><div class="teach-body">거룩함을 향한 열심의 결과로 오히려 평화의 언약이 주어졌다는 역설이 있다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">발람이 저주로도 무너뜨리지 못한 이스라엘이 결국 유혹 앞에서 스스로 무너졌다는 것, 24장과 25장을 나란히 읽으면 그 대조가 더 아프게 다가와요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>이 사건과 발람의 계략(민 31:16) 사이의 연결</div><div class="deep-body">25장 본문 자체는 이 유혹을 발람과 직접 연결하지 않지만, 이후 31:16에서 모세는 이 사건이 "발람의 꾀"였다고 밝힌다. 저주에 실패한 발람이 이스라엘을 무너뜨릴 대안적 전략(유혹을 통한 자멸)을 조언했다는 것으로, 이는 신약 요한계시록 2:14에서도 "발람의 교훈"으로 언급되며 지속적인 경고의 상징이 된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>비느하스의 행동을 오늘날 어떻게 평가할 것인가</div><div class="deep-body">즉결 처형에 가까운 비느하스의 행동을 문자적 행동 지침으로 삼는 것은 신중해야 한다는 것이 대다수 해석자들의 입장이다. 본문의 강조점은 폭력적 방법론 자체가 아니라, 공동체 전체가 침묵하거나 눈물만 흘리고 있을 때 하나님의 거룩함을 향해 보인 단호한 태도에 있다고 이해하는 것이 균형 잡힌 독법이다. 시편 106:30-31도 이 사건을 '의로 여겨진' 행동으로 긍정적으로 회고한다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch26">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V22a12 12 0 0 1 24 0v18" /><path d="M12 40h24" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 26</div>
+      <h1>26장 &middot; 새로운 세대의 명단</h1>
+      <div class="chapter-sub">민수기 26장 &mdash; 두 번째 인구조사</div>
+      <div class="ref-strip"><span class="ref-item">민 26:1-65</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-51절</div><div><div class="flow-title">모압 평지에서 다시 세는 백성</div><div class="flow-body">염병이 그친 후 모압 평지에서 다시 인구를 조사하니 <b class="hl-term">601,730명</b>, 1장의 숫자와 거의 비슷하지만 이제는 완전히 새로운 얼굴들이었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">63-65절</div><div><div class="flow-title">단 두 사람만 남은 첫 세대</div><div class="flow-body">본문은 분명히 밝힌다 &mdash; <b class="hl-insight has-insight" data-insight="26">갈렙과 여호수아 외에는</b> 시내 광야에서 계수되었던 첫 세대 중 한 사람도 남지 않았다는 것을.</div></div></div>
+      <div class="flow-item"><div class="flow-range">52-56절</div><div><div class="flow-title">수의 많고 적음에 따라 나뉘는 땅</div><div class="flow-body">인구가 많은 지파는 더 많은 땅을, 적은 지파는 더 적은 땅을 제비 뽑아 얻도록 하여, 정의로운 분배의 원칙이 미리 세워진다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 세대가 바뀌어도 지속되는 언약</div><div class="teach-body">첫 세대가 다 스러졌어도 이스라엘을 향한 하나님의 약속은 다음 세대에서 그대로 이어졌다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 심판의 완전한 성취</div><div class="teach-body">14장의 심판 선언이 문자 그대로 이루어졌다는 사실이 여기서 확인된다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 끝까지 남은 신실함의 상급</div><div class="teach-body">갈렙과 여호수아만 남았다는 것은 다른 마음을 품었던 신실함의 대가를 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 공정하게 설계된 분배 원칙</div><div class="teach-body">인구 비례에 따른 땅 분배는 어느 지파도 부당하게 손해 보지 않도록 배려한 것이다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 광야는 끝이 아니라 준비였다</div><div class="teach-body">이 인구조사는 곧 다가올 가나안 입성을 향한 실제적 준비였다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">1장과 26장의 숫자가 거의 비슷한데도, 그 안에 있는 사람은 완전히 다르다는 걸 성경이 굳이 밝혀줍니다. 한 세대는 저물고 새 세대가 약속의 땅 앞에 선 거죠.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>1장과 26장 사이 지파별 인구 증감의 패턴</div><div class="deep-body">시므온 지파는 59,300명에서 22,200명으로 극적으로 감소한 반면, 므낫세 지파는 오히려 크게 증가하는 등 지파별 증감 편차가 상당하다. 학자들은 시므온의 급감을 바알브올 사건(25장)에서 시므온 지파 지도자 시므리가 연루되었다는 사실(25:14)과 연결지어, 그 지파가 이 죄에 특히 깊이 연루되었을 가능성을 제기한다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>총 인구수가 거의 변하지 않았다는 것의 의미</div><div class="deep-body">40년의 광야 생활과 그 사이의 여러 재앙(염병, 전쟁, 반역에 대한 심판)에도 불구하고 전체 인구가 거의 그대로 유지되었다는 사실은, 겉으로는 저주와 심판의 시기처럼 보인 그 40년 동안에도 하나님이 백성 전체를 향한 축복의 언약(창 15:5의 하늘의 별과 같은 자손 약속)을 신실하게 지키고 계셨음을 보여주는 것으로 해석되곤 한다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch27">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="20" r="6" /><circle cx="31" cy="20" r="6" /><path d="M8 38c0-7 4-11 9-11s9 4 9 11M22 38c0-7 4-11 9-11s9 4 9 11" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 27</div>
+      <h1>27장 &middot; 딸들이 낸 용기 있는 질문</h1>
+      <div class="chapter-sub">민수기 27장 &mdash; 슬로브핫의 딸들과 여호수아의 위임</div>
+      <div class="ref-strip"><span class="ref-item">민 27:1-23</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-4절</div><div><div class="flow-title">아들이 없다는 이유로 사라질 뻔한 이름</div><div class="flow-body">아들 없이 죽은 <b class="hl-term">슬로브핫</b>의 다섯 딸이 모세 앞에 나아와 "우리 아버지의 이름이... 없어지리이까"라며 <b class="hl-insight has-insight" data-insight="27">담대하게 질문</b>한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">5-11절</div><div><div class="flow-title">모세가 하나님께 가져간 질문, 새로 세워진 법</div><div class="flow-body">모세는 이 문제를 스스로 판단하지 않고 하나님께 가져갔고, 하나님은 "슬로브핫의 딸들의 말이 옳으니라"며 딸도 기업을 이을 수 있는 새 규례를 세우신다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">15-23절</div><div><div class="flow-title">여호수아에게 안수하는 모세</div><div class="flow-body">약속의 땅에 들어가지 못할 것을 아는 모세가 원망 없이 여호수아에게 안수하여 다음 지도자를 세우니, 자신의 사명을 온전히 넘겨주는 성숙한 리더십을 보여준다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 정당한 질문을 던지는 용기</div><div class="teach-body">다섯 딸의 질문은 불평이 아니라 정당한 권리를 향한 담대한 요청이었다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 지도자의 겸손한 위임</div><div class="teach-body">모세는 스스로 답을 정하지 않고 하나님께 가져가는 겸손을 보였다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 살아 움직이는 율법의 적용</div><div class="teach-body">기존 법에 새로운 상황이 생기자 하나님은 새로운 규례로 응답하셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 다음 세대를 준비시키는 리더십</div><div class="teach-body">모세는 자신의 결핍보다 공동체의 미래를 먼저 준비했다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 원망 없이 마치는 순종</div><div class="teach-body">약속의 땅에 들어가지 못한다는 사실 앞에서도 모세는 끝까지 신실하게 사명을 감당했다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">"슬로브핫의 딸들의 말이 옳으니라"는 하나님의 응답, 정당한 질문에는 정당한 응답이 있다는 걸 성경이 직접 확인해주는 장면이에요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>슬로브핫의 딸들의 사건이 고대 근동 상속법 안에서 갖는 위치</div><div class="deep-body">고대 근동의 여러 법전(누지 문서 등)에도 딸의 상속권에 관한 규정이 존재했지만, 이 본문이 흥미로운 것은 기존 규정에 없던 상황에 대해 하나님이 여성 당사자의 직접적 청원을 통해 새 법을 세우셨다는 점이다. 이는 율법이 처음부터 고정불변으로 완결된 것이 아니라, 실제 삶의 필요에 응답하며 발전해가는 살아있는 체계였음을 보여준다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>모세의 요청(15-17절)과 목자 없는 양의 이미지</div><div class="deep-body">모세가 "여호와의 회중이 목자 없는 양 같이 되지 않게" 후계자를 세워달라 요청하는 이 장면은, 이후 예수님이 무리를 보시고 "목자 없는 양과 같이" 고생하는 것을 불쌍히 여기신 장면(마 9:36)과 언어적으로 공명한다. 지도자의 부재가 공동체에 얼마나 치명적인지에 대한 성경 전체의 일관된 인식을 보여준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch28">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16" /><path d="M24 16v8l6 4" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 28</div>
+      <h1>28장 &middot; 매일과 매주로 이어지는 예배</h1>
+      <div class="chapter-sub">민수기 28장 &mdash; 정규 제사의 시간표</div>
+      <div class="ref-strip"><span class="ref-item">민 28:1-31</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-8절</div><div><div class="flow-title">아침과 저녁, 매일 반복되는 상번제</div><div class="flow-body">매일 아침과 저녁 어린 양 한 마리씩을 드리는 <b class="hl-greek has-tip" data-tip="'지속적인 것, 항상 드리는 것'을 뜻하는 히브리어. 매일 아침저녁으로 드려지는 상번제를 가리킨다.">타미드</b>(상번제)가 이스라엘 하루의 리듬을 정한다. 화려하지 않지만 결코 빠뜨릴 수 없는 예배였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">9-15절</div><div><div class="flow-title">안식일과 초하루의 추가 제사</div><div class="flow-body">매주 안식일과 매달 초하루에는 <b class="hl-insight has-insight" data-insight="28">더해지는 예물</b>이 있어, 일상의 리듬 위에 주간·월간의 리듬이 겹겹이 쌓였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">16-31절</div><div><div class="flow-title">유월절과 칠칠절의 절기 제사</div><div class="flow-body">유월절·무교절과 칠칠절(초실절)에 드릴 제사가 구체적으로 규정되어, 한 해 전체가 하나님을 기억하는 리듬으로 짜여 있었다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 매일 반복되는 예배의 힘</div><div class="teach-body">특별한 날의 감격보다 매일의 신실한 반복이 신앙의 실제 기초가 된다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 겹겹이 짜인 예배의 리듬</div><div class="teach-body">일·주·월·년의 여러 층위가 겹쳐 삶 전체가 예배로 물들게 했다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 규모에 관계없이 드려지는 정성</div><div class="teach-body">가장 작은 일상의 제사도 절기의 큰 제사만큼 세밀하게 규정되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 시간 자체를 거룩하게 하는 원리</div><div class="teach-body">특정 장소만이 아니라 시간의 흐름 자체가 거룩함의 틀 안에 놓였다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 광야에서도 유지된 예배의 질서</div><div class="teach-body">이동하는 광야 생활 중에도 이 정규 제사는 결코 생략되지 않았다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">매일 아침저녁으로 드려지는 상번제, 화려하지도 특별하지도 않은 이 반복이 사실 이스라엘 신앙의 진짜 기초였다는 걸 6장의 '꺼지지 않는 불' 규례와 함께 읽으면 더 깊이 다가옵니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>레위기 23장과 민수기 28-29장의 절기 규정 비교</div><div class="deep-body">두 본문 모두 절기를 다루지만 레위기 23장은 절기의 날짜와 의미(무엇을 기념하는지)에 초점을 두는 반면, 민수기 28-29장은 그 절기마다 정확히 몇 마리의 제물을 드려야 하는지 세부 예산과 같은 실무적 규정에 집중한다. 두 본문이 상호 보완적으로 함께 읽힐 때 절기 규례의 전체 그림이 완성된다는 것이 일반적 이해다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>상번제(타미드)가 성전 파괴 이후 유대교에 남긴 유산</div><div class="deep-body">기원후 70년 성전이 파괴되어 실제 제사가 중단된 이후, 랍비 유대교는 이 상번제의 시간(아침·저녁)을 하루 두 차례의 정규 기도 시간(샤하리트, 아르비트)으로 대체하여 계승했다. 이는 제사 제도가 문자적으로 중단된 후에도 그 예배의 리듬 자체는 기도의 형태로 살아남았음을 보여주는 흥미로운 역사적 연속성이다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch29">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 34V14l16 10-16 10Z" /><path d="M28 14v20" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 29</div>
+      <h1>29장 &middot; 한 해를 마무리하는 절기들</h1>
+      <div class="chapter-sub">민수기 29장 &mdash; 칠월의 절기 제사</div>
+      <div class="ref-strip"><span class="ref-item">민 29:1-40</span><span class="ref-item">테루아</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-6절</div><div><div class="flow-title">나팔을 부는 날</div><div class="flow-body">칠월 초하루는 <b class="hl-greek has-tip" data-tip="'나팔소리, 외침'을 뜻하는 히브리어. 새로운 절기 주기의 시작을 알리는 소리를 가리킨다.">테루아</b>(나팔을 부는)를 부는 거룩한 날로, 새로운 절기 주기의 시작을 알리는 소리로 열린다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">7-11절</div><div><div class="flow-title">스스로 괴롭게 하는 대속죄일</div><div class="flow-body">칠월 십일, <b class="hl-insight has-insight" data-insight="29">모든 노동을 쉬고 스스로 괴롭게 하는</b> 대속죄일이 이어지며, 레위기 16장의 규례가 다시 확인된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">12-40절</div><div><div class="flow-title">초막절, 날마다 줄어드는 수소</div><div class="flow-body">칠 일간 이어지는 초막절 동안 매일 드리는 수소의 수가 열셋에서 하나씩 줄어드는 독특한 패턴으로 진행되며, 여덟째 날 성회로 절기 전체가 마무리된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 소리로 시작되는 새로운 계절</div><div class="teach-body">나팔 소리는 삶의 새로운 국면이 하나님으로부터 시작됨을 알리는 신호였다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 정직한 자기 성찰의 자리</div><div class="teach-body">대속죄일의 '괴롭게 함'은 형식적 절차가 아니라 진지한 자기 직면을 요구했다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 점점 줄어드는 제물이 주는 메시지</div><div class="teach-body">날마다 줄어드는 제물의 수는 절기가 끝을 향해 겸손히 마무리됨을 상징한다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 풍성한 절기 뒤의 여덟째 날</div><div class="teach-body">칠 일의 축제 뒤에 따로 마련된 여덟째 날은 절정 이후에도 하나님 앞에 머무는 시간이 필요함을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 한 해 전체를 아우르는 예배 리듬</div><div class="teach-body">칠월 한 달에 몰린 이 절기들은 한 해의 마무리를 철저히 예배로 채우게 했다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">초막절 칠 일 동안 매일 수소를 한 마리씩 줄여 드렸다는 것, 축제가 무한정 커지는 게 아니라 겸손하게 잦아드는 모습이 인상적이에요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>초막절 수소 감소 패턴(13일→7마리)의 랍비적 해석</div><div class="deep-body">칠 일간 드려진 수소의 총합은 70마리로, 랍비 전통은 이를 창세기 10장의 '칠십 민족'을 상징하는 것으로 해석하여 초막절이 이스라엘만이 아니라 열방 전체를 위한 중보의 절기라는 신학을 발전시켰다. 스가랴 14:16-19이 초막절을 열방이 함께 지킬 절기로 그리는 것도 이러한 해석과 공명한다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>나팔절(로쉬 하샤나)이 문자적 '새해'로 발전한 배경</div><div class="deep-body">흥미롭게도 민수기 본문 자체는 칠월 초하루를 '새해'로 명시하지 않지만(오히려 출애굽 규정상 새해는 니산월/1월이다), 후대 유대교는 이 날을 '로쉬 하샤나'(한 해의 머리)로 발전시켰다. 이는 성경이 두 개의 서로 다른 달력 체계(종교력과 농사력/시민력)를 병행하고 있었을 가능성을 보여주는 흥미로운 사례다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch30">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="10" width="20" height="28" rx="2" /><path d="M14 20h20M14 28h20" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 30</div>
+      <h1>30장 &middot; 말의 무게, 관계의 책임</h1>
+      <div class="chapter-sub">민수기 30장 &mdash; 여성의 서원 규례</div>
+      <div class="ref-strip"><span class="ref-item">민 30:1-16</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-2절</div><div><div class="flow-title">입 밖으로 낸 말은 지켜야 한다</div><div class="flow-body">서원한 것(<b class="hl-greek has-tip" data-tip="'서원, 맹세'를 뜻하는 히브리어. 하나님께 무언가를 드리거나 하기로 스스로 약속하는 것을 가리킨다.">네데르</b>)은 그 입에서 나온 대로 다 행해야 한다는 원칙이 남녀 모두에게 적용되는 기본 원리로 먼저 제시된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">3-15절</div><div><div class="flow-title">듣고도 잠잠하면 유효해지는 서원</div><div class="flow-body">아버지나 남편이 딸이나 아내의 서원을 들은 날 <b class="hl-insight has-insight" data-insight="30">막지 않고 잠잠</b>하면 그 서원은 유효해지지만, 들은 즉시 반대하면 무효가 될 수 있었다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">16절</div><div><div class="flow-title">관계 안에서의 책임</div><div class="flow-body">본문은 이 모든 규례가 부모와 자녀, 남편과 아내 사이의 관계 안에서 작동하는 것임을 마지막에 다시 확인한다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 말에 대한 근본적 책임</div><div class="teach-body">입 밖으로 낸 말은 가볍게 취소할 수 없는 무게를 지닌다는 원칙이 다시 확인된다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 침묵도 하나의 선택</div><div class="teach-body">즉시 반대하지 않는 침묵은 그 자체로 동의의 무게를 지녔다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 관계 속의 상호 책임</div><div class="teach-body">한 사람의 서원이 가정 공동체 전체에 영향을 미친다는 현실적 인식이 담겨 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 당대 사회 구조 속의 보호 장치</div><div class="teach-body">가부장적 사회 구조 안에서도 이 규례는 여성을 무책임한 서원으로부터 일정 부분 보호하는 장치이기도 했다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 빠른 반대의 권리와 그 무게</div><div class="teach-body">반대할 수 있는 권한은 동시에 그 반대에 따르는 책임(15절)도 함께 부과했다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">"들은 날에 잠잠하면" 서원이 유효해진다는 규정, 침묵도 결코 중립적이지 않다는 걸 보여주는 것 같아요. 우리가 무언가에 반응하지 않는 것 자체가 이미 하나의 선택이라는 거죠.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>이 규례를 가부장제의 산물로만 볼 것인가</div><div class="deep-body">현대 독자에게 이 본문은 여성의 자율권을 제한하는 규정으로 읽히기 쉽다. 그러나 일부 학자는 이것이 여성 억압을 목적으로 한 규정이라기보다, 가정 경제 전체(재산·자원)에 영향을 미칠 수 있는 서원(특히 재물이나 노동력 헌납 서원)에 대해 가장이 공동 책임을 지는 고대 가족 경제 구조를 반영한 것이라 본다. 다만 이러한 구조 자체가 오늘날의 평등 원리와는 다른 시대의 산물임을 인정하는 것이 정직한 독법이다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>과부와 이혼한 여성에게는 왜 예외가 적용되는가(9절)</div><div class="deep-body">본문은 과부나 이혼한 여성의 서원은 남성 보호자의 확인 없이도 그대로 유효하다고 규정한다. 이는 결혼 관계 밖에 있는 여성에게는 오히려 완전한 서원의 자율성이 인정되었음을 보여주며, 이 규례의 초점이 여성의 능력 자체를 불신하는 것이 아니라 혼인이라는 특정 관계 안에서의 상호 책임 구조에 있었음을 시사한다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch31">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v14M14 34l10-14 10 14z" /><path d="M12 40h24" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 31</div>
+      <h1>31장 &middot; 정의를 이루는 슬픈 전쟁</h1>
+      <div class="chapter-sub">민수기 31장 &mdash; 미디안과의 전쟁</div>
+      <div class="ref-strip"><span class="ref-item">민 31:1-54</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-12절</div><div><div class="flow-title">25장 사건에 대한 책임을 묻는 전쟁</div><div class="flow-body">하나님은 바알브올 사건의 원인이 된 <b class="hl-term">미디안</b>에게 원수를 갚으라 명하시고, 그 전쟁에서 발람도 함께 죽임을 당한다(8절).</div></div></div>
+      <div class="flow-item"><div class="flow-range">13-24절</div><div><div class="flow-title">전쟁 후에도 필요한 정결례</div><div class="flow-body">모세는 시체와 접촉한 군인들에게 <b class="hl-insight has-insight" data-insight="31">진영 밖에서 이레 동안</b> 머물며 19장의 정결례를 따르도록 명하니, 승리한 전쟁 후에도 거룩함의 기준은 낮아지지 않았다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">25-54절</div><div><div class="flow-title">공평하게 나뉘는 전리품</div><div class="flow-body">전쟁에 나간 자와 진영에 머문 자 사이에 전리품을 공평하게 나누도록 하여, 실제로 싸우지 않은 이들도 공동체의 일원으로 존중받았다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 유혹의 배후에 대한 책임 추궁</div><div class="teach-body">공동체를 무너뜨린 유혹의 근원을 하나님은 결코 가볍게 넘기지 않으셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 승리 이후에도 필요한 정결</div><div class="teach-body">전쟁에서 이긴 것이 자동으로 거룩함을 보장하지 않았다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 후방에 남은 이들을 향한 존중</div><div class="teach-body">전투에 직접 나가지 않은 이들의 기여도 동등하게 인정받았다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 정의와 폭력 사이의 긴장</div><div class="teach-body">본문이 그리는 전쟁의 잔혹함은 오늘날 독자에게 여전히 무거운 윤리적 질문을 남긴다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 하나님께 드리는 몫(28-30절)</div><div class="teach-body">전리품의 일부를 하나님께 드리도록 한 것은 승리조차 인간의 능력이 아니라 하나님의 것임을 고백하는 절차였다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">이 장은 오늘날의 시선으로 읽기 쉽지 않은 본문이에요. 다만 승리 이후에도 정결례를 요구하신 것은, 폭력조차 미화되거나 당연시되지 않았음을 보여주는 대목이라 생각합니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>이 전쟁 본문을 오늘날 어떻게 읽을 것인가</div><div class="deep-body">이 장의 전쟁 규정, 특히 여성 포로에 대한 처우(17-18절)는 현대 독자에게 큰 윤리적 불편함을 남긴다. 대다수 그리스도인 해석자들은 이를 오늘날의 행동 규범으로 직접 적용하지 않고, 특정 시대·특정 상황(가나안 정착을 앞둔 신정 국가의 특수한 역사적 국면)에 국한된 기록으로 이해하며, 본문이 그리는 폭력을 규범적으로 정당화하기보다 구속사 전체의 흐름과 그리스도 안에서의 계시의 진전 속에서 신중하게 읽어야 한다는 해석학적 입장을 취한다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>발람의 죽음(8절)이 24장의 아름다운 신탁과 남기는 긴장</div><div class="deep-body">참된 예언을 전했던 발람이 결국 이스라엘을 무너뜨린 배후로 지목되어 전쟁 중 죽는다는 사실은, 은사와 인격, 말씀 전달과 삶의 신실함이 항상 일치하지는 않는다는 냉정한 현실을 다시 한번 확인시켜 준다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch32">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="14" width="28" height="20" rx="2" /><path d="M10 14l14 10 14-10" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 32</div>
+      <h1>32장 &middot; 먼저 자리 잡고 싶은 마음</h1>
+      <div class="chapter-sub">민수기 32장 &mdash; 요단 동편 지파들의 요청</div>
+      <div class="ref-strip"><span class="ref-item">민 32:1-42</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-5절</div><div><div class="flow-title">가축이 많으니 이 땅이 좋다는 요청</div><div class="flow-body"><b class="hl-term">르우벤과 갓</b> 지파는 가축이 많다는 이유로 요단강을 건너지 않고 이미 정복한 동편 땅에 머물기를 청한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">6-15절</div><div><div class="flow-title">형제들을 낙심시킬 것인가</div><div class="flow-body">모세는 이 요청이 마치 <b class="hl-insight has-insight" data-insight="32">가데스 바네아의 정탐꾼들처럼</b> 형제들의 마음을 낙심시킬 위험이 있다고 강하게 경고한다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">16-32절</div><div><div class="flow-title">앞장서 싸우겠다는 조건부 약속</div><div class="flow-body">두 지파는 가족과 가축을 먼저 정착시키되, 자신들은 무장하고 형제들과 함께 <b class="hl-quote">앞장서 싸우겠다</b>고 약속하며 타협점을 찾는다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 개인의 유익과 공동체의 사명</div><div class="teach-body">자신의 형편에 맞는 선택이 공동체 전체의 사명과 충돌할 수 있음을 정직하게 대면해야 한다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 낙심의 전염성에 대한 경고</div><div class="teach-body">모세는 한 지파의 편안한 선택이 다른 지파의 사기를 꺾을 수 있음을 예민하게 짚어냈다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 타협이 아닌 재구성된 헌신</div><div class="teach-body">두 지파의 최종 응답은 안일한 회피가 아니라 다른 방식의 헌신으로 재구성되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 조건부 약속의 신뢰성</div><div class="teach-body">약속은 말로 그치지 않고 실제 행동으로 지켜졌을 때 신뢰를 얻는다(수 22장에서 확인됨).</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 과거의 실패를 기억하는 지도력</div><div class="teach-body">모세는 정탐꾼 사건이라는 과거의 실패를 정확히 기억하고 되풀이되지 않도록 지혜롭게 개입했다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">모세가 이 요청을 듣자마자 정탐꾼 사건을 떠올린 것, 지도자에게는 과거의 실수를 정확히 기억하고 되풀이되지 않게 하는 예민함이 얼마나 중요한지 보여줍니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>요단 동편 정착이 훗날 이스라엘 역사에 남긴 그림자</div><div class="deep-body">이 지파들의 선택은 이후 이스라엘 역사에서 반복적으로 문제가 된다. 여호수아 22장에서는 이들이 세운 제단으로 인해 내전 위기가 벌어지고, 사사기와 열왕기 시대에는 이 지역이 지리적으로 고립되어 가장 먼저 앗수르에게 정복당하는 땅이 된다(왕하 15:29). 이는 편리함을 우선한 초기의 선택이 장기적으로 어떤 결과를 낳을 수 있는지를 보여주는 성경 내적 서사로 읽히기도 한다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>모세가 이 요청을 완전히 거절하지 않고 수용한 이유</div><div class="deep-body">모세가 이 요청 자체를 원천적으로 금하지 않고 조건부로 수용했다는 것은, 지도자가 모든 개별적 필요와 형편을 획일적으로 억누르기보다 공동체의 근본 사명(형제를 향한 책임)이 지켜지는 한 다양한 선택의 여지를 허용하는 유연함을 보여준 사례로 평가되기도 한다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch33">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 34c6-10 10 6 16-4s10 6 16-4" /><circle cx="8" cy="34" r="2" /><circle cx="40" cy="26" r="2" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 33</div>
+      <h1>33장 &middot; 걸어온 길을 되짚어보다</h1>
+      <div class="chapter-sub">민수기 33장 &mdash; 광야 여정의 노정표</div>
+      <div class="ref-strip"><span class="ref-item">민 33:1-56</span><span class="ref-item">마사오트</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-49절</div><div><div class="flow-title">모세가 친히 기록한 노정</div><div class="flow-body">애굽에서부터 모압 평지까지 <b class="hl-greek has-tip" data-tip="'여정들, 진 친 곳들'을 뜻하는 히브리어. 광야 40년 동안 이스라엘이 머문 지점들을 가리킨다.">마사오트</b>(여정)로 불리는 마흔두 곳의 진 친 곳이 모세의 손으로 직접 기록되어, 광야의 방황조차 하나님의 인도하심 아래 있었음이 낱낱이 증언된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">50-53절</div><div><div class="flow-title">완전히 몰아내라는 명령</div><div class="flow-body">가나안 땅에 들어가면 그 땅 <b class="hl-insight has-insight" data-insight="33">모든 거주민을 몰아내고 우상을 다 파괴</b>하라는 단호한 명령이 다시 주어진다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">54-56절</div><div><div class="flow-title">남겨두면 찌르는 가시가 되리라</div><div class="flow-body">만일 그 땅 거주민을 남겨두면 그들이 눈의 가시와 옆구리의 찌르는 것이 되어 이스라엘을 괴롭게 하리라는 경고로 마무리된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 방황도 기록되는 여정</div><div class="teach-body">가장 혼란스러웠던 시절조차 하나님은 낱낱이 기억하고 기록하게 하셨다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 되짚어보는 것의 유익</div><div class="teach-body">지나온 길을 정리하는 것은 앞으로 나아갈 힘을 얻는 과정이기도 하다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 철저함이 요구되는 순종</div><div class="teach-body">부분적 순종은 온전한 순종이 아니라는 원칙이 다시 강조된다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 남겨둔 죄가 자라는 방식</div><div class="teach-body">완전히 처리하지 않은 문제는 결국 지속적인 고통의 근원이 된다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 광야가 남긴 것은 회한이 아니라 기록</div><div class="teach-body">40년의 광야는 후회로 묻히지 않고 다음 세대를 위한 소중한 기록으로 남았다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">마흔두 곳의 지명을 모세가 직접 다 기록했다는 것, 가장 힘들었던 시절조차 헛되지 않았고 하나님이 그 모든 걸음을 기억하고 계셨다는 뜻 아닐까요.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>여정 목록의 문학적·고고학적 가치</div><div class="deep-body">이 42개 지명 중 상당수는 정확한 위치가 현재까지 확인되지 않아, 고고학자와 지리학자들 사이에서 광야 여정의 실제 경로를 재구성하려는 시도가 계속되고 있다. 이 본문이 단순한 문학적 창작이 아니라 실제 여행 기록에 근거한 고대의 '여정 목록'(itinerary) 장르라는 점은 고대 근동의 유사한 문헌들과의 비교 연구를 통해 뒷받침된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>"눈의 가시와 옆구리의 찌르는 것"(55절) 경고의 역사적 성취</div><div class="deep-body">이 경고는 사사기 전체의 반복적 패턴(가나안 족속과의 불완전한 분리로 인한 지속적 갈등과 배교)을 통해 문자 그대로 성취된다. 여호수아서와 사사기를 잇는 다리 역할을 하는 이 경고는, 훗날 실제로 성취될 예언으로서 오경과 역사서 전체를 신학적으로 연결하는 중요한 고리가 된다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch34">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="32" height="32" rx="2" /><path d="M8 24h32M24 8v32" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 34</div>
+      <h1>34장 &middot; 경계가 그려주는 안정감</h1>
+      <div class="chapter-sub">민수기 34장 &mdash; 가나안 땅의 경계</div>
+      <div class="ref-strip"><span class="ref-item">민 34:1-29</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-12절</div><div><div class="flow-title">사방으로 그어지는 구체적 경계선</div><div class="flow-body">남쪽 신 광야에서 북쪽 하맛 어귀까지, 동쪽 요단강에서 서쪽 <b class="hl-term">대해</b>(지중해)까지 <b class="hl-insight has-insight" data-insight="34">구체적 지명</b>으로 땅의 경계가 그어진다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">13-15절</div><div><div class="flow-title">이미 받은 자와 아직 받지 못한 자</div><div class="flow-body">르우벤·갓·므낫세 반 지파는 이미 요단 동편에서 기업을 받았음이 다시 확인되며, 나머지 아홉 지파 반이 이 서편 땅을 나누어 받게 된다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">16-29절</div><div><div class="flow-title">땅을 나눌 책임자들의 명단</div><div class="flow-body">제사장 엘르아살과 여호수아, 그리고 각 지파를 대표하는 지도자들이 구체적으로 지명되어 공정한 분배를 책임지게 된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 막연함이 아닌 구체성</div><div class="teach-body">하나님의 약속은 막연한 소망이 아니라 구체적 지명과 경계로 확정되었다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 경계가 주는 안정감</div><div class="teach-body">명확한 경계는 다툼을 예방하고 각 지파에게 소속의 안정감을 주었다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 책임 있는 지도자의 세움</div><div class="teach-body">중요한 결정일수록 이름을 밝힌 책임자들을 세워 신뢰할 수 있는 절차로 진행했다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 이미 받은 것과 아직 받을 것</div><div class="teach-body">모든 지파가 동시에 같은 방식으로 기업을 받은 것은 아니었지만, 각자의 몫은 결국 채워졌다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 약속의 실현을 향한 마지막 준비</div><div class="teach-body">이 세밀한 경계 규정은 이제 정말로 눈앞에 다가온 약속의 성취를 실감하게 한다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">지명 하나하나까지 구체적으로 그어진 경계선을 보면, 하나님의 약속이 얼마나 실제적이고 구체적인지 새삼 느껴져요. 막연한 소망이 아니라 손에 잡히는 현실이었던 거죠.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>이 경계가 실제 역사 속에서 완전히 성취된 적이 있는가</div><div class="deep-body">본문이 그리는 경계는 다윗과 솔로몬 시대에 가장 근접하게 실현되었지만(대상 18-20장, 왕상 4:21), 이후 분열 왕국과 여러 정복을 거치며 이 이상적 경계가 온전히 유지된 적은 없다. 이는 이 규정을 역사적 성취 여부보다, 하나님이 아브라함에게 주신 땅의 약속(창 15:18-21)이 얼마나 온전하고 구체적이었는지를 보여주는 신학적 이상향으로 이해하는 것이 더 적절하다는 해석으로 이어진다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>땅 분배 책임자에 갈렙이 포함된 것의 의미(19절)</div><div class="deep-body">유다 지파를 대표해 갈렙이 이 분배 위원회에 이름을 올린 것은, 40년 전 신실한 보고를 했던 그가 이제 실제로 그 약속의 땅을 나누는 자리에까지 이르렀다는 점에서 신실함에 대한 하나님의 신실한 보상을 상징적으로 보여주는 배치로 읽힌다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch35">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6l14 8v12c0 10-6 16-14 18-8-2-14-8-14-18V14Z" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 35</div>
+      <h1>35장 &middot; 도망칠 수 있는 자리를 마련하다</h1>
+      <div class="chapter-sub">민수기 35장 &mdash; 레위인의 성읍과 도피성</div>
+      <div class="ref-strip"><span class="ref-item">민 35:1-34</span><span class="ref-item">미클라트</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-8절</div><div><div class="flow-title">땅 없는 자들을 위해 흩어 배치된 성읍</div><div class="flow-body">땅의 기업이 없는 레위인을 위해 마흔여덟 성읍을 각 지파의 땅에서 <b class="hl-term">흩어</b> 내어주도록 하여, 온 이스라엘 어디에서나 레위인이 함께 있게 하셨다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">9-15절</div><div><div class="flow-title">부지중 살인자를 위한 여섯 도피성</div><div class="flow-body">고의가 아니게 사람을 죽인 자가 보복자의 손을 피해 도망할 수 있는 <b class="hl-greek has-tip" data-tip="'피난처, 도피성'을 뜻하는 히브리어. 부지중 살인자가 보복으로부터 안전하게 머물 수 있는 지정된 성읍이다.">미클라트</b>(도피성)가 마흔여덟 성읍 중 여섯 곳으로 지정된다. <b class="hl-insight has-insight" data-insight="35">보복자의 손을 피해 도망할 수 있는 도피성</b>은 사적 보복이 이어지지 않도록 마련된 안전장치였다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">16-34절</div><div><div class="flow-title">고의와 실수를 가르는 세밀한 재판</div><div class="flow-body">고의적 살인과 우발적 사고를 구분하는 세밀한 기준이 제시되며, 대제사장이 죽기까지 도피성에 머물러야 한다는 독특한 규정이 이어진다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 보복의 악순환을 끊는 장치</div><div class="teach-body">도피성은 사적 보복이 끝없이 이어지지 않도록 공동체가 마련한 실제적 안전장치였다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 고의와 실수를 구분하는 정의</div><div class="teach-body">모든 죽음을 같은 무게로 다루지 않는 세밀함이 진정한 정의의 모습이다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 곳곳에 흩어진 은혜의 자리</div><div class="teach-body">도피성이 온 땅에 고르게 배치된 것은 누구나 가까운 곳에서 피난처를 찾을 수 있게 한 배려였다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 대제사장의 죽음이 여는 자유</div><div class="teach-body">대제사장의 죽음으로 도피자가 자유로워진다는 규정은 훗날 그리스도의 죽음과 자연스럽게 겹쳐 읽힌다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 피 흘림에 대한 진지한 태도</div><div class="teach-body">본문 전체는 생명을 해친 일을 결코 가볍게 넘기지 않는 하나님의 엄중함을 보여준다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">대제사장이 죽어야 도피자가 자유로워진다는 이 규정, 그리스도의 죽음으로 우리가 정죄의 자리에서 자유로워졌다는 복음의 그림자를 이토록 오래전 규례 속에서 발견하게 됩니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>도피성과 근대 형법의 '과실치사 vs 고의살인' 구분의 선구성</div><div class="deep-body">이 본문이 제시하는 정교한 기준(사용된 도구의 종류, 원한 관계의 유무, 우연성 등)은 고대 세계에서 보기 드문 수준의 법적 정교함으로 평가되며, 오늘날 형법의 고의·과실 구분 개념의 고대적 원형으로 자주 언급된다. 이는 고대 근동의 다른 법전들이 대체로 결과 중심적 처벌을 규정했던 것과 대비되는 이스라엘 법의 독특성으로 지적된다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>"대제사장이 죽기까지"(25, 28절) 규정의 신학적 의미</div><div class="deep-body">이 독특한 시효 규정이 왜 대제사장의 죽음과 연결되는지 본문은 명시적으로 설명하지 않는다. 다수 해석자는 대제사장의 죽음이 일종의 대속적 성격(그의 죽음이 공동체 전체의 정결을 새롭게 하는 상징적 사건)을 지닌다고 보며, 이는 후대 그리스도인 독자들에게 대제사장 되신 그리스도의 죽음을 통해 죄인이 완전한 자유를 얻는다는 신학(히 9:11-15)을 떠올리게 하는 풍성한 예표로 읽혀왔다.</div></div>
+    </div>
+  </section>
+</section>
+
+<section class="chapter" id="ch36">
+  <div class="chapter-head">
+    <div class="chapter-icon-badge"><svg class="chapter-icon" viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="20" r="6" /><circle cx="31" cy="20" r="6" /><path d="M8 38c0-7 4-11 9-11s9 4 9 11M22 38c0-7 4-11 9-11s9 4 9 11" /></svg></div>
+    <div class="chapter-head-text">
+      <div class="chapter-eyebrow">NUMBERS 36</div>
+      <h1>36장 &middot; 기업과 공동체 사이의 균형</h1>
+      <div class="chapter-sub">민수기 36장 &mdash; 슬로브핫 딸들의 결혼 규정</div>
+      <div class="ref-strip"><span class="ref-item">민 36:1-13</span></div>
+    </div>
+  </div>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">01</span><h2>본문 구조와 핵심 내용</h2></div>
+    <p class="sec-desc">본문의 흐름을 단락별로 정리한다.</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-range">1-4절</div><div><div class="flow-title">또 다른 걱정, 지파 경계가 흔들릴 위험</div><div class="flow-body">요셉 자손의 지도자들은 슬로브핫의 딸들이 다른 지파 남자와 결혼하면 그 <b class="hl-term">기업이 다른 지파로 넘어갈</b> 위험을 지적하며 새로운 질문을 던진다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">5-9절</div><div><div class="flow-title">지혜롭게 조율된 해법</div><div class="flow-body">모세는 여성 상속자들이 자기 지파 내에서 결혼해야 한다는 규정을 세워 <b class="hl-insight has-insight" data-insight="36">27장의 권리와 지파 경계의 안정</b> 두 가지를 동시에 지키는 균형을 이룬다.</div></div></div>
+      <div class="flow-item"><div class="flow-range">10-13절</div><div><div class="flow-title">순종하는 다섯 딸들, 마무리되는 민수기</div><div class="flow-body">슬로브핫의 다섯 딸은 명령받은 대로 순종했고, 이 마지막 구절과 함께 민수기 전체가 모압 평지, 여리고 맞은편에서 마무리된다.</div></div></div>
+    </div>
+  </section>
+  <section class="sub">
+    <div class="sec-head"><span class="sec-num">02</span><h2>신학적&middot;목회적 교훈</h2></div>
+    <p class="sec-desc">본문에서 끌어낼 수 있는 다섯 가지 교훈.</p>
+    <div class="teach-grid">
+      <div class="teach-card"><div class="teach-title">① 개인의 권리와 공동체의 질서</div><div class="teach-body">한 사람의 정당한 권리도 공동체 전체의 질서 안에서 지혜롭게 조율될 필요가 있다.</div></div>
+      <div class="teach-card"><div class="teach-title">② 끝까지 이어지는 세심한 배려</div><div class="teach-body">27장에서 시작된 문제가 36장에서 완전히 매듭지어지는 것은 하나님의 세심함을 보여준다.</div></div>
+      <div class="teach-card"><div class="teach-title">③ 순종으로 응답하는 딸들</div><div class="teach-body">자신들의 권리를 담대히 주장했던 딸들이 이번에는 조건을 겸손히 받아들이는 성숙함을 보인다.</div></div>
+      <div class="teach-card"><div class="teach-title">④ 광야 끝, 약속의 땅 문턱</div><div class="teach-body">민수기는 실패와 방황의 기록이지만, 결국 약속의 땅 코앞에서 마무리된다.</div></div>
+      <div class="teach-card"><div class="teach-title">⑤ 처음부터 끝까지 일관된 하나님의 신실하심</div><div class="teach-body">1장의 인구조사에서 36장의 마지막 규례까지, 하나님은 한결같이 자기 백성을 세밀하게 인도하셨다.</div></div>
+    </div>
+  </section>
+  <div class="speech-bubble"><div class="sb-avatar">&#10077;</div><div class="sb-text">1장의 인구조사로 시작해 36장의 결혼 규례로 끝나는 민수기, 그 사이에 담긴 원망과 반역과 은혜의 모든 이야기를 지나 이제 정말 약속의 땅 문턱에 백성이 서 있습니다.</div></div>
+  <section class="sub">
+    <div class="deep-wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>깊이 생각해볼 문제</h2></div>
+      <p class="sec-desc">함께 씨름할 가치가 있는 지점들.</p>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">1</span>27장과 36장이 수미상관 구조로 민수기 후반부를 감싸는 방식</div><div class="deep-body">슬로브핫 딸들의 이야기가 27장에서 시작해 36장, 즉 책 전체의 맨 마지막에서 완결된다는 것은 우연이 아니라는 지적이 있다. 이 두 본문 사이에 땅 분배, 절기 규례, 서원법, 전쟁, 도피성 등 다양한 주제가 배치되고, 결국 다시 이 여성들의 이야기로 돌아와 마무리됨으로써, 개인의 정당한 권리가 공동체의 다른 모든 규례들과 함께 조화를 이루어야 한다는 메시지가 책 전체의 틀로 기능한다는 문학적 해석이 있다.</div></div>
+      <div class="deep-item"><div class="deep-title"><span class="deep-num">2</span>민수기가 "정복"이 아니라 "문턱"에서 끝나는 것의 신학적 의미</div><div class="deep-body">민수기는 가나안 입성이라는 절정 직전, 요단강을 건너기 전 모압 평지에서 끝난다. 이는 신명기가 모세의 마지막 설교로, 여호수아서가 실제 정복 기사로 이어지는 구조적 장치이기도 하지만, 동시에 하나님의 약속이 성취를 향해 나아가는 여정 자체가 이미 신실함의 증거임을 보여주는 문학적·신학적 마침표로 이해할 수 있다 &mdash; 완성이 아니라 완성을 향한 신실한 준비로 책이 닫힌다.</div></div>
+    </div>
+  </section>
+</section>
+
+<div class="doc-footer">기독교한국침례회 은혜교회</div>
+
+<div class="floating-nav">
+  <a role="button" tabindex="0" onclick="goTo(event,'toc')" onkeydown="if(event.key==='Enter')goTo(event,'toc')" title="목차로">📑</a>
+  <a role="button" tabindex="0" onclick="goTo(event,'top')" onkeydown="if(event.key==='Enter')goTo(event,'top')" title="처음으로">⌃</a>
+</div>
+
+<script>
+var INSIGHTS_DATA = [null,
+{"title": "육십만이 넘는 이 숫자, 어떻게 읽어야 할까", "body": "인구조사 명단을 처음 읽으면 지루하게 느껴지기 쉬워요. 그런데 이 목록 하나하나가 사실은 하나님이 이름과 가문으로 기억하신 실제 사람들이라는 걸 생각하면 다르게 다가옵니다.\n\n거대한 무리 속에서 익명으로 사라질 수 있었던 존재들이 낱낱이 헤아려졌다는 것, 그건 그들이 하나님께 하나하나 소중했다는 뜻이기도 해요."}, {"title": "회막이 정중앙에 있었다는 것의 무게", "body": "지도를 그려보면 실감이 나요. 열두 지파가 사방으로 진을 치고, 그 한가운데 회막이 자리했습니다. 이스라엘의 모든 움직임이 문자 그대로 하나님을 중심으로 돌아가고 있었던 거죠.\n\n오늘 우리 삶의 중심에는 무엇이 자리하고 있을까요. 이 배치도는 사실 질문이기도 합니다."}, {"title": "세 가문, 서로 다른 짐", "body": "고핫·게르손·므라리, 레위 지파 안의 세 가문은 각기 다른 성막 기구를 맡았어요. 누구도 모든 것을 다 감당할 필요가 없었죠.\n\n오늘날 교회 공동체도 마찬가지예요. 모든 사람이 같은 방식으로 섬길 필요는 없습니다. 각자에게 맞는 짐이 따로 있다는 걸 이 오래된 조직표가 조용히 알려줍니다."}, {"title": "덮은 후에야 만질 수 있었던 지성물", "body": "고핫 자손은 언약궤를 비롯한 가장 거룩한 기구들을 운반했지만, 정작 그것을 직접 볼 수도, 먼저 만질 수도 없었어요. 제사장이 먼저 덮개로 덮은 후에야 접근할 수 있었죠.\n\n아무리 헌신된 자라도 거룩한 것에는 순서와 절차를 건너뛸 수 없다는 것, 열심만으로는 부족한 지점이 있다는 걸 보여주는 대목이에요."}, {"title": "왜 원금이 아니라 원금 더하기 오분의 일일까", "body": "이웃에게 잘못한 것을 갚을 때 그냥 원래 액수만 돌려주는 게 아니라 이십 퍼센트를 더 얹어 갚아야 했어요. 단순한 원상복구가 아니라 그 이상의 회복을 요구한 거죠.\n\n이건 회개가 '없었던 일로 하기'가 아니라 오히려 더 적극적으로 관계를 회복시키는 행동이어야 한다는 걸 보여줘요."}, {"title": "누구에게나 열려 있던 특별한 헌신의 길", "body": "나실인 서원은 제사장이나 레위인만의 특권이 아니었어요. 남자든 여자든, 누구든 스스로 원하면 이 특별한 구별의 삶을 선택할 수 있었죠.\n\n모든 깊은 헌신이 태생이나 직분으로 결정되는 게 아니라, 자원하는 마음으로 나아갈 수 있는 길이 언제나 열려 있었다는 게 인상적이에요."}, {"title": "지루해 보이는 반복 속에 담긴 존중", "body": "열두 지파장이 열두 날에 걸쳐 완전히 똑같은 예물을 드리는 장면, 압축해서 한 번에 기록해도 될 것을 성경은 굳이 열두 번을 다 반복해서 적었어요.\n\n이건 어느 지파도 소홀히 여기지 않으셨다는 뜻이에요. 반복이 지루함이 아니라 동등한 존중의 표현이었던 거죠."}, {"title": "온 회중이 함께 세운 레위인", "body": "레위인의 봉헌은 그들 스스로의 결단이 아니라 이스라엘 온 회중이 함께 안수함으로 이루어졌어요. 한 사람의 사역이지만 온 공동체가 함께 세운 자리였던 거죠.\n\n오늘날에도 사역자를 세우는 일은 결코 개인만의 일이 아니라, 공동체 전체가 함께 짊어지는 책임이라는 걸 이 장면이 보여줍니다."}, {"title": "규례를 지키고 싶어도 못 지키는 이들을 위한 길", "body": "부정하여 유월절을 지키지 못한 사람들이 낙심하지 않고 모세에게 나아와 물었어요. 그리고 하나님은 그들을 위해 한 달 후에 다시 지킬 수 있는 길을 열어주셨죠.\n\n규례는 사람을 배제하기 위해서가 아니라 포함시키기 위해 있다는 것, 형편이 안 되는 사람을 위해서도 하나님은 길을 마련해두셨다는 게 참 따뜻하게 다가와요."}, {"title": "소리로 기억되고 소리로 부르시는 하나님", "body": "은 나팔은 단순한 신호가 아니었어요. 전쟁과 절기의 순간마다 그 소리는 하나님 앞에서 '기억되는' 소리였죠(10절). 소리 하나에도 이렇게 깊은 신학이 담길 수 있다는 게 놀라워요.\n\n오늘 우리 삶에도 하나님을 기억하게 하는 나름의 '소리'가 있다면 무엇일까요. 찬양이든, 기도의 습관이든, 우리를 다시 부르시는 신호들 말이에요."}, {"title": "모세도 지쳤다고 말할 수 있었다는 것", "body": "위대한 지도자 모세조차 \"이 모든 백성을 내가 낳았나이까... 차라리 나를 죽여주소서\"라고 솔직하게 탈진을 토로했어요. 그 어떤 리더도 초인이 아니라는 걸 성경이 정직하게 보여줍니다.\n\n지친다는 것, 그것을 인정하고 말할 수 있다는 것 자체가 약함의 증거가 아니라 오히려 건강한 신앙의 모습일 수 있어요."}, {"title": "모세의 온유함, 침묵으로 증명된 것", "body": "미리암과 아론의 비난 앞에서 모세는 스스로를 변호하지 않았어요. 그가 온유했다는 성경의 평가(3절)는 그의 말이 아니라 오히려 그의 침묵으로 증명됩니다.\n\n부당한 비난 앞에서 즉각 반격하지 않고 하나님께 맡기는 것, 쉽지 않지만 그것이야말로 진짜 강함일 수 있다는 걸 모세가 보여줘요."}, {"title": "같은 땅을 보고도 다른 결론에 이른 이유", "body": "열두 명 모두 같은 땅을 걸었고 같은 포도송이를 봤어요. 그런데 열 명은 두려움을, 두 명은 확신을 보고했습니다. 사실은 하나였지만 그 해석은 완전히 갈렸던 거죠.\n\n우리도 종종 같은 상황 앞에서 전혀 다른 결론에 이르곤 해요. 문제는 상황 자체가 아니라 그 상황을 바라보는 우리의 시선일 때가 많다는 걸 이 본문이 일깨워줍니다."}, {"title": "용서와 결과 사이의 시차", "body": "\"내가 네 말대로 사하노라\"는 하나님의 응답 바로 뒤에 사십 년의 심판이 이어져요. 용서받았다는 것과 그 죄의 결과가 즉시 사라진다는 것은 다른 문제였던 거죠.\n\n오늘 우리도 죄를 용서받았다고 해서 그 결과까지 모두 순식간에 사라지길 기대하기보다, 용서의 은혜 안에서 남은 결과를 신실하게 살아내는 법을 배워야 할지 모릅니다."}, {"title": "무거운 심판 다음 장에 이어지는 약속", "body": "\"애굽에서 죽었더라면\"이라 부르짖던 백성에게 사십 년의 광야 방황이 선언된 바로 다음 장이 \"너희가 그 땅에 들어가서\"로 시작한다는 게 놀라워요.\n\n한 세대의 실패가 하나님의 궁극적 계획 자체를 지우지는 못했던 거죠. 심판 중에도 약속은 여전히 살아있었습니다."}, {"title": "옳은 말로 포장된 반역", "body": "\"회중이 다 각각 거룩하거늘\"이라는 고라의 말은 신학적으로 틀리지 않았어요. 문제는 그 말이 진리를 위해서가 아니라 자기 지위를 향한 도구로 쓰였다는 데 있었죠.\n\n옳은 말이라고 해서 그 동기까지 항상 옳은 건 아니라는 것, 우리 자신의 말과 주장을 돌아볼 때도 새겨야 할 지점이에요."}, {"title": "마른 막대기가 꽃을 피운다는 것", "body": "생명이라고는 전혀 없어 보이는 마른 지팡이에서 하룻밤 사이 싹이 나고 꽃이 피고 열매까지 맺혔어요. 자연의 순리로는 설명할 수 없는 일이었죠.\n\n부르심이란 결국 우리의 능력이나 자격에서 나오는 게 아니라 하나님의 생명력에서 나온다는 걸, 이보다 더 선명하게 보여줄 방법이 있을까요."}, {"title": "땅이 아니라 하나님이 기업이 된다는 것", "body": "다른 지파들은 저마다 땅을 분배받았지만 레위인에게는 그 대신 \"내가 네 기업이요 네 분깃\"이라는 말씀이 주어졌어요. 물리적 소유가 없는 삶이었지만, 그보다 더 큰 무언가를 가진 삶이었죠.\n\n오늘 우리에게도 하나님 자신이 우리의 몫이라는 이 고백이 얼마나 큰 부요함인지, 종종 잊고 사는 것 같아요."}, {"title": "시체를 만진 죄가 아니라 슬픔의 현실", "body": "사랑하는 사람의 시신을 만졌다는 이유로 이레 동안 부정하게 여겨진다는 것, 얼핏 가혹해 보일 수 있어요. 하지만 이건 죽음이라는 현실 앞에서 슬픔조차 하나님이 관심을 두고 계신다는 뜻으로 읽을 수도 있어요.\n\n애도의 시간, 회복의 시간이 필요하다는 걸 이 오래된 규례가 조용히 인정해주고 있는 거죠."}, {"title": "지팡이를 두 번 친 그 한순간", "body": "평생을 신실하게 이끌어온 모세가 단 한 번의 분노로 약속의 땅에 들어가지 못하게 되었어요. 물리적으로는 아주 작은 행동처럼 보이는데, 그 대가는 결코 작지 않았죠.\n\n지도자에게는 아무리 사소해 보이는 순간에도 하나님이 정확히 무엇을 명하셨는지가 중요하다는 걸, 이 아픈 이야기가 우리에게 경고합니다."}, {"title": "죽음의 상징이 생명의 표징으로", "body": "뱀에게 물려 죽어가던 백성에게 주어진 치료법은 다른 뱀을 만들어 쳐다보는 것이었어요. 심판의 도구였던 뱀의 형상이 오히려 생명을 주는 표징이 된 거죠.\n\n예수님이 이 장면을 자신의 십자가와 직접 연결하신 이유(요 3:14)를 생각하면, 가장 낮고 저주받은 자리에서 오히려 구원이 시작된다는 복음의 패턴이 보여요."}, {"title": "허락하신 것과 기뻐하신 것은 다를 수 있다", "body": "하나님은 발람에게 가도 좋다고 허락하셨지만, 그가 실제로 갔을 때 진노하셨어요(20-22절). 허락과 동의는 다른 문제였던 거죠.\n\n우리도 때로 어떤 일이 가능하다고 해서, 혹은 막히지 않는다고 해서 그것이 하나님이 온전히 기뻐하시는 길이라고 착각할 때가 있어요. 발람의 이야기가 그 착각에 제동을 겁니다."}, {"title": "사람이 아니시기에 후회하지 않으시는 하나님", "body": "\"하나님은 사람이 아니시니 거짓말을 하지 않으시고 인생이 아니시니 후회가 없으시도다\"라는 이 짧은 선언이 성경 전체에서 하나님의 신실하심을 이야기할 때 가장 자주 인용되는 구절 중 하나예요.\n\n인간의 약속은 상황에 따라 흔들리지만, 하나님의 약속은 어떤 상황에서도 변하지 않는다는 확신이 이 한 문장에 담겨 있습니다."}, {"title": "이방 선지자의 입에서 나온 메시아의 별", "body": "이스라엘을 저주하러 온 발람의 입에서 오히려 먼 훗날의 메시아를 가리키는 별의 예언이 흘러나왔어요. 발락의 의도와는 정반대의 말이 나온 거죠.\n\n하나님은 정말 어떤 통로를 통해서도 자신의 뜻을 이루실 수 있다는 걸, 심지어 적대적인 입을 통해서도 진리를 선포하게 하신다는 걸 보여주는 놀라운 장면이에요."}, {"title": "회중이 울고 있는 그 순간의 뻔뻔함", "body": "온 회중이 회막 문 앞에서 통곡하고 있던 바로 그 순간, 한 사람은 오히려 공공연하게 죄를 저질렀어요(6절). 슬픔과 뻔뻔함이 같은 시간, 같은 장소에 공존했던 거죠.\n\n공동체가 함께 아파하고 있을 때조차 자기 욕심을 앞세우는 사람이 있다는 것, 이 대비가 얼마나 마음을 무겁게 하는지 모릅니다."}, {"title": "숫자는 비슷해도 그 안의 사람은 완전히 달랐다", "body": "1장과 26장의 인구조사 숫자가 얼추 비슷해요. 하지만 성경은 분명히 밝혀요 - 갈렙과 여호수아 외에는 첫 세대 중 아무도 남지 않았다고.\n\n같은 숫자처럼 보여도 그 안에는 완전히 다른 세대가 서 있었던 거예요. 한 세대는 저물었고, 새로운 세대가 약속의 땅 앞에 서게 되었습니다."}, {"title": "정당한 질문을 던질 용기", "body": "슬로브핫의 다섯 딸은 아버지의 이름이 사라질 위기 앞에서 침묵하지 않고 모세에게 직접 나아가 물었어요. \"우리 아버지의 이름이... 없어지리이까.\"\n\n그리고 하나님은 \"그 말이 옳으니라\"고 응답하셨죠. 정당한 질문에는 정당한 응답이 있을 수 있다는 것, 목소리를 내는 용기가 헛되지 않을 수 있다는 걸 보여주는 이야기예요."}, {"title": "안식일과 초하루에 더해지는 예물", "body": "매일의 상번제 위에 매주 안식일, 매달 초하루의 예물이 겹겹이 더해졌어요. 일상의 리듬 위에 주간과 월간의 리듬이 층층이 쌓인 거죠.\n\n삶 전체가 이렇게 여러 겹의 예배 리듬으로 짜여 있다는 것, 특별한 날만이 아니라 시간 자체가 거룩함의 틀 안에 있었다는 걸 보여줍니다."}, {"title": "스스로를 괴롭게 한다는 것의 의미", "body": "대속죄일에 요구된 '스스로 괴롭게 함'은 단순한 형식적 절차가 아니었어요. 진지하게 자기 자신을 직면하고 낮추는 시간이 요구되었던 거죠.\n\n오늘 우리 신앙생활에도 이렇게 정직하게 멈춰 서서 자신을 돌아보는 시간이 필요할 때가 있어요. 늘 바쁘게 앞으로만 나아가지 않고요."}, {"title": "말한 것을 듣고도 잠잠했다면", "body": "아버지나 남편이 서원을 듣고도 그날 반대하지 않으면 그 서원은 유효해졌어요. 침묵도 결코 중립적이지 않았던 거죠.\n\n우리가 무언가에 반응하지 않고 가만히 있는 것 자체가 이미 하나의 선택이라는 걸, 이 오래된 규례가 조용히 알려줍니다."}, {"title": "승리했어도 필요했던 정결례", "body": "전쟁에서 승리하고 돌아온 군인들도 시체와 접촉했다면 진영 밖에서 이레 동안 머물며 정결례를 거쳐야 했어요. 승리가 자동으로 거룩함을 보장하지는 않았던 거죠.\n\n어떤 일에서 이겼다고 해서 그 과정에서 생긴 상처나 잔재를 그냥 넘겨서는 안 된다는 걸, 이 규정이 보여줍니다."}, {"title": "가데스 바네아를 기억한 모세", "body": "르우벤과 갓 지파가 요단 동편에 머물기를 청하자, 모세는 즉시 40년 전 정탐꾼 사건을 떠올렸어요. 편안한 선택이 형제들의 사기를 꺾을 수 있다는 걸 그는 예민하게 알아챘죠.\n\n과거의 실패를 정확히 기억하고 있는 지도자는 같은 실수가 되풀이되지 않도록 지혜롭게 개입할 수 있다는 걸 보여주는 장면이에요."}, {"title": "마흔두 곳, 하나하나 기록된 방황의 길", "body": "가장 혼란스럽고 힘들었던 광야의 여정을 모세는 지명 하나하나까지 직접 기록했어요. 되짚어보기 힘든 시절일수록 오히려 정확히 기록되었던 거죠.\n\n우리 인생의 가장 힘들었던 시절도 헛되지 않았고, 하나님이 그 모든 걸음을 기억하고 계셨다는 걸 이 목록이 조용히 증언합니다."}, {"title": "지명 하나까지 구체적인 약속", "body": "가나안 땅의 경계가 막연하게 그려진 게 아니라 구체적인 지명으로 하나하나 확정되었어요. 하나님의 약속은 이렇게 손에 잡히는 현실이었던 거죠.\n\n우리가 붙드는 하나님의 약속들도 막연한 소망으로만 머물지 않고, 구체적인 삶의 자리에서 실제로 이루어지는 것들이라는 걸 기억하면 좋겠어요."}, {"title": "보복의 사슬을 끊는 도피성", "body": "부지중에 사람을 죽인 자가 보복자의 손을 피해 도망칠 수 있는 도피성, 이건 끝없이 이어질 수 있는 보복의 악순환을 끊기 위한 실제적 장치였어요.\n\n정의는 때로 즉각적 응징이 아니라, 진실이 밝혀질 때까지 안전하게 머물 수 있는 자리를 마련하는 데 있다는 걸 보여줍니다."}, {"title": "27장에서 시작된 이야기, 36장에서 완결되다", "body": "슬로브핫 딸들의 정당한 권리 주장(27장)이 지파 경계라는 또 다른 고려사항과 만나(36장) 지혜롭게 조율되었어요. 개인의 권리와 공동체의 질서, 둘 다 소중히 여겨진 거죠.\n\n한 사람의 목소리가 존중받으면서도 공동체 전체의 조화가 함께 지켜질 수 있다는 걸, 민수기의 마지막 장이 보여줍니다."}
+];
+
+function goTo(e, id){
+  if(e) e.preventDefault();
+  var el = document.getElementById(id);
+  if(el){
+    var nav = document.querySelector('.quick-nav');
+    var navH = nav ? nav.offsetHeight : 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
+    window.scrollTo({top: top, behavior:'smooth'});
+  }
+  return false;
+}
+
+document.addEventListener('click', function(e){
+  var tip = document.getElementById('termTip');
+  var insTerm = e.target.closest('.has-insight');
+  if(insTerm){
+    var idx = insTerm.getAttribute('data-insight');
+    var data = INSIGHTS_DATA[idx];
+    if(data){
+      document.getElementById('insightTitle').textContent = data.title;
+      document.getElementById('insightBody').textContent = data.body;
+      document.getElementById('insightOverlay').classList.add('open');
+    }
+    e.stopPropagation();
+    return;
+  }
+  if(e.target.id === 'insightOverlay' || e.target.closest('.insight-close')){
+    document.getElementById('insightOverlay').classList.remove('open');
+    return;
+  }
+  if(e.target.closest('#insightCard')){ return; }
+
+  if(!tip) return;
+  if(e.target.closest('.tip-close')){
+    tip.style.display = 'none';
+    return;
+  }
+  var term = e.target.closest('.has-tip');
+  if(term){
+    tip.textContent = term.getAttribute('data-tip');
+    var closeBtn = document.createElement('span');
+    closeBtn.className = 'tip-close';
+    closeBtn.textContent = '\u2715';
+    tip.appendChild(closeBtn);
+
+    var rect = term.getBoundingClientRect();
+    var tipWidth = 280;
+    var left = rect.left + window.pageXOffset;
+    var maxLeft = window.pageXOffset + document.documentElement.clientWidth - tipWidth - 12;
+    if(left > maxLeft) left = Math.max(12, maxLeft);
+    tip.style.left = left + 'px';
+    tip.style.top = (rect.bottom + window.pageYOffset + 10) + 'px';
+    tip.style.display = 'block';
+    e.stopPropagation();
+  } else if(!e.target.closest('#termTip')){
+    tip.style.display = 'none';
+  }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    var ov = document.getElementById('insightOverlay');
+    if(ov) ov.classList.remove('open');
+  }
+});
+</script>
+
+</body></html>
