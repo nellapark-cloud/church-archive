@@ -5,28 +5,114 @@
     "children": [
       {
         "type": "folder",
-        "title": "말씀코이노니아 자료",
-        "desc": "성경별 성경공부 자료",
+        "title": "01. 교회 관리 시스템",
+        "desc": "출석 및 재정 관리를 위한 단일 파일 웹앱",
         "children": [
           {
-            "type": "file",
-            "file": "/files/uploads/마태복음_연구_전권합본.html",
-            "name": "마태복음"
+            "type": "folder",
+            "title": "출석관리 앱",
+            "desc": "날짜/예배 선택, 출석 토글, 교인 관리, Google Apps Script 연동 설정 패널 포함",
+            "children": []
           },
           {
-            "type": "file",
-            "name": "마가복음",
-            "file": "/files/uploads/마가복음-연구-최송본.html"
+            "type": "folder",
+            "title": "출석부",
+            "desc": "최근 제작한 출석부 문서",
+            "children": []
           },
           {
-            "type": "file",
-            "name": "민수기",
-            "file": "/files/uploads/민수기_연구_전권합본.html"
+            "type": "folder",
+            "title": "재정관리 앱",
+            "desc": "예배·교제·선교·섬김·교육 카테고리별 수입/지출, 카드·현금 구분, 영수증 업로드, 인쇄용 리포트",
+            "children": []
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "title": "02. 성경공부 인터랙티브 자료",
+        "desc": "다크 헤더 · 골드 탭 · 애니메이션 시뮬레이터 · 묵상 저널 디자인 시스템",
+        "children": [
+          {
+            "type": "folder",
+            "title": "마가복음 10장",
+            "desc": "디자인 시스템의 원형이 된 인터랙티브 성경공부 페이지",
+            "children": []
           },
           {
-            "type": "file",
-            "name": "로마서",
-            "file": "/files/uploads/로마서_연구_전권합본.html"
+            "type": "folder",
+            "title": "마가복음 11장",
+            "desc": "10장과 동일한 디자인 시스템을 적용한 인터랙티브 스터디",
+            "children": []
+          },
+          {
+            "type": "folder",
+            "title": "마가복음 12장",
+            "desc": "소유권과 주권을 주제로 한 스터디",
+            "children": []
+          },
+          {
+            "type": "folder",
+            "title": "마가복음 13장",
+            "desc": "종말론 심화 스터디, δέ(헬라어 전환 접속사) 강해 포인트 포함",
+            "children": []
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "title": "03. 사역 자료",
+        "desc": "행사 및 새신자 안내용 단일 페이지",
+        "children": [
+          {
+            "type": "folder",
+            "title": "연합 성경통독 수련회 포스터",
+            "desc": "행사 홍보용 HTML 포스터",
+            "children": []
+          },
+          {
+            "type": "folder",
+            "title": "새가족 안내",
+            "desc": "탭 네비게이션, 아코디언 Q&A, 로즈·크림 팔레트의 새신자 안내 자료",
+            "children": []
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "title": "04. 웹 / 미디어",
+        "desc": "외부 배포용 공식 페이지",
+        "children": [
+          {
+            "type": "folder",
+            "title": "은혜교회 홈페이지",
+            "desc": "예배 일정, 공지사항, 자료실 · Netlify + 가비아 도메인 연동",
+            "children": []
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "title": "05. 레위기 강해 시리즈",
+        "desc": "레위기 18~25장 표현적 설교 시리즈 및 관련 자료 (설교문·목장나눔지·SNS 카드·슬라이드)",
+        "children": [
+          {
+            "type": "folder",
+            "title": "레위기 18~24장 강해",
+            "desc": "3대지 구조, 목장나눔지, 현대적 예화를 포함한 연속 강해 시리즈",
+            "children": []
+          },
+          {
+            "type": "folder",
+            "title": "레위기 25장 · 안식과 신뢰",
+            "desc": "설교 원고, 목장나눔지, SNS 묵상 카드, 발표 슬라이드로 구성된 전체 패키지",
+            "children": []
+          },
+          {
+            "type": "folder",
+            "title": "목장나눔지 자동생성 도구",
+            "desc": "본문/구절을 넣으면 목장나눔지 형식으로 자동 정리해주는 인터랙티브 도구",
+            "children": []
           }
         ]
       }
