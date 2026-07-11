@@ -10,6 +10,16 @@
           "type": "file",
           "name": "마태복음",
           "file": "/files/uploads/마태복음_연구_전권합본.html"
+        },
+        {
+          "type": "file",
+          "name": "마가복음",
+          "file": "/files/uploads/마가복음-연구-최송본.html"
+        },
+        {
+          "type": "file",
+          "name": "로마서",
+          "file": "/files/uploads/로마서_연구_전권합본.html"
         }
       ]
     }
