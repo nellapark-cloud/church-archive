@@ -31,6 +31,11 @@
           "type": "file",
           "name": "민수기",
           "file": "/files/uploads/민수기_연구_전권합본.html"
+        },
+        {
+          "type": "file",
+          "name": "레위기",
+          "file": "/files/uploads/레위기_연구_최종본.html"
         }
       ]
     }
