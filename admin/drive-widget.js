@@ -2,16 +2,24 @@
 // Decap CMS 커스텀 위젯: "children" 필드를 구글 드라이브처럼
 // 폴더 클릭 → 들어가기 → 안의 내용만 보기 방식으로 편집할 수 있게 해줍니다.
 // createClass / h 는 decap-cms.js가 로드된 후 전역으로 제공됩니다.
+//
+// 중요: 이 위젯은 자체 state에 데이터를 복사해두지 않고, 항상 this.props.value에서
+// 직접 읽어옵니다. Decap이 위젯을 다시 마운트해도(그런 경우가 실제로 있습니다)
+// 데이터가 초기화되지 않도록 하기 위한 설계입니다. state는 오직 "지금 어느 폴더를
+// 보고 있는지(path)"와 "새 폴더 이름 입력창이 열려있는지" 같은 화면 UI 상태만 담습니다.
 
 var DriveTreeControl = createClass({
 
   getInitialState: function () {
     return {
-      tree: this.props.value ? this.props.value.toJS() : [],
       path: [],
       addingFolder: false,
       newFolderName: ''
     };
+  },
+
+  getTree: function () {
+    return this.props.value ? this.props.value.toJS() : [];
   },
 
   componentDidUpdate: function (prevProps) {
@@ -27,28 +35,25 @@ var DriveTreeControl = createClass({
   },
 
   emitChange: function (newTree) {
-    console.log('[drive-widget] emitChange called, new length at root:', newTree.length);
-    this.setState({ tree: newTree });
     this.props.onChange(Immutable.fromJS(newTree));
-    console.log('[drive-widget] onChange fired');
   },
 
   getCurrentChildren: function () {
-    var node = { children: this.state.tree };
+    var node = { children: this.getTree() };
     for (var i = 0; i < this.state.path.length; i++) {
+      if (!node.children || !node.children[this.state.path[i]]) return [];
       node = node.children[this.state.path[i]];
     }
     return node.children || [];
   },
 
   setCurrentChildren: function (newChildren) {
-    var tree = JSON.parse(JSON.stringify(this.state.tree));
+    var tree = this.getTree();
     var node = { children: tree };
     for (var i = 0; i < this.state.path.length; i++) {
       node = node.children[this.state.path[i]];
     }
     node.children = newChildren;
-    console.log('[drive-widget] setCurrentChildren, path:', this.state.path, 'root length now:', tree.length);
     this.emitChange(tree);
   },
 
@@ -75,17 +80,17 @@ var DriveTreeControl = createClass({
 
   removeItem: function (index) {
     var item = this.getCurrentChildren()[index];
+    if (!item) return;
     var label = item.type === 'folder' ? item.title : item.name;
-    console.log('[drive-widget] removeItem called for', label, 'index', index);
     if (!window.confirm('"' + label + '" 항목을 삭제할까요?')) return;
     var children = this.getCurrentChildren().slice();
     children.splice(index, 1);
-    console.log('[drive-widget] children after splice, length:', children.length);
     this.setCurrentChildren(children);
   },
 
   renameItem: function (index) {
     var item = this.getCurrentChildren()[index];
+    if (!item) return;
     var current = item.type === 'folder' ? item.title : item.name;
     var next = window.prompt('새 이름을 입력하세요', current);
     if (!next) return;
@@ -114,7 +119,7 @@ var DriveTreeControl = createClass({
   render: function () {
     var self = this;
     var children = this.getCurrentChildren();
-    console.log('[drive-widget] render, current children length:', children.length, 'path:', this.state.path);
+    var fullTree = this.getTree();
 
     // 경로(빵부스러기)
     var crumbNodes = [h('span', {
@@ -123,9 +128,10 @@ var DriveTreeControl = createClass({
       onClick: function () { self.goToCrumb(0); }
     }, '전체')];
 
-    var node = { children: this.state.tree };
+    var node = { children: fullTree };
     for (var i = 0; i < this.state.path.length; i++) {
       node = node.children[this.state.path[i]];
+      if (!node) break;
       crumbNodes.push(h('span', { key: 'sep' + i, style: { margin: '0 6px', color: '#999' } }, '/'));
       crumbNodes.push(h('span', {
         key: 'crumb' + i,
