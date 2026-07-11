@@ -7,6 +7,7 @@
         "type": "folder",
         "title": "01. 교회 관리 시스템",
         "desc": "출석 및 재정 관리를 위한 단일 파일 웹앱",
+        "slug": "01-교회-관리-시스템",
         "children": [
           {
             "type": "folder",
@@ -32,6 +33,7 @@
         "type": "folder",
         "title": "02. 성경공부 인터랙티브 자료",
         "desc": "다크 헤더 · 골드 탭 · 애니메이션 시뮬레이터 · 묵상 저널 디자인 시스템",
+        "slug": "02-성경공부-인터랙티브-자료",
         "children": [
           {
             "type": "folder",
@@ -63,6 +65,7 @@
         "type": "folder",
         "title": "03. 사역 자료",
         "desc": "행사 및 새신자 안내용 단일 페이지",
+        "slug": "03-사역-자료",
         "children": [
           {
             "type": "folder",
@@ -82,6 +85,7 @@
         "type": "folder",
         "title": "04. 웹 / 미디어",
         "desc": "외부 배포용 공식 페이지",
+        "slug": "04-웹-미디어",
         "children": [
           {
             "type": "folder",
@@ -95,6 +99,7 @@
         "type": "folder",
         "title": "05. 레위기 강해 시리즈",
         "desc": "레위기 18~25장 표현적 설교 시리즈 및 관련 자료 (설교문·목장나눔지·SNS 카드·슬라이드)",
+        "slug": "05-레위기-강해-시리즈",
         "children": [
           {
             "type": "folder",
@@ -113,6 +118,38 @@
             "title": "목장나눔지 자동생성 도구",
             "desc": "본문/구절을 넣으면 목장나눔지 형식으로 자동 정리해주는 인터랙티브 도구",
             "children": []
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "title": "말씀코이노니아",
+        "desc": "책별 성경공부",
+        "slug": "06-말씀코이노니아",
+        "children": [
+          {
+            "type": "file",
+            "name": "마태복음",
+            "desc": "",
+            "file": "files/uploads/마태복음_연구_전권합본.html"
+          },
+          {
+            "type": "file",
+            "name": "마가복음",
+            "desc": "",
+            "file": "files/uploads/마가복음-연구-최송본.html"
+          },
+          {
+            "type": "file",
+            "name": "로마서",
+            "desc": "",
+            "file": "files/uploads/로마서_연구_전권합본.html"
+          },
+          {
+            "type": "file",
+            "name": "민수기",
+            "desc": "",
+            "file": "files/uploads/민수기_연구_전권합본.html"
           }
         ]
       }

@@ -27,10 +27,12 @@ if (fs.existsSync(categoriesDir)) {
 const children = categoryFiles.map(filename => {
   const raw = fs.readFileSync(path.join(categoriesDir, filename), 'utf8');
   const cat = JSON.parse(raw);
+  const slug = filename.replace(/\.json$/, '');
   return {
     type: 'folder',
-    title: cat.title || filename.replace(/\.json$/, ''),
+    title: cat.title || slug,
     desc: cat.desc || '',
+    slug: slug,
     children: cat.children || []
   };
 });

@@ -18,6 +18,7 @@
     <h1 id="page-title">은혜교회 작업 아카이브</h1>
     <p id="page-desc"></p>
     <div class="hero-count" id="hero-count"></div>
+    <div id="admin-actions" style="margin-top:20px;"></div>
   </header>
 
   <section class="category" style="padding-top:48px;">
@@ -112,6 +113,19 @@
       document.getElementById('page-title').textContent = isRoot ? data.siteTitle : node.title;
       document.getElementById('page-desc').textContent = isRoot ? data.siteDesc : (node.desc || '');
 
+      const adminActions = document.getElementById('admin-actions');
+      adminActions.innerHTML = '';
+      if (isAdmin) {
+        if (isRoot) {
+          adminActions.innerHTML = `<a class="btn btn-view" style="display:inline-block;padding:9px 18px;" href="/admin/#/collections/categories/new">+ 새 최상위 폴더</a>`;
+        } else {
+          const rootSlug = data.root.children[pathIndices[0]] && data.root.children[pathIndices[0]].slug;
+          if (rootSlug) {
+            adminActions.innerHTML = `<a class="btn btn-view" style="display:inline-block;padding:9px 18px;" href="/admin/#/collections/categories/entries/${encodeURIComponent(rootSlug)}">✎ 이 폴더 관리하기</a>`;
+          }
+        }
+      }
+
       const children = node.children || [];
       const folders = children.filter(c => c.type === 'folder');
       const files = children.filter(c => c.type === 'file');
@@ -144,7 +158,9 @@
           <h3 class="card-title">${child.title}</h3>
           <p class="card-desc">${child.desc || ''}</p>
           <div class="card-meta">항목 ${subCount}개 →</div>
+          ${isRoot && isAdmin && child.slug ? `<a class="admin-edit-link" href="/admin/#/collections/categories/entries/${encodeURIComponent(child.slug)}" onclick="event.stopPropagation();" style="position:absolute;top:14px;right:14px;font-size:11px;color:#A9814E;font-weight:600;">✎ 편집</a>` : ''}
         `;
+        if (isRoot && isAdmin) a.style.position = 'relative';
         grid.appendChild(a);
       });
 
