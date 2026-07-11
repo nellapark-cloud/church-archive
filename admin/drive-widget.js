@@ -14,8 +14,23 @@ var NativeFileControl = NativeFileWidget && (NativeFileWidget.control || NativeF
 function makeFieldShim(obj) {
   return {
     get: function (key, def) { return (obj && key in obj) ? obj[key] : def; },
+    getIn: function (keys, def) {
+      var value = obj;
+      for (var i = 0; i < keys.length; i++) {
+        if (!value || !(keys[i] in value)) return def;
+        value = value[keys[i]];
+      }
+      return value;
+    },
     toJS: function () { return obj || {}; },
-    hasIn: function () { return false; }
+    hasIn: function (keys) {
+      var value = obj;
+      for (var i = 0; i < keys.length; i++) {
+        if (!value || !(keys[i] in value)) return false;
+        value = value[keys[i]];
+      }
+      return true;
+    }
   };
 }
 
@@ -279,7 +294,11 @@ var DriveTreeControl = createClass({
             h('div', { style: { fontSize: '12px', marginBottom: '8px', color: '#6B6759' } }, '아래에서 파일을 선택하세요:'),
             NativeFileControl
               ? h(NativeFileControl, Object.assign({}, this.props, {
-                  field: makeFieldShim({ media_library: {}, choose_url: false }),
+                  field: makeFieldShim({
+                    widget: 'file',
+                    choose_url: false,
+                    media_library: makeFieldShim({ allow_multiple: false })
+                  }),
                   value: this.state.pendingFileValue,
                   forID: 'drive-widget-file-picker',
                   classNameWrapper: '',
