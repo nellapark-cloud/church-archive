@@ -1,0 +1,13 @@
+{
+  "title": "교회행정자료",
+  "children": [
+    {
+      "type": "folder",
+      "title": "앱"
+    },
+    {
+      "type": "folder",
+      "title": "문서"
+    }
+  ]
+}
