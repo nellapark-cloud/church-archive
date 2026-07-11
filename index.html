@@ -171,7 +171,7 @@
         row.className = 'file-row';
         row.innerHTML = `
           <div class="file-info">
-            <p class="file-name">${file.name}</p>
+            <p class="file-name">${(file.name || '').replace(/\.[a-zA-Z0-9]{1,6}$/, '')}</p>
             <p class="file-desc">${file.desc || ''}</p>
           </div>
           <div class="file-actions">

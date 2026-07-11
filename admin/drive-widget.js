@@ -14,7 +14,8 @@ var DriveTreeControl = createClass({
     return {
       path: [],
       addingFolder: false,
-      newFolderName: ''
+      newFolderName: '',
+      selected: {}
     };
   },
 
@@ -26,14 +27,15 @@ var DriveTreeControl = createClass({
   },
 
   componentDidUpdate: function (prevProps) {
-    console.log('[drive-widget] componentDidUpdate, props.value 길이:', this.getTree().length);
     var prevMedia = prevProps.mediaPaths && prevProps.mediaPaths.get
       ? prevProps.mediaPaths.get(this._controlID)
       : null;
     var media = this.props.mediaPaths && this.props.mediaPaths.get
       ? this.props.mediaPaths.get(this._controlID)
       : null;
+    console.log('[drive-widget] componentDidUpdate, controlID:', this._controlID, '이전 미디어값:', prevMedia, '현재 미디어값:', media);
     if (media && media !== prevMedia) {
+      console.log('[drive-widget] 새 파일 경로 감지됨, addFileNode 실행:', media);
       this.addFileNode(media);
     }
   },
@@ -73,11 +75,11 @@ var DriveTreeControl = createClass({
   },
 
   enterFolder: function (index) {
-    this.setState({ path: this.state.path.concat([index]) });
+    this.setState({ path: this.state.path.concat([index]), selected: {} });
   },
 
   goToCrumb: function (depth) {
-    this.setState({ path: this.state.path.slice(0, depth) });
+    this.setState({ path: this.state.path.slice(0, depth), selected: {} });
   },
 
   startAddFolder: function () {
@@ -103,6 +105,34 @@ var DriveTreeControl = createClass({
     this.setCurrentChildren(children);
   },
 
+  toggleSelect: function (index) {
+    var sel = Object.assign({}, this.state.selected);
+    if (sel[index]) { delete sel[index]; } else { sel[index] = true; }
+    this.setState({ selected: sel });
+  },
+
+  selectAll: function () {
+    var children = this.getCurrentChildren();
+    var sel = {};
+    children.forEach(function (c, i) { sel[i] = true; });
+    this.setState({ selected: sel });
+  },
+
+  clearSelection: function () {
+    this.setState({ selected: {} });
+  },
+
+  removeSelected: function () {
+    var selectedIndexes = Object.keys(this.state.selected).map(Number);
+    if (selectedIndexes.length === 0) return;
+    if (!window.confirm(selectedIndexes.length + '개 항목을 삭제할까요? (하위 내용이 있는 폴더도 함께 삭제됩니다)')) return;
+    var children = this.getCurrentChildren().filter(function (c, i) {
+      return selectedIndexes.indexOf(i) === -1;
+    });
+    this.setState({ selected: {} });
+    this.setCurrentChildren(children);
+  },
+
   renameItem: function (index) {
     var item = this.getCurrentChildren()[index];
     if (!item) return;
@@ -117,6 +147,13 @@ var DriveTreeControl = createClass({
 
   startUpload: function () {
     this._controlID = this._controlID || ('drivewidget' + Math.random().toString(36).slice(2));
+    console.log('[drive-widget] startUpload 클릭됨. controlID:', this._controlID,
+      'onOpenMediaLibrary 존재여부:', typeof this.props.onOpenMediaLibrary);
+    if (typeof this.props.onOpenMediaLibrary !== 'function') {
+      console.error('[drive-widget] onOpenMediaLibrary가 이 위젯에 전달되지 않았습니다.');
+      window.alert('업로드 기능을 초기화하지 못했습니다. 콘솔 로그를 확인해주세요.');
+      return;
+    }
     this.props.onOpenMediaLibrary({
       controlID: this._controlID,
       forImage: false,
@@ -124,10 +161,17 @@ var DriveTreeControl = createClass({
     });
   },
 
+  stripExt: function (filename) {
+    var idx = filename.lastIndexOf('.');
+    return idx > 0 ? filename.slice(0, idx) : filename;
+  },
+
   addFileNode: function (mediaPath) {
     var filename = mediaPath.split('/').pop();
+    var displayName = this.stripExt(filename);
     var children = this.getCurrentChildren().slice();
-    children.push({ type: 'file', name: filename, desc: '', file: mediaPath });
+    children.push({ type: 'file', name: displayName, desc: '', file: mediaPath });
+    console.log('[drive-widget] addFileNode 실행 완료, 표시 이름:', displayName, '경로:', mediaPath);
     this.setCurrentChildren(children);
   },
 
@@ -135,7 +179,7 @@ var DriveTreeControl = createClass({
     var self = this;
     var children = this.getCurrentChildren();
     var fullTree = this.getTree();
-    console.log('[drive-widget] render 호출, 현재 폴더 항목 수:', children.length, '전체 최상위 개수:', fullTree.length);
+    var selectedCount = Object.keys(this.state.selected).length;
 
     // 경로(빵부스러기)
     var crumbNodes = [h('span', {
@@ -158,14 +202,21 @@ var DriveTreeControl = createClass({
 
     var tiles = children.map(function (item, index) {
       var isFolder = item.type === 'folder';
+      var isSelected = !!self.state.selected[index];
       return h('div', {
         key: index,
         style: {
-          border: '1px solid #E4DFD3', borderRadius: '4px', padding: '12px 10px',
+          border: isSelected ? '2px solid #A9814E' : '1px solid #E4DFD3', borderRadius: '4px', padding: '11px 10px',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
-          background: '#fff', position: 'relative'
+          background: isSelected ? '#FAF3E8' : '#fff', position: 'relative'
         }
       },
+        h('input', {
+          type: 'checkbox',
+          checked: isSelected,
+          onChange: function () { self.toggleSelect(index); },
+          style: { position: 'absolute', top: '6px', left: '6px', cursor: 'pointer' }
+        }),
         h('div', {
           style: { fontSize: '28px', cursor: isFolder ? 'pointer' : 'default' },
           onClick: function () { if (isFolder) self.enterFolder(index); }
@@ -194,9 +245,24 @@ var DriveTreeControl = createClass({
       h('div', {
         style: {
           display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
-          gap: '10px', marginBottom: '14px', minHeight: '40px'
+          gap: '10px', marginBottom: '10px', minHeight: '40px'
         }
       }, tiles),
+      children.length > 0
+        ? h('div', { style: { display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '14px', fontSize: '12px' } },
+            h('button', { type: 'button', style: { fontSize: '11.5px', padding: '5px 10px' }, onClick: function () { self.selectAll(); } }, '전체 선택'),
+            selectedCount > 0
+              ? h('button', {
+                  type: 'button',
+                  style: { fontSize: '11.5px', padding: '5px 10px', color: '#a3392f' },
+                  onClick: function () { self.removeSelected(); }
+                }, '선택 삭제 (' + selectedCount + '개)')
+              : null,
+            selectedCount > 0
+              ? h('button', { type: 'button', style: { fontSize: '11.5px', padding: '5px 10px' }, onClick: function () { self.clearSelection(); } }, '선택 해제')
+              : null
+          )
+        : null,
       this.state.addingFolder
         ? h('div', { style: { display: 'flex', gap: '8px', marginBottom: '12px' } },
             h('input', {
