@@ -57,6 +57,12 @@ var DriveTreeControl = createClass({
   },
 
   setCurrentChildren: function (newChildren) {
+    // 최상위(위젯 루트)에서는 넘어온 children 배열이 곧 전체 트리이므로 그대로 저장한다.
+    // 임시 래퍼 객체에 대입하면 실제 tree 참조는 바뀌지 않아 변경이 사라진다.
+    if (this.state.path.length === 0) {
+      this.emitChange(newChildren);
+      return;
+    }
     var tree = this.getTree();
     var node = { children: tree };
     for (var i = 0; i < this.state.path.length; i++) {
