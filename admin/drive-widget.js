@@ -8,6 +8,17 @@
 // 2. onChange에는 가공하지 않은 순수 JS 값을 그대로 전달함
 //    (Decap 공식 예제와 동일한 방식 — Immutable로 감싸지 않음)
 
+var NativeFileWidget = (typeof CMS !== 'undefined' && CMS.getWidget) ? CMS.getWidget('file') : null;
+var NativeFileControl = NativeFileWidget && (NativeFileWidget.control || NativeFileWidget.Control || NativeFileWidget);
+
+function makeFieldShim(obj) {
+  return {
+    get: function (key, def) { return (obj && key in obj) ? obj[key] : def; },
+    toJS: function () { return obj || {}; },
+    hasIn: function () { return false; }
+  };
+}
+
 var DriveTreeControl = createClass({
 
   getInitialState: function () {
@@ -15,7 +26,9 @@ var DriveTreeControl = createClass({
       path: [],
       addingFolder: false,
       newFolderName: '',
-      selected: {}
+      selected: {},
+      addingFile: false,
+      pendingFileValue: ''
     };
   },
 
@@ -26,24 +39,9 @@ var DriveTreeControl = createClass({
     return v;
   },
 
-  componentDidUpdate: function (prevProps) {
-    var prevMedia = prevProps.mediaPaths && prevProps.mediaPaths.get
-      ? prevProps.mediaPaths.get(this._controlID)
-      : null;
-    var media = this.props.mediaPaths && this.props.mediaPaths.get
-      ? this.props.mediaPaths.get(this._controlID)
-      : null;
-    console.log('[drive-widget] componentDidUpdate, controlID:', this._controlID, '이전 미디어값:', prevMedia, '현재 미디어값:', media);
-    if (media && media !== prevMedia) {
-      console.log('[drive-widget] 새 파일 경로 감지됨, addFileNode 실행:', media);
-      this.addFileNode(media);
-    }
-  },
-
   emitChange: function (newTree) {
     try {
       this.props.onChange(newTree);
-      console.log('[drive-widget] onChange 호출 완료, 넘긴 길이:', newTree.length);
     } catch (err) {
       console.error('[drive-widget] onChange 에러:', err);
     }
@@ -145,33 +143,31 @@ var DriveTreeControl = createClass({
     this.setCurrentChildren(children);
   },
 
-  startUpload: function () {
-    this._controlID = this._controlID || ('drivewidget' + Math.random().toString(36).slice(2));
-    console.log('[drive-widget] startUpload 클릭됨. controlID:', this._controlID,
-      'onOpenMediaLibrary 존재여부:', typeof this.props.onOpenMediaLibrary);
-    if (typeof this.props.onOpenMediaLibrary !== 'function') {
-      console.error('[drive-widget] onOpenMediaLibrary가 이 위젯에 전달되지 않았습니다.');
-      window.alert('업로드 기능을 초기화하지 못했습니다. 콘솔 로그를 확인해주세요.');
-      return;
-    }
-    this.props.onOpenMediaLibrary({
-      controlID: this._controlID,
-      forImage: false,
-      allowMultiple: false
-    });
-  },
-
   stripExt: function (filename) {
     var idx = filename.lastIndexOf('.');
     return idx > 0 ? filename.slice(0, idx) : filename;
   },
 
-  addFileNode: function (mediaPath) {
-    var filename = mediaPath.split('/').pop();
+  startAddFile: function () {
+    if (!NativeFileControl) {
+      console.error('[drive-widget] Decap의 file 위젯을 찾지 못했습니다.');
+      window.alert('업로드 기능을 불러오지 못했습니다. 페이지를 새로고침해주세요.');
+      return;
+    }
+    this.setState({ addingFile: true, pendingFileValue: '' });
+  },
+
+  cancelAddFile: function () {
+    this.setState({ addingFile: false, pendingFileValue: '' });
+  },
+
+  handleNativeFileChange: function (newPath) {
+    if (!newPath) return;
+    var filename = newPath.split('/').pop();
     var displayName = this.stripExt(filename);
     var children = this.getCurrentChildren().slice();
-    children.push({ type: 'file', name: displayName, desc: '', file: mediaPath });
-    console.log('[drive-widget] addFileNode 실행 완료, 표시 이름:', displayName, '경로:', mediaPath);
+    children.push({ type: 'file', name: displayName, desc: '', file: newPath });
+    this.setState({ addingFile: false, pendingFileValue: '' });
     this.setCurrentChildren(children);
   },
 
@@ -277,10 +273,25 @@ var DriveTreeControl = createClass({
             h('button', { type: 'button', onClick: function () { self.confirmAddFolder(); } }, '추가'),
             h('button', { type: 'button', onClick: function () { self.setState({ addingFolder: false }); } }, '취소')
           )
-        : h('div', { style: { display: 'flex', gap: '8px' } },
-            h('button', { type: 'button', onClick: function () { self.startAddFolder(); } }, '+ 새 폴더'),
-            h('button', { type: 'button', onClick: function () { self.startUpload(); } }, '+ 자료 업로드')
+        : null,
+      this.state.addingFile
+        ? h('div', { style: { border: '1px solid #E4DFD3', borderRadius: '4px', padding: '12px', marginBottom: '12px', background: '#FAF8F3' } },
+            h('div', { style: { fontSize: '12px', marginBottom: '8px', color: '#6B6759' } }, '아래에서 파일을 선택하세요:'),
+            NativeFileControl
+              ? h(NativeFileControl, Object.assign({}, this.props, {
+                  field: makeFieldShim({ media_library: {}, choose_url: false }),
+                  value: this.state.pendingFileValue,
+                  forID: 'drive-widget-file-picker',
+                  classNameWrapper: '',
+                  onChange: function (val) { self.handleNativeFileChange(val); }
+                }))
+              : null,
+            h('button', { type: 'button', style: { marginTop: '8px' }, onClick: function () { self.cancelAddFile(); } }, '취소')
           )
+        : (!this.state.addingFolder ? h('div', { style: { display: 'flex', gap: '8px' } },
+            h('button', { type: 'button', onClick: function () { self.startAddFolder(); } }, '+ 새 폴더'),
+            h('button', { type: 'button', onClick: function () { self.startAddFile(); } }, '+ 자료 업로드')
+          ) : null)
     );
   }
 });
