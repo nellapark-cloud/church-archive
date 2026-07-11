@@ -19,7 +19,10 @@ var DriveTreeControl = createClass({
   },
 
   getTree: function () {
-    return this.props.value ? this.props.value.toJS() : [];
+    var v = this.props.value;
+    if (!v) return [];
+    if (typeof v.toJS === 'function') return v.toJS();
+    return v;
   },
 
   componentDidUpdate: function (prevProps) {
@@ -35,7 +38,12 @@ var DriveTreeControl = createClass({
   },
 
   emitChange: function (newTree) {
-    this.props.onChange(Immutable.fromJS(newTree));
+    try {
+      this.props.onChange(newTree);
+      console.log('[drive-widget] onChange 성공, 새 길이:', newTree.length);
+    } catch (err) {
+      console.error('[drive-widget] onChange 에러:', err);
+    }
   },
 
   getCurrentChildren: function () {
