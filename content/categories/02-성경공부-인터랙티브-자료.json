@@ -1,6 +1,6 @@
 {
-  "title": "성경공부",
-  "desc": "책별성경공부",
+  "title": "책별성경공부",
+  "desc": "",
   "children": [
     {
       "type": "folder",
