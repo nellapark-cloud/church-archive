@@ -1,0 +1,38 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "files/uploads"
+public_folder: "/files/uploads"
+
+locale: "ko"
+
+collections:
+  - name: "categories"
+    label: "최상위 폴더"
+    label_singular: "폴더"
+    folder: "content/categories"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "📁 {{title}}"
+    fields:
+      - { label: "폴더 이름", name: "title", widget: "string" }
+      - { label: "설명", name: "desc", widget: "text", required: false }
+      - label: "폴더 내용"
+        name: "children"
+        widget: "drive_tree"
+        required: false
+
+  - name: "settings"
+    label: "사이트 설정"
+    files:
+      - file: "content/site.json"
+        label: "사이트 제목/설명"
+        name: "site"
+        format: "json"
+        fields:
+          - { label: "사이트 제목", name: "siteTitle", widget: "string" }
+          - { label: "사이트 설명", name: "siteDesc", widget: "text" }

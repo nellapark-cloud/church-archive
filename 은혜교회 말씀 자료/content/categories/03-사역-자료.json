@@ -1,0 +1,18 @@
+{
+  "title": "03. 사역 자료",
+  "desc": "행사 및 새신자 안내용 단일 페이지",
+  "children": [
+    {
+      "type": "folder",
+      "title": "연합 성경통독 수련회 포스터",
+      "desc": "행사 홍보용 HTML 포스터",
+      "children": []
+    },
+    {
+      "type": "folder",
+      "title": "새가족 안내",
+      "desc": "탭 네비게이션, 아코디언 Q&A, 로즈·크림 팔레트의 새신자 안내 자료",
+      "children": []
+    }
+  ]
+}
