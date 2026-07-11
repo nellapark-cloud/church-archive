@@ -27,8 +27,10 @@ var DriveTreeControl = createClass({
   },
 
   emitChange: function (newTree) {
+    console.log('[drive-widget] emitChange called, new length at root:', newTree.length);
     this.setState({ tree: newTree });
     this.props.onChange(Immutable.fromJS(newTree));
+    console.log('[drive-widget] onChange fired');
   },
 
   getCurrentChildren: function () {
@@ -46,6 +48,7 @@ var DriveTreeControl = createClass({
       node = node.children[this.state.path[i]];
     }
     node.children = newChildren;
+    console.log('[drive-widget] setCurrentChildren, path:', this.state.path, 'root length now:', tree.length);
     this.emitChange(tree);
   },
 
@@ -73,9 +76,11 @@ var DriveTreeControl = createClass({
   removeItem: function (index) {
     var item = this.getCurrentChildren()[index];
     var label = item.type === 'folder' ? item.title : item.name;
+    console.log('[drive-widget] removeItem called for', label, 'index', index);
     if (!window.confirm('"' + label + '" 항목을 삭제할까요?')) return;
     var children = this.getCurrentChildren().slice();
     children.splice(index, 1);
+    console.log('[drive-widget] children after splice, length:', children.length);
     this.setCurrentChildren(children);
   },
 
@@ -109,6 +114,7 @@ var DriveTreeControl = createClass({
   render: function () {
     var self = this;
     var children = this.getCurrentChildren();
+    console.log('[drive-widget] render, current children length:', children.length, 'path:', this.state.path);
 
     // 경로(빵부스러기)
     var crumbNodes = [h('span', {

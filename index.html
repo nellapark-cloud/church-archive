@@ -37,14 +37,21 @@
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
+  let isAdmin = false;
+  let identityReady = false;
+  let siteData = null;
+
   if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
+    window.netlifyIdentity.on('init', user => {
+      isAdmin = !!user;
+      identityReady = true;
+      window.netlifyIdentity.on('login', () => { isAdmin = true; renderPage(); });
+      window.netlifyIdentity.on('logout', () => { isAdmin = false; renderPage(); });
+      renderPage();
     });
+    window.netlifyIdentity.init();
+  } else {
+    identityReady = true;
   }
 </script>
 
@@ -64,6 +71,13 @@
   fetch('content/data.json')
     .then(res => res.json())
     .then(data => {
+      siteData = data;
+      renderPage();
+    });
+
+  function renderPage() {
+    if (!siteData || !identityReady) return;
+    const data = siteData;
       const params = new URLSearchParams(location.search);
       const pathParam = params.get('path');
       const pathIndices = pathParam ? pathParam.split(',').filter(x => x !== '').map(Number) : [];
@@ -118,6 +132,7 @@
       }
 
       const grid = document.getElementById('folder-grid');
+      grid.innerHTML = '';
       children.forEach((child, idx) => {
         if (child.type !== 'folder') return;
         const newPath = [...pathIndices, idx].join(',');
@@ -134,6 +149,7 @@
       });
 
       const list = document.getElementById('file-list');
+      list.innerHTML = '';
       files.forEach(file => {
         const row = document.createElement('div');
         row.className = 'file-row';
@@ -144,7 +160,7 @@
           </div>
           <div class="file-actions">
             <a class="btn btn-view" href="${file.file}" target="_blank">열람</a>
-            <a class="btn btn-download" href="${file.file}" download>다운로드</a>
+            ${isAdmin ? `<a class="btn btn-download" href="${file.file}" download>다운로드</a>` : ''}
           </div>
         `;
         list.appendChild(row);
@@ -152,8 +168,10 @@
 
       if (folders.length === 0 && files.length === 0) {
         document.getElementById('empty-state').style.display = 'block';
+      } else {
+        document.getElementById('empty-state').style.display = 'none';
       }
-    });
+  }
 </script>
 
 </body>
