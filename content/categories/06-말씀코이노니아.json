@@ -2,9 +2,11 @@
   "title": "말씀코이노니아",
   "desc": "책별 성경공부",
   "children": [
-    { "type": "file", "name": "마태복음", "desc": "", "file": "files/uploads/마태복음_연구_전권합본.html" },
-    { "type": "file", "name": "마가복음", "desc": "", "file": "files/uploads/마가복음-연구-최송본.html" },
-    { "type": "file", "name": "로마서", "desc": "", "file": "files/uploads/로마서_연구_전권합본.html" },
-    { "type": "file", "name": "민수기", "desc": "", "file": "files/uploads/민수기_연구_전권합본.html" }
+    {
+      "type": "file",
+      "file": "/files/uploads/마태복음_연구_전권합본.html",
+      "name": "마태복음",
+      "desc": "마태복음 성경공부"
+    }
   ]
 }
