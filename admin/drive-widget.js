@@ -12,25 +12,27 @@ var NativeFileWidget = (typeof CMS !== 'undefined' && CMS.getWidget) ? CMS.getWi
 var NativeFileControl = NativeFileWidget && (NativeFileWidget.control || NativeFileWidget.Control || NativeFileWidget);
 
 function makeFieldShim(obj) {
+  obj = obj || {};
   return {
-    get: function (key, def) { return (obj && key in obj) ? obj[key] : def; },
-    getIn: function (keys, def) {
-      var value = obj;
-      for (var i = 0; i < keys.length; i++) {
-        if (!value || !(keys[i] in value)) return def;
-        value = value[keys[i]];
-      }
-      return value;
-    },
-    toJS: function () { return obj || {}; },
-    hasIn: function (keys) {
-      var value = obj;
-      for (var i = 0; i < keys.length; i++) {
-        if (!value || !(keys[i] in value)) return false;
-        value = value[keys[i]];
+    get: function (key, def) { return (key in obj) ? obj[key] : def; },
+    has: function (key) { return key in obj; },
+    hasIn: function (path) {
+      var cur = obj;
+      for (var i = 0; i < path.length; i++) {
+        if (cur == null || !(path[i] in cur)) return false;
+        cur = cur[path[i]];
       }
       return true;
-    }
+    },
+    getIn: function (path, def) {
+      var cur = obj;
+      for (var i = 0; i < path.length; i++) {
+        if (cur == null || !(path[i] in cur)) return def;
+        cur = cur[path[i]];
+      }
+      return cur;
+    },
+    toJS: function () { return obj; }
   };
 }
 
@@ -294,11 +296,7 @@ var DriveTreeControl = createClass({
             h('div', { style: { fontSize: '12px', marginBottom: '8px', color: '#6B6759' } }, '아래에서 파일을 선택하세요:'),
             NativeFileControl
               ? h(NativeFileControl, Object.assign({}, this.props, {
-                  field: makeFieldShim({
-                    widget: 'file',
-                    choose_url: false,
-                    media_library: makeFieldShim({ allow_multiple: false })
-                  }),
+                  field: makeFieldShim({ media_library: {}, choose_url: false }),
                   value: this.state.pendingFileValue,
                   forID: 'drive-widget-file-picker',
                   classNameWrapper: '',
