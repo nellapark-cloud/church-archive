@@ -179,6 +179,7 @@ var DriveTreeControl = createClass({
   },
 
   handleNativeFileChange: function (newPath) {
+    console.log('[drive-widget] handleNativeFileChange 호출됨, 받은 값:', newPath, typeof newPath);
     if (!newPath) return;
     var filename = newPath.split('/').pop();
     var displayName = this.stripExt(filename);
