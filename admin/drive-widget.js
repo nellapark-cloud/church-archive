@@ -1,12 +1,12 @@
 // drive-widget.js
 // Decap CMS 커스텀 위젯: "children" 필드를 구글 드라이브처럼
 // 폴더 클릭 → 들어가기 → 안의 내용만 보기 방식으로 편집할 수 있게 해줍니다.
-// createClass / h 는 decap-cms.js가 로드된 후 전역으로 제공됩니다.
 //
-// 중요: 이 위젯은 자체 state에 데이터를 복사해두지 않고, 항상 this.props.value에서
-// 직접 읽어옵니다. Decap이 위젯을 다시 마운트해도(그런 경우가 실제로 있습니다)
-// 데이터가 초기화되지 않도록 하기 위한 설계입니다. state는 오직 "지금 어느 폴더를
-// 보고 있는지(path)"와 "새 폴더 이름 입력창이 열려있는지" 같은 화면 UI 상태만 담습니다.
+// 핵심 원칙:
+// 1. 자체 state에 데이터를 복사해두지 않고, 항상 this.props.value에서 직접 읽음
+//    (Decap이 위젯을 다시 마운트해도 데이터가 초기화되지 않도록)
+// 2. onChange에는 가공하지 않은 순수 JS 값을 그대로 전달함
+//    (Decap 공식 예제와 동일한 방식 — Immutable로 감싸지 않음)
 
 var DriveTreeControl = createClass({
 
@@ -26,6 +26,7 @@ var DriveTreeControl = createClass({
   },
 
   componentDidUpdate: function (prevProps) {
+    console.log('[drive-widget] componentDidUpdate, props.value 길이:', this.getTree().length);
     var prevMedia = prevProps.mediaPaths && prevProps.mediaPaths.get
       ? prevProps.mediaPaths.get(this._controlID)
       : null;
@@ -40,7 +41,7 @@ var DriveTreeControl = createClass({
   emitChange: function (newTree) {
     try {
       this.props.onChange(newTree);
-      console.log('[drive-widget] onChange 성공, 새 길이:', newTree.length);
+      console.log('[drive-widget] onChange 호출 완료, 넘긴 길이:', newTree.length);
     } catch (err) {
       console.error('[drive-widget] onChange 에러:', err);
     }
@@ -128,6 +129,7 @@ var DriveTreeControl = createClass({
     var self = this;
     var children = this.getCurrentChildren();
     var fullTree = this.getTree();
+    console.log('[drive-widget] render 호출, 현재 폴더 항목 수:', children.length, '전체 최상위 개수:', fullTree.length);
 
     // 경로(빵부스러기)
     var crumbNodes = [h('span', {
