@@ -22,6 +22,17 @@
           "file": "/files/uploads/로마서_연구_전권합본.html"
         }
       ]
+    },
+    {
+      "type": "folder",
+      "title": "구약",
+      "children": [
+        {
+          "type": "file",
+          "name": "민수기",
+          "file": "/files/uploads/민수기_연구_전권합본.html"
+        }
+      ]
     }
   ]
 }
